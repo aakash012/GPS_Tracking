@@ -1,0 +1,79 @@
+<div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+    <table class="table">
+      <tr ngclass="btn-primary">
+        <th class="tbl2">
+          <input formControlName="userName" placeholder="Enter UserName" />
+        </th>
+        <th class="tbl2">
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="Enter Password"
+          />
+        </th>
+        <th class="tbl2">
+          <select Tooltip="userType" formControlName="userType">
+            <option value="0">Driver</option>
+            <option value="1">Customer</option>
+          </select>
+        </th>
+        <th class="tbl2">
+          <button
+            type="submit"
+            Tooltip="Click Submit Button"
+            [disabled]="!userForm.valid"
+          >
+            Submit</button
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+          <button
+            type="reset"
+            Tooltip="Click Reset Button"
+            (click)="resetForm()"
+          >
+            Reset
+          </button>
+        </th>
+        <th class="tbl2">Delete</th>
+      </tr>
+    </table>
+
+    <table class="table">
+      <tr ngclass="btn-primary">
+        <th class="tbl2">User Id</th>
+        <th class="tbl2">User Name</th>
+        <th class="tbl2">Password</th>
+        <th class="tbl2">User Type</th>
+        <th class="tbl2">Edit</th>
+        <th class="tbl2">Delete</th>
+      </tr>
+      <tr *ngFor="let User of allUsers | async">
+        <td class="tbl2">{{ User.userId }}</td>
+        <td class="tbl2">{{ User.userName }}</td>
+        <td class="tbl2">{{ User.Password }}</td>
+        <td class="tbl2">{{ User.userType == 0 ? "Driver" : "Customer" }}</td>
+
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-info"
+            matTooltip="Click Edit Button"
+            (click)="loadUserToEdit(User.userId)"
+          >
+            Edit
+          </button>
+        </td>
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            matTooltip="Click Delete Button"
+            (click)="deleteUser(User.userId)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
