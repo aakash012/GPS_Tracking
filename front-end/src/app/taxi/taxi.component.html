@@ -1,0 +1,48 @@
+<p>New Taxi!</p>
+<form [formGroup]="taxiForm" (ngSubmit)="onFormSubmit()">
+    <div class="row" >
+        <div class="col-lg-2">
+            <div class="form-group">  
+                <label for="taxiNo">Taxi No.</label>  
+                <input formControlName="taxiNo" class="form-control" id="taxiNo"> 
+                <input formControlName="taxiId" type="hidden" class="form-control" id="taxiId"> 
+            </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">  
+              <label for="company">Company</label>  
+              <select Tooltip="Enter Company" formControlName="Company">
+                  <option value="Toyota">Toyota</option>
+                  <option value="Honda">Honda</option>
+                  <option value="Skoda">Skoda</option>
+                  <option value="Mahindra">Mahindra</option>
+              </select>
+            </div> 
+        </div>
+          <button type="submit" Tooltip="Click Submit Button">Save</button>
+          <button type="reset" Tooltip="Click Reset Button" (click)="ResetForm()">Reset</button>  
+    </div>
+    
+</form>  
+
+<p>List of Taxi</p>
+<table>
+    <tr>
+        <th>Taxi ID</th>
+        <th>Taxi No.</th>
+        <th>Company</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr *ngFor="let taxi of taxiList">
+        <td>{{taxi.TaxiId}}</td>
+        <td>{{taxi.TaxiNo}}</td>
+        <td>{{taxi.Company}}</td>
+        <td>
+            <button type="button" class="btn btn-danger" matTooltip="Click Delete Button" (click)="FillTaxiFormToEdit(taxi.TaxiId)">Edit</button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger" matTooltip="Click Delete Button" (click)="DeleteTaxi(taxi.TaxiId)">Delete</button>
+        </td>
+    </tr>
+</table>
