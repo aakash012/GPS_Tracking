@@ -68,3 +68,6 @@ D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CoreCompileInputs.cache
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CopyComplete
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.dll
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.pdb
+D:\GPS_Tracking\back-end\Api\Api\bin\System.Web.Cors.dll
+D:\GPS_Tracking\back-end\Api\Api\bin\System.Web.Http.Cors.dll
+D:\GPS_Tracking\back-end\Api\Api\bin\System.Web.Http.Cors.xml
