@@ -83,8 +83,18 @@ body
   list-style: none;
   line-height: 42px;
 }
-a{
-  color: black;
+#btn1{
+  border: none;
+  background-color: transparent;
+}
+#btn1:active{
+  border: none;
+}
+#btn1:visited{
+  border: none;
+}
+#btn1:hover{
+  text-decoration: underline;
 }
 footer
 {

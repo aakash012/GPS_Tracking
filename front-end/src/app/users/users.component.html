@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-    <table class="table">
+    <table class="table" border="2">
       <tr ngclass="btn-primary">
         <th class="tbl2">
           <input formControlName="userName" placeholder="Enter UserName" />
@@ -21,6 +21,7 @@
         <th class="tbl2">
           <button
             type="submit"
+            class="btn btn-primary"
             Tooltip="Click Submit Button"
             [disabled]="!userForm.valid"
           >
@@ -28,18 +29,18 @@
           >&nbsp;&nbsp;&nbsp;&nbsp;
           <button
             type="reset"
+            class="btn btn-danger"
             Tooltip="Click Reset Button"
             (click)="resetForm()"
           >
             Reset
           </button>
         </th>
-        <th class="tbl2">Delete</th>
       </tr>
     </table>
 
-    <table class="table">
-      <tr ngclass="btn-primary">
+    <table class="table" border="2">
+      <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
         <th class="tbl2">User Id</th>
         <th class="tbl2">User Name</th>
         <th class="tbl2">Password</th>
@@ -50,7 +51,7 @@
       <tr *ngFor="let User of allUsers | async">
         <td class="tbl2">{{ User.userId }}</td>
         <td class="tbl2">{{ User.userName }}</td>
-        <td class="tbl2">{{ User.Password }}</td>
+        <td class="tbl2">{{ User.password }}</td>
         <td class="tbl2">{{ User.userType == 0 ? "Driver" : "Customer" }}</td>
 
         <td class="tbl2">
