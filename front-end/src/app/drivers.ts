@@ -1,9 +1,9 @@
 export class Driver
 
 {
-  driverId: string;
-  name: string;
-  gender: string;
-  contact: string;
-  license: string;
+  DriverId: string;
+  DriverName: string;
+  Gender: string;
+  ContactNo: string;
+  DrivingLicense: string;
 }

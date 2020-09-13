@@ -20,11 +20,11 @@ export class CustomersComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerForm = this.formbulider.group({
-      customerName: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      CustomerName: ['', [Validators.required]],
+      Password: ['', [Validators.required]],
     });
 
     this.allCustomers = this.userService.getAllCustomer();
   }
-  
+
 }

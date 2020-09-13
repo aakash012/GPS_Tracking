@@ -3,17 +3,17 @@
     <table class="table" border="2">
       <tr ngclass="btn-primary">
         <th class="tbl2">
-          <input formControlName="userName" placeholder="Enter UserName" />
+          <input formControlName="Username" placeholder="Enter UserName" />
         </th>
         <th class="tbl2">
           <input
-            formControlName="password"
+            formControlName="Password"
             type="password"
             placeholder="Enter Password"
           />
         </th>
         <th class="tbl2">
-          <select Tooltip="userType" formControlName="userType">
+          <select Tooltip="UserType" formControlName="userType">
             <option value="0">Driver</option>
             <option value="1">Customer</option>
           </select>
@@ -49,10 +49,10 @@
         <th class="tbl2">Delete</th>
       </tr>
       <tr *ngFor="let User of allUsers | async">
-        <td class="tbl2">{{ User.userId }}</td>
-        <td class="tbl2">{{ User.userName }}</td>
-        <td class="tbl2">{{ User.password }}</td>
-        <td class="tbl2">{{ User.userType == 0 ? "Driver" : "Customer" }}</td>
+        <td class="tbl2">{{ User.UserId }}</td>
+        <td class="tbl2">{{ User.Username }}</td>
+        <td class="tbl2">{{ User.Password }}</td>
+        <td class="tbl2">{{ User.UserType == 0 ? "Driver" : "Customer" }}</td>
 
         <td class="tbl2">
           <button
