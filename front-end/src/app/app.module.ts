@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { CustomersComponent } from './customers/customers.component';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { DriversComponent } from './drivers/drivers.component';
+import { TaxiComponent } from './taxi/taxi.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { DriversComponent } from './drivers/drivers.component';
     AdminDashboardComponent,
     UsersComponent,
     CustomersComponent,
-    DriversComponent
+    DriversComponent,
+    TaxiComponent,
   ],
   imports: [
     BrowserModule,

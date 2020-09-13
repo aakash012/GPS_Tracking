@@ -1,0 +1,64 @@
+<div class="container">
+  <form [formGroup]="taxiForm" (ngSubmit)="onFormSubmit()">
+    <table class="table" border="2">
+      <tr ngclass="btn-primary">
+        <th class="tbl2">
+          Taxi Number &nbsp;&nbsp;
+          <input formControlName="taxiNo" placeholder="Enter Taxi no." />
+        </th>
+        <th class="tbl2">
+          Taxi Company &nbsp;&nbsp;
+          <select Tooltip="taxiCompany" formControlName="taxiCompany">
+            <option value="0">M&M</option>
+            <option value="1">Tata</option>
+          </select>
+        </th>
+        <th class="tbl2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            Tooltip="Click Save Button"
+            [disabled]="!taxiForm.valid"
+          >
+            Save</button>
+        </th>
+      </tr>
+    </table>
+
+    <table class="table" border="2">
+      <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
+        <th class="tbl2">Taxi Id</th>
+        <th class="tbl2">Taxi Number</th>
+        <th class="tbl2">Company</th>
+        <th class="tbl2">Edit</th>
+        <th class="tbl2">Delete</th>
+      </tr>
+      <tr *ngFor="let Taxi of allTaxis | async">
+        <td class="tbl2">{{ Taxi.TaxiId }}</td>
+        <td class="tbl2">{{ Taxi.taxiNo }}</td>
+        <td class="tbl2">{{ Taxi.userType == 0 ? "M&M" : "Tata" }}</td>
+
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-info"
+            matTooltip="Click Edit Button"
+            (click)="loadTaxiToEdit(Taxi.taxiId)"
+          >
+            Edit
+          </button>
+        </td>
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            matTooltip="Click Delete Button"
+            (click)="deleteTaxi(Taxi.taxiId)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

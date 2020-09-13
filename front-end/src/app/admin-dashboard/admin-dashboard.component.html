@@ -44,6 +44,7 @@
   <div class="row" id="main">
     <div class="col-2" id="lpanel">
       <ul id="lmenu">
+        <li><button id="btn1" (click)="onTaxis()">Taxi</button></li>
         <li><button id="btn1" (click)="onUsers()">Users</button></li>
         <li><button id="btn1" (click)="onDrivers()">Drivers</button></li>
         <li><button id="btn1" (click)="onCustomers()">Customers</button></li>
@@ -52,6 +53,9 @@
       </ul>
     </div>
     <div class="col-9" id="rpanel">
+      <div id="comp-render" *ngIf="taxi">
+        <app-taxi></app-taxi>
+      </div>
       <div id="comp-render" *ngIf="user">
         <app-users></app-users>
       </div>
@@ -61,7 +65,6 @@
       <div id="comp-render" *ngIf="driver">
         <app-drivers></app-drivers>
       </div>
-
     </div>
   </div>
 
