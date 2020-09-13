@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrackarsAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Taxi">
+    <Key>
+      <PropertyRef Name="TaxiId" />
+    </Key>
+    <Property Name="TaxiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaxiNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TaxiDriver" Relationship="TrackarsAppModel.FK__TaxiDrive__TaxiI__4316F928" FromRole="Taxi" ToRole="TaxiDriver" />
+  </EntityType>
+  <EntityContainer Name="TrackarsAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Taxi" EntityType="Self.Taxi" />
+    <EntitySet Name="Customer" EntityType="TrackarsAppModel.Customer" />
+    <EntitySet Name="TaxiDriver" EntityType="TrackarsAppModel.TaxiDriver" />
+    <AssociationSet Name="FK__TaxiDrive__TaxiI__4316F928" Association="TrackarsAppModel.FK__TaxiDrive__TaxiI__4316F928">
+      <End Role="Taxi" EntitySet="Taxi" />
+      <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerPassword" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfRegistration" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TaxiDriver">
+    <Key>
+      <PropertyRef Name="TaxiDriverId" />
+    </Key>
+    <Property Name="TaxiDriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DriverId" Type="Int32" />
+    <Property Name="TaxiId" Type="Int32" />
+    <NavigationProperty Name="Taxi" Relationship="TrackarsAppModel.FK__TaxiDrive__TaxiI__4316F928" FromRole="TaxiDriver" ToRole="Taxi" />
+  </EntityType>
+  <Association Name="FK__TaxiDrive__TaxiI__4316F928">
+    <End Type="TrackarsAppModel.Taxi" Role="Taxi" Multiplicity="0..1" />
+    <End Type="TrackarsAppModel.TaxiDriver" Role="TaxiDriver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Taxi">
+        <PropertyRef Name="TaxiId" />
+      </Principal>
+      <Dependent Role="TaxiDriver">
+        <PropertyRef Name="TaxiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

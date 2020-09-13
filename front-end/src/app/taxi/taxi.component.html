@@ -5,21 +5,19 @@
         <th class="tbl2">
           Taxi Number &nbsp;&nbsp;
           <input formControlName="TaxiNo" placeholder="Enter Taxi no." />
+          <input formControlName="taxiId" type="hidden" class="form-control" id="taxiId">
         </th>
         <th class="tbl2">
           Taxi Company &nbsp;&nbsp;
           <select Tooltip="taxiCompany" formControlName="Company">
-            <option value="0">M&M</option>
-            <option value="1">Tata</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Honda">Honda</option>
+            <option value="Skoda">Skoda</option>
+            <option value="Mahindra">Mahindra</option>
           </select>
         </th>
         <th class="tbl2">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            Tooltip="Click Save Button"
-            [disabled]="!taxiForm.valid"
-          >
+          <button type="submit" class="btn btn-primary" Tooltip="Click Save Button" [disabled]="!taxiForm.valid">
             Save</button>
         </th>
       </tr>
@@ -33,28 +31,20 @@
         <th class="tbl2">Edit</th>
         <th class="tbl2">Delete</th>
       </tr>
-      <tr *ngFor="let Taxi of allTaxis | async">
+      <tr *ngFor="let Taxi of taxiList ">
         <td class="tbl2">{{ Taxi.TaxiId }}</td>
         <td class="tbl2">{{ Taxi.TaxiNo }}</td>
-        <td class="tbl2">{{ Taxi.Company == 0 ? "M&M" : "Tata" }}</td>
+        <td class="tbl2">{{ Taxi.Company }}</td>
 
         <td class="tbl2">
-          <button
-            type="button"
-            class="btn btn-info"
-            matTooltip="Click Edit Button"
-            (click)="loadTaxiToEdit(Taxi.taxiId)"
-          >
+          <button type="button" class="btn btn-info" matTooltip="Click Edit Button"
+            (click)="FillTaxiFormToEdit(Taxi.TaxiId)">
             Edit
           </button>
         </td>
         <td class="tbl2">
-          <button
-            type="button"
-            class="btn btn-danger"
-            matTooltip="Click Delete Button"
-            (click)="deleteTaxi(Taxi.taxiId)"
-          >
+          <button type="button" class="btn btn-danger" matTooltip="Click Delete Button"
+            (click)="DeleteTaxi(Taxi.TaxiId)">
             Delete
           </button>
         </td>

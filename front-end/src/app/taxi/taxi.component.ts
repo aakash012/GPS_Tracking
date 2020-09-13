@@ -1,82 +1,89 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Taxi } from '../taxi';
 import { TaxiService } from '../taxi.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-taxi',
   templateUrl: './taxi.component.html',
   styleUrls: ['./taxi.component.css']
 })
+
 export class TaxiComponent implements OnInit {
 
-  dataSaved = false;
+  taxiList: Taxi[];
   taxiForm: any;
-  allTaxis: Observable<Taxi[]>;
-  taxiIdUpdate = null;
-  message = null;
-  constructor(
-    private formbulider: FormBuilder,
-    private taxiService: TaxiService
-  ) {}
+  taxiUpdate = null;
+
+  constructor(private formbulider: FormBuilder, private taxiService: TaxiService) { }
 
   ngOnInit(): void {
+
     this.taxiForm = this.formbulider.group({
+      taxiId: ['0'],
       TaxiNo: ['', [Validators.required]],
-      Company: ['', [Validators.required]],
+      Company: ['', [Validators.required]]
+
     });
 
-    this.allTaxis = this.taxiService.getAllTaxi();
+    this.getTaxiDetails();
+  }
+
+  getTaxiDetails() {
+    this.taxiService.getAllTaxi().subscribe((data: Taxi[]) => {
+      this.taxiList = data;
+    });
   }
 
   onFormSubmit() {
-    debugger;
-    this.dataSaved = false;
     const taxi = this.taxiForm.value;
+    alert(taxi);
     this.CreateTaxi(taxi);
-    this.taxiForm.reset();
+    this.getTaxiDetails();
   }
-  loadTaxiToEdit(taxiId: string) {
-    this.taxiService.getTaxiById(taxiId).subscribe((taxi) => {
-      debugger;
-      this.message = null;
-      this.dataSaved = false;
-      this.taxiIdUpdate = taxi.TaxiId;
-      this.taxiForm.controls['TaxiNo'].setValue(taxi.TaxiNo);
-      this.taxiForm.controls['Company'].setValue(taxi.Company, {
-        onlySelf: true,
-      });
+
+  FillTaxiFormToEdit(TaxiId: number) {
+    this.taxiService.getTaxiById(TaxiId).subscribe(Taxi => {
+      this.taxiUpdate = Taxi.TaxiId;
+      this.taxiForm.controls['taxiId'].setValue(Taxi.TaxiId);
+      this.taxiForm.controls['TaxiNo'].setValue(Taxi.TaxiNo);
+      this.taxiForm.controls['Company'].setValue(Taxi.Company, { onlySelf: true });
+      
     });
+
   }
+
   CreateTaxi(taxi: Taxi) {
-    if (this.taxiIdUpdate == null) {
-      this.taxiService.createTaxi(taxi).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record saved Successfully';
-        this.taxiIdUpdate = null;
-        this.taxiForm.reset();
-      });
-    } else {
-      taxi.TaxiId = this.taxiIdUpdate;
-      this.taxiService.updateTaxi(taxi).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record Updated Successfully';
-        this.taxiIdUpdate = null;
-        this.taxiForm.reset();
+    if (this.taxiUpdate == null) {
+      this.taxiService.saveTaxi(taxi).subscribe(() => {
+        this.taxiUpdate = null;
+        this.ResetForm();
       });
     }
-  }
-  deleteUser(taxiId: string) {
-    if (confirm("Are you sure you want to delete this ?")) {
-      debugger;
-    this.taxiService.deleteTaxiById(taxiId).subscribe(() => {
-      this.dataSaved = true;
-      this.message = 'Record Deleted Succefully';
-      this.taxiIdUpdate = null;
-      this.taxiForm.reset();
+    else{
+      this.taxiService.updateTaxi(taxi).subscribe(() => {
+        this.taxiUpdate = null;
+        this.ResetForm();
+      });
+    }
 
-    });
+
   }
+
+  DeleteTaxi(TaxiId: number) {
+    if (confirm("Are you sure you want to delete this ?")) {
+
+      this.taxiService.deleteTaxiById(TaxiId).subscribe(() => {
+        this.taxiUpdate = null;
+        this.getTaxiDetails();
+      });
+    }
+
+  }
+  
+ResetForm() {
+  this.taxiForm.reset();
+  
 }
+
 }

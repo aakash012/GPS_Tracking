@@ -14,8 +14,17 @@ namespace Api.DBContextLayer
     
     public partial class Taxi
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Taxi()
+        {
+            this.TaxiDriver = new HashSet<TaxiDriver>();
+        }
+    
         public int TaxiId { get; set; }
         public string TaxiNo { get; set; }
         public string Company { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
     }
 }

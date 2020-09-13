@@ -14,12 +14,26 @@ namespace Api.DBContextLayer
     
     public partial class Driver
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Driver()
+        {
+            this.TaxiDriver = new HashSet<TaxiDriver>();
+            this.Attendance = new HashSet<Attendance>();
+        }
+    
         public int DriverId { get; set; }
         public Nullable<int> UserId { get; set; }
         public string DriverName { get; set; }
-        public Nullable<int> Gender { get; set; }
+        public int Gender { get; set; }
         public string ContactNo { get; set; }
         public string DrivingLicence { get; set; }
         public Nullable<int> Rating { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
+        public virtual Gender Gender1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attendance> Attendance { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -16,9 +16,11 @@ namespace Api.DBContextLayer
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public string Gender { get; set; }
+        public Nullable<int> Gender { get; set; }
         public string ContactNo { get; set; }
         public string CustomerPassword { get; set; }
         public Nullable<System.DateTime> DateOfRegistration { get; set; }
+    
+        public virtual Gender Gender1 { get; set; }
     }
 }

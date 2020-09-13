@@ -14,9 +14,18 @@ namespace Api.DBContextLayer
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.Driver = new HashSet<Driver>();
+        }
+    
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public int UserType { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Driver> Driver { get; set; }
     }
 }

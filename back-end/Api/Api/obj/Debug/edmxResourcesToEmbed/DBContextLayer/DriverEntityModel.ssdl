@@ -7,7 +7,7 @@
     <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" />
     <Property Name="DriverName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Gender" Type="int" />
+    <Property Name="Gender" Type="int" Nullable="false" />
     <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="DrivingLicence" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Rating" Type="int" />

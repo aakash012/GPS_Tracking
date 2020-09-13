@@ -2,6 +2,7 @@
 using Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +12,7 @@ using System.Web.Http.Cors;
 namespace Api.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    [RoutePrefix("api/Taxix")]
+    [RoutePrefix("api/Taxi")]
     public class TaxiController : ApiController
     {
         #region Get Operation
@@ -20,13 +21,11 @@ namespace Api.Controllers
 
         public IHttpActionResult Get()
         {
-            List<Taxi> taxiList = new List<Taxi>();
-            using(TaxiMasterEntities obj=new TaxiMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                taxiList = obj.Taxi.ToList();
+                return Ok(obj.Taxi.ToList());
             }
 
-            return Ok(taxiList);
         }
 
         [HttpGet]
@@ -48,19 +47,18 @@ namespace Api.Controllers
         [HttpPost]
         [Route("Save")]
 
-        public IHttpActionResult SaveTaxiData(List<TaxiInputModel> taxiInputList)
+        public IHttpActionResult SaveTaxiData(Taxi taxiInputList)
         {
             int RowAffected = 0;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                foreach(var item in taxiInputList)
-                {
+             
                     Taxi taxi = new Taxi();
-                    taxi.TaxiNo = item.TaxiNo;
-                    taxi.Company = item.Company;
+                    taxi.TaxiNo = taxiInputList.TaxiNo;
+                    taxi.Company = taxiInputList.Company;
 
                     obj.Taxi.Add(taxi);
-                }
+              
 
                 RowAffected = obj.SaveChanges();
 
@@ -94,28 +92,27 @@ namespace Api.Controllers
         #endregion
 
         #region Update Operation
-        [HttpPost]
+        [HttpPut]
         [Route("Update")]
 
-        public IHttpActionResult Update(List<TaxiInputModel> taxiInputList)
+        public IHttpActionResult Update(Taxi taxiInputList)
         {
             int RowAffected = 0;
             
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 
-                foreach (var item in taxiInputList)
-                {
+                
                     Taxi taxi = new Taxi();
-                    taxi = obj.Taxi.ToList().Where(it => it.TaxiId == item.TaxiId).SingleOrDefault();
+                    taxi = obj.Taxi.ToList().Where(it => it.TaxiId == taxiInputList.TaxiId).SingleOrDefault();
 
                     if (taxi != null)
                     {
-                        taxi.TaxiNo = item.TaxiNo;
-                        taxi.Company = item.Company;
+                        taxi.TaxiNo = taxiInputList.TaxiNo;
+                        taxi.Company = taxiInputList.Company;
                         RowAffected = obj.SaveChanges();
                     }
-                }
+                
             }
             
             return Ok(RowAffected);

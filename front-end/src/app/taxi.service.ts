@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 import { Taxi } from './taxi';
 
@@ -8,27 +9,33 @@ import { Taxi } from './taxi';
 })
 export class TaxiService {
 
-  url= ''
-  constructor(private http: HttpClient) { }
-  getAllTaxi(): Observable<Taxi[]> {
-    return this.http.get<Taxi[]>(this.url + '/AllTaxiDetails');
+  url='http://localhost:5050/api/Taxi';
+  constructor(private http:HttpClient) { }
+
+  getAllTaxi() 
+  {
+    return this.http.get(this.url + '/GetAllTaxi');
   }
 
-  getTaxiById(taxiId: string): Observable<Taxi> {
-    return this.http.get<Taxi>(this.url + '/GetTaxiDetailsById/' + taxiId);
-  }
-  createTaxi(Taxi: Taxi): Observable<Taxi> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Taxi>(this.url + '/InsertTaxiDetails/', Taxi, httpOptions);
+  getTaxiById(TaxiId:number) : Observable<Taxi>
+  {
+    return this.http.get<Taxi>(this.url + '/GetTaxiById/'+TaxiId);
   }
 
-  updateTaxi(Taxi: Taxi): Observable<Taxi> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Taxi>(this.url + '/UpdateTaxiDetails/', Taxi, httpOptions);
+  saveTaxi(taxi:Taxi) : Observable<Taxi>
+  {
+    return this.http.post<Taxi>(this.url+'/Save',taxi);
   }
 
-  deleteTaxiById(taxiId: string): Observable<number> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<number>(this.url + '/DeleteTaxiDetails?id=' + taxiId, httpOptions);
+  updateTaxi(taxi:Taxi): Observable<Taxi>
+  {
+    return this.http.put<Taxi>(this.url+'/Update',taxi);
   }
+
+  deleteTaxiById(TaxiId:number):Observable<number>{
+    return this.http.delete<number>(this.url+'/DeleteById/'+TaxiId);
+  }
+
+  
+
 }

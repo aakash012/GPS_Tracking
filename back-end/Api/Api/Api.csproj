@@ -94,26 +94,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBContextLayer\CustomerEntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomerEntityModel.edmx</DependentUpon>
-      <LastGenOutput>CustomerEntityModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBContextLayer\CustomerEntityModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomerEntityModel.edmx</DependentUpon>
-      <LastGenOutput>CustomerEntityModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBContextLayer\DriverEntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DriverEntityModel.edmx</DependentUpon>
-      <LastGenOutput>DriverEntityModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBContextLayer\DriverEntityModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DriverEntityModel.edmx</DependentUpon>
-      <LastGenOutput>DriverEntityModel.cs</LastGenOutput>
-    </Content>
     <Content Include="DBContextLayer\TaxiEntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TaxiEntityModel.edmx</DependentUpon>
@@ -124,62 +104,30 @@
       <DependentUpon>TaxiEntityModel.edmx</DependentUpon>
       <LastGenOutput>TaxiEntityModel.cs</LastGenOutput>
     </Content>
-    <Content Include="DBContextLayer\UserEntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-      <LastGenOutput>UserEntityModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBContextLayer\UserEntityModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-      <LastGenOutput>UserEntityModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\TaxiController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\TaxiDriverController.cs" />
+    <Compile Include="DBContextLayer\Attendance.cs">
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBContextLayer\Customer.cs">
-      <DependentUpon>CustomerEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\CustomerEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\CustomerEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\CustomerEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerEntityModel.edmx</DependentUpon>
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\Driver.cs">
-      <DependentUpon>DriverEntityModel.tt</DependentUpon>
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBContextLayer\DriverEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DriverEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\DriverEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DriverEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\DriverEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DriverEntityModel.edmx</DependentUpon>
+    <Compile Include="DBContextLayer\Gender.cs">
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\Taxi.cs">
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContextLayer\TaxiDriver.cs">
       <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\TaxiEntityModel.Context.cs">
@@ -197,31 +145,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TaxiEntityModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DBContextLayer\UserEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\UserEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContextLayer\UserEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="DBContextLayer\Users.cs">
-      <DependentUpon>UserEntityModel.tt</DependentUpon>
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerInputModel.cs" />
     <Compile Include="Models\DriverInputModel.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\TaxiDriverInputModel.cs" />
     <Compile Include="Models\TaxiInputModel.cs" />
-    <Compile Include="Models\UserInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,27 +164,6 @@
     </EntityDeploy>
     <Content Include="DBContextLayer\TaxiEntityModel.edmx.diagram">
       <DependentUpon>TaxiEntityModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="DBContextLayer\DriverEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DriverEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DBContextLayer\DriverEntityModel.edmx.diagram">
-      <DependentUpon>DriverEntityModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="DBContextLayer\UserEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DBContextLayer\UserEntityModel.edmx.diagram">
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="DBContextLayer\CustomerEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CustomerEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DBContextLayer\CustomerEntityModel.edmx.diagram">
-      <DependentUpon>CustomerEntityModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">

@@ -1,6 +1,6 @@
-export class Taxi
-{
-  TaxiId: string;
-  TaxiNo: string;
-  Company: string;
+export class Taxi {
+  TaxiId:Number;
+  TaxiNo:String;
+  Company:String;
+
 }
