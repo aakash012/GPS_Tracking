@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrackarsAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CustomerPassword" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DateOfRegistration" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Taxi">
+    <Key>
+      <PropertyRef Name="TaxiId" />
+    </Key>
+    <Property Name="TaxiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaxiNo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Company" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaxiDriver">
+    <Key>
+      <PropertyRef Name="TaxiDriverId" />
+    </Key>
+    <Property Name="TaxiDriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DriverId" Type="int" />
+    <Property Name="TaxiId" Type="int" />
+  </EntityType>
+  <Association Name="FK__TaxiDrive__TaxiI__4316F928">
+    <End Role="Taxi" Type="Self.Taxi" Multiplicity="0..1" />
+    <End Role="TaxiDriver" Type="Self.TaxiDriver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Taxi">
+        <PropertyRef Name="TaxiId" />
+      </Principal>
+      <Dependent Role="TaxiDriver">
+        <PropertyRef Name="TaxiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrackarsAppModelStoreContainer">
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Taxi" EntityType="Self.Taxi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxiDriver" EntityType="Self.TaxiDriver" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__TaxiDrive__TaxiI__4316F928" Association="Self.FK__TaxiDrive__TaxiI__4316F928">
+      <End Role="Taxi" EntitySet="Taxi" />
+      <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

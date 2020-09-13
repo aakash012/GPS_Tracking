@@ -12,19 +12,20 @@ namespace Api.DBContextLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Taxi
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Taxi()
+        public Users()
         {
-            this.TaxiDriver = new HashSet<TaxiDriver>();
+            this.Driver = new HashSet<Driver>();
         }
     
-        public int TaxiId { get; set; }
-        public string TaxiNo { get; set; }
-        public string Company { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserPassword { get; set; }
+        public int UserType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
+        public virtual ICollection<Driver> Driver { get; set; }
     }
 }

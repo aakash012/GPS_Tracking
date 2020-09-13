@@ -7,7 +7,7 @@
     <Property Name="DriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" />
     <Property Name="DriverName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Gender" Type="String" />
+    <Property Name="Gender" Type="String" Nullable="false" />
     <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DrivingLicence" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Rating" Type="Int32" />

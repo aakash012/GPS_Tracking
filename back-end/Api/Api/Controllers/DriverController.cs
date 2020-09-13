@@ -19,7 +19,7 @@ namespace Api.Controllers
         public IHttpActionResult Get()
         {
             List<Driver> driverList = new List<Driver>();
-            using (DriverMasterEntities obj = new DriverMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 driverList = obj.Driver.ToList();
             }
@@ -33,7 +33,7 @@ namespace Api.Controllers
         public IHttpActionResult GetDriverById(int Id)
         {
             Driver driver = new Driver();
-            using (DriverMasterEntities obj = new DriverMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 driver = obj.Driver.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
             }
@@ -50,7 +50,7 @@ namespace Api.Controllers
         public IHttpActionResult SaveDriverData(List<DriverInputModel> driverInputList)
         {
             int RowAffected = 0;
-            using (DriverMasterEntities obj = new DriverMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 foreach (var item in driverInputList)
                 {
@@ -80,7 +80,7 @@ namespace Api.Controllers
             int RowAffected = 0;
             Driver driver = new Driver();
 
-            using (DriverMasterEntities obj = new DriverMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 driver = obj.Driver.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
 
@@ -103,7 +103,7 @@ namespace Api.Controllers
         {
             int RowAffected = 0;
 
-            using (DriverMasterEntities obj = new DriverMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
 
                 foreach (var item in driverInputList)

@@ -71,3 +71,4 @@ D:\GPS_Tracking\back-end\Api\Api\bin\roslyn\vbc.exe.config
 D:\GPS_Tracking\back-end\Api\Api\bin\roslyn\vbc.rsp
 D:\GPS_Tracking\back-end\Api\Api\bin\roslyn\VBCSCompiler.exe
 D:\GPS_Tracking\back-end\Api\Api\bin\roslyn\VBCSCompiler.exe.config
+D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csprojAssemblyReference.cache

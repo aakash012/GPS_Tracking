@@ -2,6 +2,7 @@
 using Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,13 +21,11 @@ namespace Api.Controllers
 
         public IHttpActionResult Get()
         {
-            List<Taxi> taxiList = new List<Taxi>();
-            using(TaxiMasterEntities obj=new TaxiMasterEntities())
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                taxiList = obj.Taxi.ToList();
+                return Ok(obj.Taxi.ToList());
             }
 
-            return Ok(taxiList);
         }
 
         [HttpGet]
@@ -48,7 +47,7 @@ namespace Api.Controllers
         [HttpPost]
         [Route("Save")]
 
-        public IHttpActionResult SaveTaxiData(TaxiInputModel taxiInputList)
+        public IHttpActionResult SaveTaxiData(Taxi taxiInputList)
         {
             int RowAffected = 0;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
@@ -96,7 +95,7 @@ namespace Api.Controllers
         [HttpPut]
         [Route("Update")]
 
-        public IHttpActionResult Update(TaxiInputModel taxiInputList)
+        public IHttpActionResult Update(Taxi taxiInputList)
         {
             int RowAffected = 0;
             
