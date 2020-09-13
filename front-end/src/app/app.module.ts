@@ -11,7 +11,6 @@ import { CustomersComponent } from './customers/customers.component';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { DriversComponent } from './drivers/drivers.component';
 import { TaxiComponent } from './taxi/taxi.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +21,6 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     CustomersComponent,
     DriversComponent,
     TaxiComponent,
-    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
