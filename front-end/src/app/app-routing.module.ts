@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UsersComponent } from './users/users.component';
 import { CustomersComponent } from './customers/customers.component';
 import { DriversComponent } from './drivers/drivers.component';
+import { TaxiComponent } from './taxi/taxi.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'drivers',
     component: DriversComponent
+  },
+  {
+    path: 'taxi',
+    component: TaxiComponent
   }
 ];
 

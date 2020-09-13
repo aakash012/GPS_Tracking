@@ -87,15 +87,7 @@ body
   border: none;
   background-color: transparent;
 }
-#btn1:active{
-  border: none;
-}
-#btn1:visited{
-  border: none;
-}
-#btn1:hover{
-  text-decoration: underline;
-}
+
 footer
 {
   position: absolute;
