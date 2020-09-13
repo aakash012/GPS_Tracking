@@ -1,6 +1,6 @@
 export class User
  {
-   userId: Int8Array;
+   userId: string;
    userName: string;
    password: string;
    userType: string;
