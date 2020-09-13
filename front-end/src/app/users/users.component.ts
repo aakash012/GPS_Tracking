@@ -22,9 +22,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formbulider.group({
-      userName: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      userType: ['', [Validators.required]],
+      Username: ['', [Validators.required]],
+      Password: ['', [Validators.required]],
+      UserType: ['', [Validators.required]],
     });
 
     this.allUsers = this.userService.getAllUser();
@@ -43,10 +43,10 @@ export class UsersComponent implements OnInit {
       debugger;
       this.message = null;
       this.dataSaved = false;
-      this.userIdUpdate = user.userId;
-      this.userForm.controls['userName'].setValue(user.userName);
-      this.userForm.controls['password'].setValue(user.password);
-      this.userForm.controls['userType'].setValue(user.userType, {
+      this.userIdUpdate = user.UserId;
+      this.userForm.controls['Username'].setValue(user.UserName);
+      this.userForm.controls['Password'].setValue(user.Password);
+      this.userForm.controls['UserType'].setValue(user.UserType, {
         onlySelf: true,
       });
     });
@@ -61,7 +61,7 @@ export class UsersComponent implements OnInit {
         this.userForm.reset();
       });
     } else {
-      user.userId = this.userIdUpdate;
+      user.UserId = this.userIdUpdate;
       this.userService.updateUser(user).subscribe(() => {
         this.dataSaved = true;
         this.message = 'Record Updated Successfully';

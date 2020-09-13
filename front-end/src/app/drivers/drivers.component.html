@@ -3,24 +3,24 @@
     <table class="table" border="2">
       <tr ngclass="btn-primary">
         <th class="tbl2">
-          <input formControlName="name" placeholder="Enter Name" />
+          <input formControlName="DriverName" placeholder="Enter Name" />
         </th>
         <th class="tbl2">
-          <select Tooltip="Gender" formControlName="gender">
+          <select Tooltip="Gender" formControlName="Gender">
             <option value="0">Male</option>
             <option value="1">Female</option>
           </select>
         </th>
         <th class="tbl2">
           <input
-            formControlName="contact"
+            formControlName="ContactNo"
             type="number"
             placeholder="**********"
           />
         </th>
         <th class="tbl2">
           <input
-            formControlName="license"
+            formControlName="DrivingLicense"
             type="text"
             placeholder="Enter license"
           />
@@ -49,11 +49,11 @@
         <th class="tbl2">Delete</th>
       </tr>
       <tr *ngFor="let Driver of allDrivers | async">
-        <td class="tbl2">{{ Driver.driverId }}</td>
-        <td class="tbl2">{{ Driver.name }}</td>
-        <td class="tbl2">{{ Driver.gender == 0 ? "Male" : "Female" }}</td>
-        <td class="tbl2">{{ Driver.contact }}</td>
-        <td class="tbl2">{{ Driver.license }}</td>
+        <td class="tbl2">{{ Driver.DriverId }}</td>
+        <td class="tbl2">{{ Driver.DriverName }}</td>
+        <td class="tbl2">{{ Driver.Gender == 0 ? "Male" : "Female" }}</td>
+        <td class="tbl2">{{ Driver.ContactNo }}</td>
+        <td class="tbl2">{{ Driver.DrivingLicense }}</td>
         <td class="tbl2">
           <button
             type="button"

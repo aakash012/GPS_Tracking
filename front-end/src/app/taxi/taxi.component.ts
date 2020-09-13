@@ -23,8 +23,8 @@ export class TaxiComponent implements OnInit {
 
   ngOnInit(): void {
     this.taxiForm = this.formbulider.group({
-      taxiNo: ['', [Validators.required]],
-      taxiCompany: ['', [Validators.required]],
+      TaxiNo: ['', [Validators.required]],
+      Company: ['', [Validators.required]],
     });
 
     this.allTaxis = this.taxiService.getAllTaxi();
@@ -42,9 +42,9 @@ export class TaxiComponent implements OnInit {
       debugger;
       this.message = null;
       this.dataSaved = false;
-      this.taxiIdUpdate = taxi.taxiId;
-      this.taxiForm.controls['taxiNo'].setValue(taxi.taxiNo);
-      this.taxiForm.controls['taxiCompany'].setValue(taxi.taxiCompany, {
+      this.taxiIdUpdate = taxi.TaxiId;
+      this.taxiForm.controls['TaxiNo'].setValue(taxi.TaxiNo);
+      this.taxiForm.controls['Company'].setValue(taxi.Company, {
         onlySelf: true,
       });
     });
@@ -58,7 +58,7 @@ export class TaxiComponent implements OnInit {
         this.taxiForm.reset();
       });
     } else {
-      taxi.taxiId = this.taxiIdUpdate;
+      taxi.TaxiId = this.taxiIdUpdate;
       this.taxiService.updateTaxi(taxi).subscribe(() => {
         this.dataSaved = true;
         this.message = 'Record Updated Successfully';

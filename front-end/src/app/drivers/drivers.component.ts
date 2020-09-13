@@ -22,10 +22,10 @@ export class DriversComponent implements OnInit {
 
   ngOnInit(): void {
     this.driverForm = this.formbulider.group({
-      name: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      contact: ['', [Validators.required]],
-      license: ['', [Validators.required]],
+      DriverName: ['', [Validators.required]],
+      Gender: ['', [Validators.required]],
+      ContactNo: ['', [Validators.required]],
+      DrivingLicense: ['', [Validators.required]],
     });
 
     this.allDrivers = this.driverService.getAllDriver();
@@ -35,13 +35,13 @@ export class DriversComponent implements OnInit {
       debugger;
       this.message = null;
       this.dataSaved = false;
-      this.driverIdUpdate = driver.driverId;
-      this.driverForm.controls['name'].setValue(driver.name);
-      this.driverForm.controls['gender'].setValue(driver.gender, {
+      this.driverIdUpdate = driver.DriverId;
+      this.driverForm.controls['DriverName'].setValue(driver.DriverName);
+      this.driverForm.controls['Gender'].setValue(driver.Gender, {
         onlySelf: true,
       });
-      this.driverForm.controls['contact'].setValue(driver.contact);
-      this.driverForm.controls['license'].setValue(driver.license);
+      this.driverForm.controls['ContactNo'].setValue(driver.ContactNo);
+      this.driverForm.controls['DrivingLicense'].setValue(driver.DrivingLicense);
     });
   }
   CreateDriver(driver: Driver) {
@@ -53,7 +53,7 @@ export class DriversComponent implements OnInit {
         this.driverForm.reset();
       });
     } else {
-      driver.driverId = this.driverIdUpdate;
+      driver.DriverId = this.driverIdUpdate;
       this.driverService.updateDriver(driver).subscribe(() => {
         this.dataSaved = true;
         this.message = 'Record Updated Successfully';
