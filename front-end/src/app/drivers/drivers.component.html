@@ -1,0 +1,80 @@
+<div class="container">
+  <form [formGroup]="driverForm">
+    <table class="table" border="2">
+      <tr ngclass="btn-primary">
+        <th class="tbl2">
+          <input formControlName="name" placeholder="Enter Name" />
+        </th>
+        <th class="tbl2">
+          <select Tooltip="Gender" formControlName="gender">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+          </select>
+        </th>
+        <th class="tbl2">
+          <input
+            formControlName="contact"
+            type="number"
+            placeholder="**********"
+          />
+        </th>
+        <th class="tbl2">
+          <input
+            formControlName="license"
+            type="text"
+            placeholder="Enter license"
+          />
+        </th>
+        <th class="tbl2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            Tooltip="Click Submit Button"
+            [disabled]="!driverForm.valid"
+          >
+            Submit</button
+          >
+        </th>
+      </tr>
+    </table>
+
+    <table class="table" border="2">
+      <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
+        <th class="tbl2">Driver Id</th>
+        <th class="tbl2">Name</th>
+        <th class="tbl2">Gender</th>
+        <th class="tbl2">Contact No.</th>
+        <th class="tbl2">Driving License</th>
+        <th class="tbl2">Edit</th>
+        <th class="tbl2">Delete</th>
+      </tr>
+      <tr *ngFor="let Driver of allDrivers | async">
+        <td class="tbl2">{{ Driver.driverId }}</td>
+        <td class="tbl2">{{ Driver.name }}</td>
+        <td class="tbl2">{{ Driver.gender == 0 ? "Male" : "Female" }}</td>
+        <td class="tbl2">{{ Driver.contact }}</td>
+        <td class="tbl2">{{ Driver.license }}</td>
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-info"
+            matTooltip="Click Edit Button"
+            (click)="loaddriverToEdit(Driver.driverId)"
+          >
+            Edit
+          </button>
+        </td>
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            matTooltip="Click Delete Button"
+            (click)="deleteDriver(Driver.driverId)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

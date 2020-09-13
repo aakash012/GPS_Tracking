@@ -8,17 +8,32 @@ import { Component, OnInit } from '@angular/core';
 export class AdminDashboardComponent implements OnInit {
 
 
-  display=false;
+  user=false;
   customer=false;
+  driver=false;
   onUsers(){
-    this.display=!this.display;
-    if(this.display)
-      this.customer=false;
+    this.user=!this.user;
+    if(this.user)
+      {
+        this.customer=false;
+        this.driver=false;
+      }
   }
   onCustomers(){
     this.customer=!this.customer;
     if(this.customer)
-      this.display=false;
+    {
+      this.user=false;
+      this.driver=false;
+    }
+  }
+  onDrivers(){
+    this.driver=!this.driver;
+    if(this.driver)
+    {
+      this.user=false;
+      this.customer=false;
+    }
   }
   constructor() { }
 

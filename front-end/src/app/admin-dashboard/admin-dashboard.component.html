@@ -44,20 +44,24 @@
   <div class="row" id="main">
     <div class="col-2" id="lpanel">
       <ul id="lmenu">
-        <li><button type="button" class="btn btn-primary" (click)="onUsers()">Users</button></li>
-        <li><a href="">Drivers</a></li>
-        <li><button type="button" class="btn btn-primay" (click)="onCustomers()">Customers</button></li>
-        <li><a href="">Driver Location</a></li>
-        <li><a href="">Driver Attendance</a></li>
+        <li><button id="btn1" (click)="onUsers()">Users</button></li>
+        <li><button id="btn1" (click)="onDrivers()">Drivers</button></li>
+        <li><button id="btn1" (click)="onCustomers()">Customers</button></li>
+        <li><button id="btn1">Driver Location</button></li>
+        <li><button id="btn1">Driver Attendance</button></li>
       </ul>
     </div>
     <div class="col-9" id="rpanel">
-      <div id="comp-render" *ngIf="display">
+      <div id="comp-render" *ngIf="user">
         <app-users></app-users>
       </div>
       <div id="comp-render" *ngIf="customer">
         <app-customers></app-customers>
       </div>
+      <div id="comp-render" *ngIf="driver">
+        <app-drivers></app-drivers>
+      </div>
+
     </div>
   </div>
 
