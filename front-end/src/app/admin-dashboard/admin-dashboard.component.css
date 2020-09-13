@@ -19,7 +19,7 @@
 }
 body
 {
-	background-image: linear-gradient( 109.5deg,  rgba(229,233,177,1) 11.2%, rgba(223,205,187,1) 100.2% );
+	background:#f6f9fc;
 }
 .fa
 {
@@ -68,8 +68,9 @@ body
   background: white;
 }
 #lpanel{
-  background-color: #8BC6EC;
-background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+  background-color: #DCD9D4;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
+  background-blend-mode: soft-light,screen;
 
 }
 #rpanel{
@@ -82,9 +83,12 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
   list-style: none;
   line-height: 42px;
 }
+a{
+  color: black;
+}
 footer
 {
-  position: relative;
+  position: absolute;
   margin-top: 40px;
   	left: 0;
   	bottom: 0;
