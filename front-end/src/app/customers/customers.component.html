@@ -1,0 +1,16 @@
+<div class="container">
+  <form [formGroup]="customerForm" (ngSubmit)="onFormSubmit(customerForm.value)">
+    <table class="table">
+      <tr ngclass="btn-primary">
+        <th class="tbl2">Customer Id</th>
+        <th class="tbl2">Customer Name</th>
+        <th class="tbl2">Password</th>
+      </tr>
+      <tr *ngFor="let Customer of allCustomers | async">
+        <td class="tbl2">{{ Customer.customerId }}</td>
+        <td class="tbl2">{{ Customer.customerName }}</td>
+        <td class="tbl2">{{ Customer.Password }}</td>
+      </tr>
+    </table>
+  </form>
+</div>

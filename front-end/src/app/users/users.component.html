@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <form [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm.value)">
     <table class="table">
       <tr ngclass="btn-primary">
         <th class="tbl2">
