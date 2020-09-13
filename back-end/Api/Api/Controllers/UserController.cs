@@ -13,6 +13,41 @@ namespace Api.Controllers
     public class UserController : ApiController
     {
 
+        #region Login Opereation
+        [HttpPost]
+        [Route("Login")]
+        public IHttpActionResult Login(List<UserInputModel> userInputList){
+
+            int RowAffected =0;
+
+            using (UserMasterEntities obj = new UserMasterEntities())
+            {
+
+                foreach (var item in userInputList)
+                {
+                    Users user = new Users();
+                    user = obj.Users.ToList().Where(it => it.UserName== item.UserName && it.UserPassword == item.UserPassword ).SingleOrDefault();
+
+                    if (user != null)
+                    {
+                        /*  user.UserName = item.UserName;
+                          user.UserPassword = item.UserPassword;
+                          user.UserType = item.UserType;
+                          RowAffected = obj.SaveChanges();*/
+                        RowAffected = 1;
+                    }
+                }
+            }
+
+            return Ok(RowAffected);
+
+
+
+
+        }
+
+        #endregion
+
         #region Get Operation
 
         [HttpGet]
