@@ -1,6 +1,12 @@
 <div class="container">
   <form [formGroup]="rideForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
+      <tr>
+        <td>PickUp Location</td>
+        <td>Drop Location</td>
+        <td>Driver Name</td>
+        <td></td>
+      </tr>
       <tr ngclass="btn-primary">
         <th class="tbl2">
           <input formControlName="PickUp" disabled/>

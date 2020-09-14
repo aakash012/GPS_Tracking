@@ -81,7 +81,7 @@ main
 }
 footer
 {
-  position: absolute;
+  position: relative;
   margin-top: 40px;
   	left: 0;
   	bottom: 0;

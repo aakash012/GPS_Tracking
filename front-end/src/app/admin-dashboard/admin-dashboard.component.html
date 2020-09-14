@@ -50,7 +50,7 @@
         <li><button id="btn1" (click)="onCustomers()">Customers</button></li>
         <li><button id="btn1" (click)="customerRide()">Customer Ride</button></li>
         <li><button id="btn1" (click)="driverLocation()">Driver Location</button></li>
-        <li><button id="btn1">Driver Attendance</button></li>
+        <li><button id="btn1" (click)="onAttendance()">Driver Attendance</button></li>
       </ul>
     </div>
     <div class="col-9" id="rpanel">
@@ -71,6 +71,9 @@
       </div>
       <div id="comp-render" *ngIf="custRide">
         <app-customer-ride></app-customer-ride>
+      </div>
+      <div id="comp-render" *ngIf="attend">
+        <app-attendance></app-attendance>
       </div>
 
     </div>
