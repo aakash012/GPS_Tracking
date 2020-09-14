@@ -58,7 +58,7 @@ body
 #main{
   margin: 20px;
   /* background: palegoldenrod; */
-  height: 530px;
+  height: 500px;
 
 }
 #lpanel, #rpanel{
@@ -83,10 +83,18 @@ body
   text-align: left;
   list-style: none;
   line-height: 42px;
+  padding-top: 100% ;
 }
 #btn1{
-  border: none;
+  border: 2px solid black;
+  border-radius: 3px;
   background-color: transparent;
+  font-size: larger;
+  font-weight: 600;
+  transition: ease all 0.5s;
+}
+#btn1:hover{
+  box-shadow: 1px 1px 1px 1px black;
 }
 footer
 {
