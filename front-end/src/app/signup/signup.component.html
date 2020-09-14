@@ -79,16 +79,16 @@
           <div class="form-group">
             <label>Gender</label><br />
             <div class="form-check form-check-inline">
-              <input class="form-check-input" formControlName="Gender" type="radio" name="gen" value="Male" />
+              <input class="form-check-input" formControlName="Gender" type="radio" name="Gender" value=1 />
               <label class="form-check-label">Male</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" formControlName="Gender" name="gen" value="Female" />
+              <input class="form-check-input" type="radio" formControlName="Gender" name="Gender" value=2 />
               <label class="form-check-label">Female</label>
             </div>
           </div>
           <div class="form-group">
-            <label>Phone No.</label>
+            <label>Contact No.</label>
             <input
               type="text"
               formControlName="ContactNo"
@@ -100,7 +100,7 @@
             <label>Password</label>
             <input
               type="password"
-              formControlName="Password"
+              formControlName="CustomerPassword"
               class="form-control"
               placeholder="Enter Password"
             />
@@ -114,7 +114,7 @@
             />
           </div>
           <div class="row">
-            <div class="col-md-12" align="right">
+            <div class="col-md-12" align="center">
               <button type="submit" class="btn btn-primary">Sign Up</button>
             </div>
           </div>

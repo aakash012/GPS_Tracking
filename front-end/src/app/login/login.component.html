@@ -54,18 +54,18 @@
 <!-- MAIN SECTION -->
 <main>
 	<div class=container id=mid_contr>
-		<form name="form" (ngSubmit)="login()" #f="ngForm">
+		<form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
 			<div class="form-group">
 				<label>Username</label>
-				<input type="text" name="Password" class="form-control sty1" [(ngModel)]="model.UserName" placeholder="Enter Username">
+				<input type="text" name="UserName" class="form-control sty1" formControlName="UserName" placeholder="Enter Username">
 			</div>
 			<div class="form-group">
 				<label>Password</label>
-				<input type="password" name="Password" [(ngModel)]="model.Password" class="form-control sty1" placeholder="Enter Password">
+				<input type="password" name="UserPassword" class="form-control sty1" formControlName="UserPassword" placeholder="Enter Password">
 			</div>
 			<div class=row>
-				<div class=col-md-6><a id=f_pass href="javascript:forget_pass();">Forget Password?</a></div>
-				<div class=col-md-6><button type="submit" class="btn btn-primary">Sign In</button></div>
+				<!-- <div class=col-md-6><a id=f_pass href="javascript:forget_pass();">Forget Password?</a></div> -->
+				<div class=col-md-12 align="center"><button type="submit" class="btn btn-primary">Sign In</button></div>
 			</div>
 		</form>
 	</div>

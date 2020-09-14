@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginServiceService } from '../login-service.service';
+import { SignupService } from '../signup.service';
 import { Register } from '../register';
+import { Router } from '@angular/router';
 import {Observable} from 'rxjs';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
@@ -13,14 +14,14 @@ export class SignupComponent implements OnInit {
   data = false;
   signUpForm: any;
   massage:string;
-  constructor( private formbulider: FormBuilder, private loginService:LoginServiceService ) { }
+  constructor( private router: Router, private formbulider: FormBuilder, private signUpService:SignupService ) { }
 
   ngOnInit() {
       this.signUpForm = this.formbulider.group({
       CustomerName: ['', [Validators.required]],
       Gender: ['', [Validators.required]],
       ContactNo: ['', [Validators.required]],
-      Password: ['', [Validators.required]],
+      CustomerPassword: ['', [Validators.required]],
     });
   }
   onFormSubmit()
@@ -30,12 +31,13 @@ export class SignupComponent implements OnInit {
   }
   CreateCustomer(register:Register)
   {
-  this.loginService.CreateCustomer(register).subscribe(
+  this.signUpService.CreateCustomer(register).subscribe(
     ()=>
     {
       this.data = true;
       this.massage = 'Data saved Successfully';
       this.signUpForm.reset();
+      this.router.navigate(['login']);
     });
   }
 

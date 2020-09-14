@@ -20,7 +20,9 @@ namespace Api.DBContextLayer
         public string ContactNo { get; set; }
         public string CustomerPassword { get; set; }
         public Nullable<System.DateTime> DateOfRegistration { get; set; }
+        public Nullable<int> UserId { get; set; }
     
         public virtual Gender Gender1 { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

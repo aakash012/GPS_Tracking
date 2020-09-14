@@ -109,9 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\TaxiController.cs" />
     <Compile Include="Controllers\TaxiDriverController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DBContextLayer\Attendance.cs">
       <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>

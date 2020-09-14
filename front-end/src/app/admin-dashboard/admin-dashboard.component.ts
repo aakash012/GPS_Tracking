@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
+  }
   taxi=false;
   user=false;
   customer=false;
@@ -49,9 +54,10 @@ export class AdminDashboardComponent implements OnInit {
       this.taxi=false;
     }
   }
-  constructor() { }
-
-  ngOnInit(): void {
+  onSignOut(){
+    this.router.navigate(['login']);
   }
+
+ 
 
 }

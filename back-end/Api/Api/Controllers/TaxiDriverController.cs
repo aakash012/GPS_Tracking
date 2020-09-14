@@ -6,9 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Models;
+using System.Web.Http.Cors;
 
 namespace Api.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     [RoutePrefix("api/TaxiDriver")]
     public class TaxiDriverController : ApiController
     {

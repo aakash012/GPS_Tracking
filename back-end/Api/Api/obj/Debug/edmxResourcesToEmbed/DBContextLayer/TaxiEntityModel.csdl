@@ -41,6 +41,10 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Driver" EntitySet="Driver" />
     </AssociationSet>
+    <AssociationSet Name="FK__Customer__userid__5AEE82B9" Association="TaxiMasterModel.FK__Customer__userid__5AEE82B9">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Driver">
     <Key>
@@ -133,6 +137,8 @@
     <Property Name="CustomerPassword" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="DateOfRegistration" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Gender1" Relationship="TaxiMasterModel.FK__Customer__Gender__47DBAE45" FromRole="Customer" ToRole="Gender" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="TaxiMasterModel.FK__Customer__userid__5AEE82B9" FromRole="Customer" ToRole="Users" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -143,6 +149,7 @@
     <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserType" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Driver__UserId__38996AB5" FromRole="Users" ToRole="Driver" />
+    <NavigationProperty Name="Customer" Relationship="TaxiMasterModel.FK__Customer__userid__5AEE82B9" FromRole="Users" ToRole="Customer" />
   </EntityType>
   <Association Name="FK__Attendanc__Drive__3F466844">
     <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
@@ -176,6 +183,18 @@
         <PropertyRef Name="UserId" />
       </Principal>
       <Dependent Role="Driver">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customer__userid__5AEE82B9">
+    <End Type="TaxiMasterModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="TaxiMasterModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Customer">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
