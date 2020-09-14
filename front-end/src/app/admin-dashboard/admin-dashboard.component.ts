@@ -24,7 +24,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
   onUsers(){
-    this.user=true;
+    this.user=true
     if(this.user)
       {
         this.customer=false;

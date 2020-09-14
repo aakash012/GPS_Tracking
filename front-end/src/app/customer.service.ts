@@ -8,9 +8,11 @@ import { Customer } from './customer';
 })
 export class CustomerService {
 
-  url= ''
-  constructor(private http: HttpClient) {  }
-  getAllCustomer(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.url + '/AllCustomerDetails');
+  url='http://localhost:5050/api/Customer';
+  constructor(private http:HttpClient) { }
+
+  getAllCustomer() 
+  {
+    return this.http.get(this.url + '/GetAllCustomer');
   }
 }

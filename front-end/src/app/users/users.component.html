@@ -3,17 +3,19 @@
     <table class="table" border="2">
       <tr ngclass="btn-primary">
         <th class="tbl2">
-          <input formControlName="Username" placeholder="Enter UserName" />
+          <input formControlName="UserName" placeholder="Enter UserName" />
+          <input formControlName="UserId" type="hidden" class="form-control" id="UserId">
         </th>
         <th class="tbl2">
           <input
-            formControlName="Password"
-            type="password"
+            formControlName="UserPassword"
+            type="text"
             placeholder="Enter Password"
           />
         </th>
         <th class="tbl2">
-          <select Tooltip="UserType" formControlName="userType">
+          <select Tooltip="UserType" formControlName="UserType">
+            <option value="1">Admin</option>
             <option value="2">Driver</option>
           </select>
         </th>
@@ -30,7 +32,7 @@
             type="reset"
             class="btn btn-danger"
             Tooltip="Click Reset Button"
-            (click)="resetForm()"
+            (click)="ResetForm()"
           >
             Reset
           </button>
@@ -40,16 +42,14 @@
 
     <table class="table" border="2">
       <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
-        <th class="tbl2">User Id</th>
         <th class="tbl2">User Name</th>
         <th class="tbl2">Password</th>
         <th class="tbl2">User Type</th>
         <th class="tbl2">Edit</th>
         <th class="tbl2">Delete</th>
       </tr>
-      <tr *ngFor="let User of allUsers | async">
-        <td class="tbl2">{{ User.UserId }}</td>
-        <td class="tbl2">{{ User.Username }}</td>
+      <tr *ngFor="let User of userList">
+        <td class="tbl2">{{ User.UserName }}</td>
         <td class="tbl2">{{ User.UserPassword }}</td>
         <td class="tbl2">{{ User.UserType == 1 ? "Admin" : "Driver" }}</td>
 
@@ -58,7 +58,7 @@
             type="button"
             class="btn btn-info"
             matTooltip="Click Edit Button"
-            (click)="loadUserToEdit(User.userId)"
+            (click)="FillUserFormToEdit(User.UserId)"
           >
             Edit
           </button>
@@ -68,7 +68,7 @@
             type="button"
             class="btn btn-danger"
             matTooltip="Click Delete Button"
-            (click)="deleteUser(User.userId)"
+            (click)="DeleteUser(User.UserId)"
           >
             Delete
           </button>

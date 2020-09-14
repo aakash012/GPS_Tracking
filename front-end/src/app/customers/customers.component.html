@@ -1,15 +1,17 @@
 <div class="container">
-  <form [formGroup]="customerForm">
+  <form>
     <table class="table" border="2">
       <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
-        <th class="tbl2">Customer Id</th>
         <th class="tbl2">Customer Name</th>
-        <th class="tbl2">Password</th>
+        <th class="tbl2">Gender</th>
+        <th class="tbl2">Contact Number</th>
+        <th class="tbl2">Registration Date</th>
       </tr>
-      <tr *ngFor="let Customer of allCustomers | async">
-        <td class="tbl2">{{ Customer.CustomerId }}</td>
+      <tr *ngFor="let Customer of customerList">
         <td class="tbl2">{{ Customer.CustomerName }}</td>
-        <td class="tbl2">{{ Customer.Password }}</td>
+        <td class="tbl2">{{ Customer.GenderType }}</td> 
+        <td class="tbl2">{{ Customer.ContactNo }}</td> 
+        <td class="tbl2">{{ Customer.DateOfRegistration }}</td> 
       </tr>
     </table>
   </form>

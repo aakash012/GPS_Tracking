@@ -10,84 +10,80 @@ import { UserService } from '../user.service';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  dataSaved = false;
+  userList: User[];
   userForm: any;
-  allUsers: Observable<User[]>;
-  userIdUpdate = null;
-  message = null;
-  constructor(
-    private formbulider: FormBuilder,
-    private userService: UserService
-  ) {}
+  userUpdate = null;
+
+  constructor(private formbulider: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
+
     this.userForm = this.formbulider.group({
-      Username: ['', [Validators.required]],
-      Password: ['', [Validators.required]],
-      UserType: ['', [Validators.required]],
+      UserId: ['0', [Validators.required]],
+      UserName: ['', [Validators.required]],
+      UserPassword: ['', [Validators.required]],
+      UserType: ['', [Validators.required]]
+
     });
 
-    this.allUsers = this.userService.getAllUser();
+    this.getUserDetails();
+  }
+
+  getUserDetails() {
+    this.userService.getAllUser().subscribe((data: User[]) => {
+      this.userList = data;
+    });
   }
 
   onFormSubmit() {
-    debugger;
-    this.dataSaved = false;
     const user = this.userForm.value;
+    alert(user);
     this.CreateUser(user);
-    this.userForm.reset();
+    this.getUserDetails();
   }
 
-  loadUserToEdit(userId: string) {
-    this.userService.getUserById(userId).subscribe((user) => {
-      debugger;
-      this.message = null;
-      this.dataSaved = false;
-      this.userIdUpdate = user.UserId;
-      this.userForm.controls['Username'].setValue(user.UserName);
-      this.userForm.controls['Password'].setValue(user.Password);
-      this.userForm.controls['UserType'].setValue(user.UserType, {
-        onlySelf: true,
-      });
+  FillUserFormToEdit(UserId: number) {
+    this.userService.getUserById(UserId).subscribe(User => {
+      this.userUpdate = User.UserId;
+      this.userForm.controls['UserId'].setValue(User.UserId);
+      this.userForm.controls['UserName'].setValue(User.UserName);
+      this.userForm.controls['UserPassword'].setValue(User.UserPassword);
+      this.userForm.controls['UserType'].setValue(User.UserType, { onlySelf: true });
+      
     });
+
   }
+
   CreateUser(user: User) {
-    if (this.userIdUpdate == null) {
-      this.userService.createUser(user).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record saved Successfully';
-        //this.loadAllEmployees();
-        this.userIdUpdate = null;
-        this.userForm.reset();
-      });
-    } else {
-      user.UserId = this.userIdUpdate;
-      this.userService.updateUser(user).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record Updated Successfully';
-        //this.loadAllEmployees();
-        this.userIdUpdate = null;
-        this.userForm.reset();
+    if (this.userUpdate == null) {
+      this.userService.saveUser(user).subscribe(() => {
+        this.userUpdate = null;
+        this.ResetForm();
       });
     }
+    else{
+      this.userService.updateUser(user).subscribe(() => {
+        this.userUpdate = null;
+        this.ResetForm();
+      });
+    }
+
+
   }
-  deleteUser(userId: string) {
+
+  DeleteUser(UserId: number) {
     if (confirm("Are you sure you want to delete this ?")) {
-      debugger;
-    this.userService.deleteUserById(userId).subscribe(() => {
-      this.dataSaved = true;
-      this.message = 'Record Deleted Succefully';
-      //this.loadAllEmployees();
-      this.userIdUpdate = null;
-      this.userForm.reset();
 
-    });
+      this.userService.deleteUserById(UserId).subscribe(() => {
+        this.userUpdate = null;
+        this.getUserDetails();
+      });
+    }
+
   }
-}
-
-resetForm() {
+  
+ResetForm() {
   this.userForm.reset();
-  this.message = null;
-  this.dataSaved = false;
+  
 }
 }

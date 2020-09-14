@@ -1,7 +1,7 @@
 export class User
  {
-   UserId: string;
+   UserId: number;
    UserName: string;
-   Password: string;
+   UserPassword: string;
    UserType: string;
  }
