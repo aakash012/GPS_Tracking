@@ -8,6 +8,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { DriversComponent } from './drivers/drivers.component';
 import { TaxiComponent } from './taxi/taxi.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'userDashboard',
     component: UserDashboardComponent
+  },
+  {
+    path: 'driverDashboard',
+    component: DriverDashboardComponent
   }
 ];
 

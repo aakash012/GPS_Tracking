@@ -58,6 +58,7 @@ body
 #main{
   margin: 20px;
   /* background: palegoldenrod; */
+  height: 530px;
 
 }
 #lpanel, #rpanel{
