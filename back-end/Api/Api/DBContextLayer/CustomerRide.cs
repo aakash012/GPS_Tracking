@@ -12,14 +12,16 @@ namespace Api.DBContextLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Attendance
+    public partial class CustomerRide
     {
-        public int AttendanceId { get; set; }
-        public Nullable<int> DriverId { get; set; }
-        public Nullable<int> NumberOfDays { get; set; }
-        public string FinancialYear { get; set; }
-        public string AttendanceMonth { get; set; }
+        public int CustomerRideId { get; set; }
+        public Nullable<int> CustomerId { get; set; }
+        public Nullable<int> TaxiDriverId { get; set; }
+        public string PickupLocation { get; set; }
+        public string DropLocation { get; set; }
+        public int RideStatus { get; set; }
     
-        public virtual Driver Driver { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual TaxiDriver TaxiDriver { get; set; }
     }
 }

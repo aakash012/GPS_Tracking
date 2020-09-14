@@ -27,15 +27,14 @@ namespace Api.DBContextLayer
         public int Gender { get; set; }
         public string ContactNo { get; set; }
         public string DrivingLicence { get; set; }
-
         public string UserPassword { get; set; }
         public Nullable<int> Rating { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
         public virtual Gender Gender1 { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendance { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

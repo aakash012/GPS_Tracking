@@ -7,11 +7,13 @@
     <Schema Namespace="TaxiMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
-            <PropertyRef Name="AttendenceId" />
+            <PropertyRef Name="AttendanceId" />
           </Key>
-          <Property Name="AttendenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttendanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DriverId" Type="int" />
           <Property Name="NumberOfDays" Type="int" />
+          <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="AttendanceMonth" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -24,6 +26,17 @@
           <Property Name="CustomerPassword" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="DateOfRegistration" Type="datetime" />
           <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="CustomerRide">
+          <Key>
+            <PropertyRef Name="CustomerRideId" />
+          </Key>
+          <Property Name="CustomerRideId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="TaxiDriverId" Type="int" />
+          <Property Name="PickupLocation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DropLocation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RideStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
@@ -105,6 +118,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CustomerR__Custo__5EBF139D">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerRide">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomerR__TaxiD__5FB337D6">
+          <End Role="TaxiDriver" Type="Self.TaxiDriver" Multiplicity="0..1" />
+          <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxiDriver">
+              <PropertyRef Name="TaxiDriverId" />
+            </Principal>
+            <Dependent Role="CustomerRide">
+              <PropertyRef Name="TaxiDriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Driver__Gender__46E78A0C">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
@@ -156,6 +193,7 @@
         <EntityContainer Name="TaxiMasterModelStoreContainer">
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerRide" EntityType="Self.CustomerRide" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Taxi" EntityType="Self.Taxi" Schema="dbo" store:Type="Tables" />
@@ -172,6 +210,14 @@
           <AssociationSet Name="FK__Customer__userid__5AEE82B9" Association="Self.FK__Customer__userid__5AEE82B9">
             <End Role="Users" EntitySet="Users" />
             <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerR__Custo__5EBF139D" Association="Self.FK__CustomerR__Custo__5EBF139D">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerRide" EntitySet="CustomerRide" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerR__TaxiD__5FB337D6" Association="Self.FK__CustomerR__TaxiD__5FB337D6">
+            <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+            <End Role="CustomerRide" EntitySet="CustomerRide" />
           </AssociationSet>
           <AssociationSet Name="FK__Driver__Gender__46E78A0C" Association="Self.FK__Driver__Gender__46E78A0C">
             <End Role="Gender" EntitySet="Gender" />
@@ -220,13 +266,8 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Driver" EntitySet="Driver" />
           </AssociationSet>
-          <EntitySet Name="Attendance" EntityType="TaxiMasterModel.Attendance" />
           <EntitySet Name="Customer" EntityType="TaxiMasterModel.Customer" />
           <EntitySet Name="Users" EntityType="TaxiMasterModel.Users" />
-          <AssociationSet Name="FK__Attendanc__Drive__3F466844" Association="TaxiMasterModel.FK__Attendanc__Drive__3F466844">
-            <End Role="Driver" EntitySet="Driver" />
-            <End Role="Attendance" EntitySet="Attendance" />
-          </AssociationSet>
           <AssociationSet Name="FK__Customer__Gender__47DBAE45" Association="TaxiMasterModel.FK__Customer__Gender__47DBAE45">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Customer" EntitySet="Customer" />
@@ -238,6 +279,20 @@
           <AssociationSet Name="FK__Customer__userid__5AEE82B9" Association="TaxiMasterModel.FK__Customer__userid__5AEE82B9">
             <End Role="Users" EntitySet="Users" />
             <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <EntitySet Name="CustomerRide" EntityType="TaxiMasterModel.CustomerRide" />
+          <AssociationSet Name="FK__CustomerR__Custo__5EBF139D" Association="TaxiMasterModel.FK__CustomerR__Custo__5EBF139D">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerRide" EntitySet="CustomerRide" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomerR__TaxiD__5FB337D6" Association="TaxiMasterModel.FK__CustomerR__TaxiD__5FB337D6">
+            <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+            <End Role="CustomerRide" EntitySet="CustomerRide" />
+          </AssociationSet>
+          <EntitySet Name="Attendance" EntityType="TaxiMasterModel.Attendance" />
+          <AssociationSet Name="FK__Attendanc__Drive__3F466844" Association="TaxiMasterModel.FK__Attendanc__Drive__3F466844">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Driver">
@@ -253,8 +308,8 @@
           <Property Name="Rating" Type="Int32" />
           <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__4222D4EF" FromRole="Driver" ToRole="TaxiDriver" />
           <NavigationProperty Name="Gender1" Relationship="TaxiMasterModel.FK__Driver__Gender__46E78A0C" FromRole="Driver" ToRole="Gender" />
-          <NavigationProperty Name="Attendance" Relationship="TaxiMasterModel.FK__Attendanc__Drive__3F466844" FromRole="Driver" ToRole="Attendance" />
           <NavigationProperty Name="Users" Relationship="TaxiMasterModel.FK__Driver__UserId__38996AB5" FromRole="Driver" ToRole="Users" />
+          <NavigationProperty Name="Attendance" Relationship="TaxiMasterModel.FK__Attendanc__Drive__3F466844" FromRole="Driver" ToRole="Attendance" />
         </EntityType>
         <EntityType Name="TaxiDriver">
           <Key>
@@ -265,6 +320,7 @@
           <Property Name="TaxiId" Type="Int32" />
           <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__4222D4EF" FromRole="TaxiDriver" ToRole="Driver" />
           <NavigationProperty Name="Taxi" Relationship="TaxiMasterModel.FK__TaxiDrive__TaxiI__4316F928" FromRole="TaxiDriver" ToRole="Taxi" />
+          <NavigationProperty Name="CustomerRide" Relationship="TaxiMasterModel.FK__CustomerR__TaxiD__5FB337D6" FromRole="TaxiDriver" ToRole="CustomerRide" />
         </EntityType>
         <Association Name="FK__TaxiDrive__Drive__4222D4EF">
           <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
@@ -311,15 +367,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="AttendenceId" />
-          </Key>
-          <Property Name="AttendenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DriverId" Type="Int32" />
-          <Property Name="NumberOfDays" Type="Int32" />
-          <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Attendanc__Drive__3F466844" FromRole="Attendance" ToRole="Driver" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -333,6 +380,7 @@
           <NavigationProperty Name="Gender1" Relationship="TaxiMasterModel.FK__Customer__Gender__47DBAE45" FromRole="Customer" ToRole="Gender" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="TaxiMasterModel.FK__Customer__userid__5AEE82B9" FromRole="Customer" ToRole="Users" />
+          <NavigationProperty Name="CustomerRide" Relationship="TaxiMasterModel.FK__CustomerR__Custo__5EBF139D" FromRole="Customer" ToRole="CustomerRide" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -345,18 +393,6 @@
           <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Driver__UserId__38996AB5" FromRole="Users" ToRole="Driver" />
           <NavigationProperty Name="Customer" Relationship="TaxiMasterModel.FK__Customer__userid__5AEE82B9" FromRole="Users" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK__Attendanc__Drive__3F466844">
-          <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
-          <End Type="TaxiMasterModel.Attendance" Role="Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driver">
-              <PropertyRef Name="DriverId" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="DriverId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Customer__Gender__47DBAE45">
           <End Type="TaxiMasterModel.Gender" Role="Gender" Multiplicity="0..1" />
           <End Type="TaxiMasterModel.Customer" Role="Customer" Multiplicity="*" />
@@ -390,6 +426,66 @@
             </Principal>
             <Dependent Role="Customer">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerRide">
+          <Key>
+            <PropertyRef Name="CustomerRideId" />
+          </Key>
+          <Property Name="CustomerRideId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TaxiDriverId" Type="Int32" />
+          <Property Name="PickupLocation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DropLocation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RideStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="TaxiMasterModel.FK__CustomerR__Custo__5EBF139D" FromRole="CustomerRide" ToRole="Customer" />
+          <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__CustomerR__TaxiD__5FB337D6" FromRole="CustomerRide" ToRole="TaxiDriver" />
+        </EntityType>
+        <Association Name="FK__CustomerR__Custo__5EBF139D">
+          <End Type="TaxiMasterModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="TaxiMasterModel.CustomerRide" Role="CustomerRide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerRide">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomerR__TaxiD__5FB337D6">
+          <End Type="TaxiMasterModel.TaxiDriver" Role="TaxiDriver" Multiplicity="0..1" />
+          <End Type="TaxiMasterModel.CustomerRide" Role="CustomerRide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxiDriver">
+              <PropertyRef Name="TaxiDriverId" />
+            </Principal>
+            <Dependent Role="CustomerRide">
+              <PropertyRef Name="TaxiDriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceId" />
+          </Key>
+          <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="NumberOfDays" Type="Int32" />
+          <Property Name="FinancialYear" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AttendanceMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Attendanc__Drive__3F466844" FromRole="Attendance" ToRole="Driver" />
+        </EntityType>
+        <Association Name="FK__Attendanc__Drive__3F466844">
+          <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
+          <End Type="TaxiMasterModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverId" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="DriverId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -438,15 +534,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Attendance">
-            <EntityTypeMapping TypeName="TaxiMasterModel.Attendance">
-              <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="NumberOfDays" ColumnName="NumberOfDays" />
-                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
-                <ScalarProperty Name="AttendenceId" ColumnName="AttendenceId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="TaxiMasterModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -467,6 +554,29 @@
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerRide">
+            <EntityTypeMapping TypeName="TaxiMasterModel.CustomerRide">
+              <MappingFragment StoreEntitySet="CustomerRide">
+                <ScalarProperty Name="RideStatus" ColumnName="RideStatus" />
+                <ScalarProperty Name="DropLocation" ColumnName="DropLocation" />
+                <ScalarProperty Name="PickupLocation" ColumnName="PickupLocation" />
+                <ScalarProperty Name="TaxiDriverId" ColumnName="TaxiDriverId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerRideId" ColumnName="CustomerRideId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendance">
+            <EntityTypeMapping TypeName="TaxiMasterModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceMonth" ColumnName="AttendanceMonth" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="NumberOfDays" ColumnName="NumberOfDays" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

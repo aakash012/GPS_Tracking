@@ -12,13 +12,16 @@
         <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__TaxiI__4316F928" />
         <EntityTypeShape EntityType="TaxiMasterModel.Gender" Width="1.5" PointX="1.125" PointY="3.375" />
         <AssociationConnector Association="TaxiMasterModel.FK__Driver__Gender__46E78A0C" />
-        <EntityTypeShape EntityType="TaxiMasterModel.Attendance" Width="1.5" PointX="5.625" PointY="4.375" />
         <EntityTypeShape EntityType="TaxiMasterModel.Customer" Width="1.5" PointX="3.375" PointY="8.125" />
         <EntityTypeShape EntityType="TaxiMasterModel.Users" Width="1.5" PointX="3.375" PointY="4.875" />
-        <AssociationConnector Association="TaxiMasterModel.FK__Attendanc__Drive__3F466844" />
         <AssociationConnector Association="TaxiMasterModel.FK__Customer__Gender__47DBAE45" />
         <AssociationConnector Association="TaxiMasterModel.FK__Driver__UserId__38996AB5" />
         <AssociationConnector Association="TaxiMasterModel.FK__Customer__userid__5AEE82B9" />
+        <EntityTypeShape EntityType="TaxiMasterModel.CustomerRide" Width="1.5" PointX="7.875" PointY="4.75" />
+        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__Custo__5EBF139D" />
+        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__TaxiD__5FB337D6" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Attendance" Width="1.5" PointX="5.625" PointY="4.25" />
+        <AssociationConnector Association="TaxiMasterModel.FK__Attendanc__Drive__3F466844" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustomerRideController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\TaxiController.cs" />
     <Compile Include="Controllers\TaxiDriverController.cs" />
@@ -118,6 +119,9 @@
       <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\Customer.cs">
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContextLayer\CustomerRide.cs">
       <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\Driver.cs">

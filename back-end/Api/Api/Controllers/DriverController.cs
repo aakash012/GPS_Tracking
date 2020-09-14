@@ -36,6 +36,14 @@ namespace Api.Controllers
                                   }).ToList();
 
                 return Ok(driverList);
+                //Attendance attendance = new Attendance();
+                //attendance = obj.Attendance.ToList().Where(it => it.DriverId == 11).SingleOrDefault();
+                //if (attendance != null)
+                //{
+                //    attendance.NumberOfDays = 0;
+                //    return Ok(attendance);
+                //}
+                //return Ok(12);
             }
 
         }

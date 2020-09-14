@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
       this.data = true;
       this.massage = 'Data saved Successfully';
       this.signUpForm.reset();
-      this.router.navigate(['login']);
+      this.router.navigate(['userDashboard']);
     });
   }
 

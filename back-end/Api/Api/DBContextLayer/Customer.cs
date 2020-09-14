@@ -14,6 +14,12 @@ namespace Api.DBContextLayer
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.CustomerRide = new HashSet<CustomerRide>();
+        }
+    
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public Nullable<int> Gender { get; set; }
@@ -24,5 +30,7 @@ namespace Api.DBContextLayer
     
         public virtual Gender Gender1 { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerRide> CustomerRide { get; set; }
     }
 }
