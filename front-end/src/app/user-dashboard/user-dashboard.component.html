@@ -54,12 +54,26 @@
       </div>
     </header>
 
-    <main class="row" id="mainc">
-      <div class="col-4"></div>
-      <div class="col-4" align="center">
-        <button class="btn btn-primary">Book a Ride</button>
+    <main id="mainc">
+      <div class="row1">
+        <div class="col-12">
+          <agm-map [latitude]="latitude" [longitude]="longitude">
+            <agm-marker
+              id="agm1"
+              [latitude]="latitude"
+              [longitude]="longitude"
+              [label]="'D'"
+              *ngIf="locationChosen"
+            ></agm-marker>
+          </agm-map>
+        </div>
       </div>
-      <div class="col-4"></div>
+      <br>
+      <div class="row1">
+        <div class="col-12" align="center">
+          <button class="btn btn-primary">Book a Ride</button>
+        </div>
+      </div>
     </main>
 
     <!-- FOOTER SECTION -->

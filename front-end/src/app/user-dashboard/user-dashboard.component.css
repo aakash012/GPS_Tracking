@@ -52,7 +52,10 @@
 	color: white;
 }
 #mainc{
-  margin: 20%;
+  margin: 50px;
+}
+agm-map {
+  height: 350px;
 }
 footer
 {

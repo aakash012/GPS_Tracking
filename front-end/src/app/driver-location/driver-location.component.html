@@ -1,0 +1,15 @@
+<agm-map [latitude]="latitude" [longitude]="longitude">
+  <agm-marker
+    id="agm1"
+    [latitude]="latitude"
+    [longitude]="longitude"
+    [label]="'C'"
+    *ngIf="locationChosen"
+  ></agm-marker>
+  <agm-marker
+    [latitude]="latitude1"
+    [longitude]="longitude2"
+    [label]="'D'"
+    *ngIf="locationChosen"
+  ></agm-marker>
+</agm-map>
