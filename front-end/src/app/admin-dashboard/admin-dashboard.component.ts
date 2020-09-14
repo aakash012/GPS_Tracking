@@ -13,6 +13,7 @@ export class AdminDashboardComponent implements OnInit {
   driver=false;
 
   onTaxis(){
+    
     this.taxi=true;
     if(this.taxi)
     {

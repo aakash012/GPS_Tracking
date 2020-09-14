@@ -1,28 +1,29 @@
 <div class="container">
-  <form [formGroup]="driverForm">
+  <form [formGroup]="driverForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
       <tr ngclass="btn-primary">
         <th class="tbl2">
           <input formControlName="DriverName" placeholder="Enter Name" />
+          <input formControlName="driverId" type="hidden" class="form-control" id="driverId">
         </th>
         <th class="tbl2">
           <select Tooltip="Gender" formControlName="Gender">
-            <option value="0">Male</option>
-            <option value="1">Female</option>
+            <option value=1>Male</option>
+            <option value=2>Female</option>
           </select>
         </th>
         <th class="tbl2">
           <input
             formControlName="ContactNo"
-            type="number"
+            type="text"
             placeholder="**********"
           />
         </th>
         <th class="tbl2">
           <input
-            formControlName="DrivingLicense"
+            formControlName="DrivingLicence"
             type="text"
-            placeholder="Enter license"
+            placeholder="Enter licence"
           />
         </th>
         <th class="tbl2">
@@ -37,10 +38,9 @@
         </th>
       </tr>
     </table>
-
+  </form>
     <table class="table" border="2">
       <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
-        <th class="tbl2">Driver Id</th>
         <th class="tbl2">Name</th>
         <th class="tbl2">Gender</th>
         <th class="tbl2">Contact No.</th>
@@ -48,18 +48,17 @@
         <th class="tbl2">Edit</th>
         <th class="tbl2">Delete</th>
       </tr>
-      <tr *ngFor="let Driver of allDrivers | async">
-        <td class="tbl2">{{ Driver.DriverId }}</td>
+      <tr *ngFor="let Driver of driverList">
         <td class="tbl2">{{ Driver.DriverName }}</td>
-        <td class="tbl2">{{ Driver.Gender == 0 ? "Male" : "Female" }}</td>
+        <td class="tbl2">{{ Driver.GenderType}}</td>
         <td class="tbl2">{{ Driver.ContactNo }}</td>
-        <td class="tbl2">{{ Driver.DrivingLicense }}</td>
+        <td class="tbl2">{{ Driver.DrivingLicence }}</td>
         <td class="tbl2">
           <button
             type="button"
             class="btn btn-info"
             matTooltip="Click Edit Button"
-            (click)="loaddriverToEdit(Driver.driverId)"
+            (click)="FillDriverFormToEdit(Driver.DriverId)"
           >
             Edit
           </button>
@@ -69,12 +68,11 @@
             type="button"
             class="btn btn-danger"
             matTooltip="Click Delete Button"
-            (click)="deleteDriver(Driver.driverId)"
+            (click)="DeleteDriver(Driver.DriverId)"
           >
             Delete
           </button>
         </td>
       </tr>
-    </table>
-  </form>
+    </table> 
 </div>
