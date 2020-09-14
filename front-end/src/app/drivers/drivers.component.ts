@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { Driver } from '../drivers';
 import { DriversService } from '../drivers.service';
 
@@ -10,68 +9,80 @@ import { DriversService } from '../drivers.service';
   styleUrls: ['./drivers.component.css'],
 })
 export class DriversComponent implements OnInit {
-  dataSaved = false;
+  driverList: Driver[];
   driverForm: any;
-  allDrivers: Observable<Driver[]>;
-  driverIdUpdate = null;
-  message = null;
-  constructor(
-    private formbulider: FormBuilder,
-    private driverService: DriversService
-  ) {}
+  driverUpdate = null;
+
+  constructor(private formbulider: FormBuilder, private driverService: DriversService) { }
 
   ngOnInit(): void {
+
     this.driverForm = this.formbulider.group({
+      driverId: ['0'],
       DriverName: ['', [Validators.required]],
-      Gender: ['', [Validators.required]],
+      Gender: [1, [Validators.required]],
       ContactNo: ['', [Validators.required]],
-      DrivingLicense: ['', [Validators.required]],
+      DrivingLicence: ['', [Validators.required]]
+
     });
 
-    this.allDrivers = this.driverService.getAllDriver();
+    this.getDriverDetails();
   }
-  loadDriverToEdit(driverId: string) {
-    this.driverService.getDriverById(driverId).subscribe((driver) => {
-      debugger;
-      this.message = null;
-      this.dataSaved = false;
-      this.driverIdUpdate = driver.DriverId;
-      this.driverForm.controls['DriverName'].setValue(driver.DriverName);
-      this.driverForm.controls['Gender'].setValue(driver.Gender, {
-        onlySelf: true,
-      });
-      this.driverForm.controls['ContactNo'].setValue(driver.ContactNo);
-      this.driverForm.controls['DrivingLicense'].setValue(driver.DrivingLicense);
+
+  getDriverDetails() {
+    this.driverService.getAllDriver().subscribe((data: Driver[]) => {
+      this.driverList = data;
     });
   }
+
+  onFormSubmit() {
+    const driver = this.driverForm.value;
+   // alert(driver);
+    this.CreateDriver(driver);
+    this.getDriverDetails();
+  }
+
+  FillDriverFormToEdit(DriverId: number) {
+    this.driverService.getDriverById(DriverId).subscribe(Driver => {
+      this.driverUpdate = Driver.DriverId;
+      this.driverForm.controls['driverId'].setValue(Driver.DriverId);
+      this.driverForm.controls['DriverName'].setValue(Driver.DriverName);
+      this.driverForm.controls['Gender'].setValue(Driver.Gender, { onlySelf: true });
+      this.driverForm.controls['ContactNo'].setValue(Driver.ContactNo);
+      this.driverForm.controls['DrivingLicence'].setValue(Driver.DrivingLicence);
+      
+    });
+
+  }
+
   CreateDriver(driver: Driver) {
-    if (this.driverIdUpdate == null) {
-      this.driverService.createDriver(driver).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record saved Successfully';
-        this.driverIdUpdate = null;
-        this.driverForm.reset();
+    if (this.driverUpdate == null) {
+      this.driverService.saveDriver(driver).subscribe(() => {
+        this.driverUpdate = null;
+        this.ResetForm();
       });
-    } else {
-      driver.DriverId = this.driverIdUpdate;
+    }
+    else{
       this.driverService.updateDriver(driver).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record Updated Successfully';
-        this.driverIdUpdate = null;
-        this.driverForm.reset();
+        this.driverUpdate = null;
+        this.ResetForm();
       });
     }
   }
-  deleteDriver(driverId: string) {
-    if (confirm('Are you sure you want to delete this ?')) {
-      debugger;
-      this.driverService.deleteDriverById(driverId).subscribe(() => {
-        this.dataSaved = true;
-        this.message = 'Record Deleted Succefully';
-        //this.loadAllEmployees();
-        this.driverIdUpdate = null;
-        this.driverForm.reset();
+
+  DeleteDriver(DriverId: number) {
+    if (confirm("Are you sure you want to delete this ?")) {
+
+      this.driverService.deleteDriverById(DriverId).subscribe(() => {
+        this.driverUpdate = null;
+        this.getDriverDetails();
       });
     }
+
   }
+  
+ResetForm() {
+  this.driverForm.reset();
+  
+}
 }

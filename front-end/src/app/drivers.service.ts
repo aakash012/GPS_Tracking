@@ -8,27 +8,30 @@ import { Driver } from './drivers';
 })
 export class DriversService {
 
-  url= ''
-  constructor(private http: HttpClient) { }
-  getAllDriver(): Observable<Driver[]> {
-    return this.http.get<Driver[]>(this.url + '/AllDriverDetails');
+  url='http://localhost:5050/api/Driver';
+  constructor(private http:HttpClient) { }
+
+  getAllDriver() 
+  {
+    return this.http.get(this.url + '/GetAllDrivers');
   }
 
-  getDriverById(driverId: string): Observable<Driver> {
-    return this.http.get<Driver>(this.url + '/GetDriverDetailsById/' + driverId);
-  }
-  createDriver(Driver: Driver): Observable<Driver> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Driver>(this.url + '/InsertDriverDetails/', Driver, httpOptions);
+  getDriverById(DriverId:number) : Observable<Driver>
+  {
+    return this.http.get<Driver>(this.url + '/GetDriverById/'+DriverId);
   }
 
-  updateDriver(Driver: Driver): Observable<Driver> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<Driver>(this.url + '/UpdateDriverDetails/', Driver, httpOptions);
+  saveDriver(driver:Driver) : Observable<Driver>
+  {
+    return this.http.post<Driver>(this.url+'/Save',driver);
   }
 
-  deleteDriverById(driverId: string): Observable<number> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<number>(this.url + '/DeleteDriverDetails?id=' + driverId, httpOptions);
+  updateDriver(driver:Driver): Observable<Driver>
+  {
+    return this.http.put<Driver>(this.url+'/Update',driver);
+  }
+
+  deleteDriverById(DriverId:number):Observable<number>{
+    return this.http.delete<number>(this.url+'/DeleteById/'+DriverId);
   }
 }
