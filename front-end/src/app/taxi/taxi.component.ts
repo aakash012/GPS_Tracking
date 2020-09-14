@@ -67,7 +67,6 @@ export class TaxiComponent implements OnInit {
       });
     }
 
-
   }
 
   DeleteTaxi(TaxiId: number) {

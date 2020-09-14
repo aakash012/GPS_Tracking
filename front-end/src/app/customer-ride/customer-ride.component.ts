@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Rides } from '../rides';
-import { RideService } from '../ride.service';
+import { CustomerRide } from '../customer-ride';
+import { CustomerRideService } from '../customer-ride.service';
 
 @Component({
   selector: 'app-customer-ride',
@@ -10,24 +10,24 @@ import { RideService } from '../ride.service';
 })
 export class CustomerRideComponent implements OnInit {
 
-  rideList: Rides[];
+  rideList: CustomerRide[];
   rideForm: any;
   rideUpdate = null;
-  constructor(private formbulider: FormBuilder, private RideService: RideService) { }
+  constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService) { }
 
   ngOnInit(): void {
     this.rideForm = this.formbulider.group({
-      RideId: ['0'],
+      CustomerRideId: ['0'],
       CustomerName: ['', [Validators.required]],
-      PickUpLocation: ['', [Validators.required]],
+      PickupLocation: ['', [Validators.required]],
       DropLocation: ['', [Validators.required]],
-      RideList: [1, [Validators.required]],
+      TaxiDriverId: ['0']
     });
 
     this.getRideDetails();
   }
   getRideDetails() {
-    this.RideService.getAllRides().subscribe((data: Rides[]) => {
+    this.customerRideService.getAllCustomerRide().subscribe((data: CustomerRide[]) => {
       this.rideList = data;
     });
   }
@@ -37,28 +37,22 @@ export class CustomerRideComponent implements OnInit {
     this.CreateRide(ride);
     this.getRideDetails();
   }
-  FillRideFormToEdit(RideId: number) {
-    this.RideService.getRideById(RideId).subscribe(Rides => {
-      this.rideUpdate = Rides.RideId;
-      this.rideForm.controls['RideId'].setValue(Rides.RideId);
-      this.rideForm.controls['PickUpLocation'].setValue(Rides.PickUpLocation);
+  FillRideFormToEdit(CustomerRideId: number) {
+    this.customerRideService.getCustomerRideById(CustomerRideId).subscribe(Rides => {
+      this.rideForm.controls['CustomerRideId'].setValue(Rides.CustomerRideId);
+      this.rideForm.controls['PickupLocation'].setValue(Rides.PickupLocation);
       this.rideForm.controls['DropLocation'].setValue(Rides.DropLocation);
-      this.rideForm.controls['DriverList'].setValue(Rides.DriverList, { onlySelf: true });
+      // this.rideForm.controls['DriverList'].setValue(Rides.DriverList, { onlySelf: true });
     });
   }
-  CreateRide(ride: Rides) {
-    if (this.rideUpdate == null) {
-      this.RideService.saveRide(ride).subscribe(() => {
+  CreateRide(ride: CustomerRide) {
+    // if (this.rideUpdate == null) {
+      this.customerRideService.saveCustomerRide(ride).subscribe(() => {
         this.rideUpdate = null;
         this.ResetForm();
       });
-    }
-    else{
-      this.RideService.updateRide(ride).subscribe(() => {
-        this.rideUpdate = null;
-        this.ResetForm();
-      });
-    }
+    // /}
+
   }
 ResetForm() {
   this.rideForm.reset();

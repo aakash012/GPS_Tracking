@@ -13,6 +13,7 @@ namespace Api.Controllers
     [RoutePrefix("api/CustomerRide")]
     public class CustomerRideController : ApiController
     {
+
         #region Get Operation
         [HttpGet]
         [Route("GetAllCustomerRide")]
@@ -41,6 +42,21 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [Route("GetCustomerRideById/{Id}")]
+
+        public IHttpActionResult GetCustomerRideById(int Id)
+        {
+            CustomerRide customerRide = new CustomerRide();
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+                customerRide = obj.CustomerRide.ToList().Where(it => it.CustomerRideId == Id).SingleOrDefault();
+            }
+
+            return Ok(customerRide);
+        }
+
+
+        [HttpGet]
         [Route("GetAllAttendance")]
 
         public IHttpActionResult GetAttendance()
@@ -63,6 +79,29 @@ namespace Api.Controllers
                 return Ok(attendanceList);
             }
 
+        }
+        #endregion
+
+
+        #region Save Operation
+        [HttpPost]
+        [Route("Save")]
+        public IHttpActionResult SaveCustomerRideData(CustomerRide customerRideList)
+        {
+            int RowAffected = 0;
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+
+                CustomerRide customerRide = new CustomerRide();
+                customerRide.CustomerId = customerRideList.CustomerId;
+                customerRide.PickupLocation = customerRideList.PickupLocation;
+                customerRide.DropLocation = customerRideList.DropLocation;
+
+                obj.CustomerRide.Add(customerRide);
+                RowAffected = obj.SaveChanges();
+
+            }
+            return Ok(RowAffected);
         }
         #endregion
 

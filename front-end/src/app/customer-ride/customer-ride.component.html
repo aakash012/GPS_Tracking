@@ -9,15 +9,16 @@
       </tr>
       <tr ngclass="btn-primary">
         <th class="tbl2">
-          <input formControlName="PickUp" disabled/>
-          <input formControlName="rideId" type="hidden" class="form-control" id="rideId">
+          <!-- <label>PickUp Location</label> -->
+          <input formControlName="PickupLocation" disabled/>
+          <input formControlName="CustomerRideId" type="hidden" class="form-control" id="CustomerRideId">
         </th>
         <th class="tbl2">
-          <input formControlName="Drop" disabled/>
+          <input formControlName="DropLocation" disabled/>
         </th>
         <th class="tbl2">
-          <select Tooltip="Choose Driver" formControlName="Driver">
-            <option value=1>Ramesh</option>
+          <select Tooltip="Choose Driver" formControlName="TaxiDriverId">
+            <option value=3>Ramesh</option>
             <option value=2>Suresh</option>
           </select>
         </th>
@@ -26,7 +27,7 @@
             type="submit"
             class="btn btn-primary"
             Tooltip="Click Submit Button"
-            [disabled]="!rideForm.valid"
+            
           >
             Submit</button
           >
@@ -44,15 +45,16 @@
       </tr>
       <tr *ngFor="let Ride of rideList">
         <td class="tbl2">{{ Ride.CustomerName }}</td>
-        <td class="tbl2">{{ Ride.PickUpLocation}}</td>
+        <td class="tbl2">{{ Ride.PickupLocation}}</td>
         <td class="tbl2">{{ Ride.DropLocation }}</td>
-        <td class="tbl2">{{ Ride.Status }}</td>
+        <td class="tbl2">{{ Ride.RideStatus == 1 ? "Ride Booked" : "Booking Request"}}</td>
         <td class="tbl2">
           <button
             type="button"
             class="btn btn-info"
             matTooltip="Click Edit Button"
-            (click)="FillRideFormToEdit(Ride.RideId)"
+            (click)="FillRideFormToEdit(Ride.CustomerRideId)"
+            *ngIf="Ride.RideStatus == 0"
           >
             Approve
           </button>

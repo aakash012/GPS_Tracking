@@ -7,12 +7,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RideService {
-  url='';
+  
+  url='http://localhost:5050/api/CustomerRide';
   constructor(private http:HttpClient) { }
 
   getAllRides()
   {
-    return this.http.get(this.url + '/GetAllRides');
+    return this.http.get(this.url + '/GetAllCustomerRide');
   }
 
   getRideById(RideId:number) : Observable<Rides>

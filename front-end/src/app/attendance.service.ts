@@ -8,9 +8,9 @@ import { Attendance } from './attendance';
 })
 export class AttendanceService {
 
-  url='';
-  http: any;
-  constructor() { }
+  url='http://localhost:5050/api/CustomerRide';
+  
+  constructor(private http:HttpClient) { }
   getAllAttendance()
   {
     return this.http.get(this.url + '/GetAllAttendance');

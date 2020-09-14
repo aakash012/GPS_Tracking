@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {AgmMap, MapsAPILoader  } from '@agm/core';
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { CustomerRide } from '../customer-ride';
+import { CustomerRideService } from '../customer-ride.service';
 import {} from 'googlemaps';
 
 @Component({
@@ -16,7 +18,9 @@ export class UserDashboardComponent implements OnInit {
   zoom: number;
   latitude: any;
   longitude: any;
-  constructor(private apiloader: MapsAPILoader) {}
+  customerRideForm:any;
+
+  constructor(private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService ) {}
   get() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: Position) => {
@@ -34,12 +38,22 @@ export class UserDashboardComponent implements OnInit {
                     geocoder.geocode({
                         'location': latlng
                     }, function(results) {
+                        console.log(latlng);
+                        console.log(results);
                         if (results[0]) {
                             this.currentLocation = results[0].formatted_address;
+                            alert(this.currentLocation);
                             console.log(this.assgin);
                         } else {
                             console.log('Not found');
                         }
+
+                        // this.customerRideForm = this.formbulider.group({
+                        //     CustomerId: ['1'],
+                        //     PickUpLocation: [this.lat, [Validators.required]],
+                        //     DropLocation: ['Jalandhar', [Validators.required]]
+                      
+                        //   });
                     });
                 });
             }
@@ -51,6 +65,13 @@ ngOnInit()
     this.get()
     this.agmMap.triggerResize(true);
      this.zoom = 16;
+
+     this.customerRideForm = this.formbulider.group({
+        CustomerId: ['1'],
+        PickUpLocation: ['31.6340 , 74.8723', [Validators.required]],
+        DropLocation: ['31.3260 , 75.5762', [Validators.required]]
+  
+      });
     }
     mapClicked($event: any) {
       this.latitude = $event.coords.lat,
@@ -73,4 +94,23 @@ ngOnInit()
           });
       });
   }
+
+  onBookRide() {
+    const customerRide = this.customerRideForm.value;
+    //alert(taxi);
+    this.CreateCustomerRide(customerRide);
+    
+  }
+  
+  CreateCustomerRide(customerRide: CustomerRide) {
+    
+      this.customerRideService.saveCustomerRide(customerRide).subscribe(() => {
+       
+      });
+    
+   
+  }
+
 }
+
+

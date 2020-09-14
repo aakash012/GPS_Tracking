@@ -94,6 +94,14 @@ namespace Api.Controllers
                     obj.Driver.Add(driver);
 
                     RowAffected = obj.SaveChanges();
+
+                    int driverId = driver.DriverId;
+                    Attendance attendance = new Attendance();
+                    attendance.DriverId = driverId;
+                    attendance.FinancialYear = "2020";
+                    attendance.AttendanceMonth = "September";
+                    obj.Attendance.Add(attendance);
+                    RowAffected = obj.SaveChanges();
                 }
 
             }

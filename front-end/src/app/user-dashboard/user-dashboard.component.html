@@ -66,7 +66,7 @@
               (mapClick)="mapClicked($event)"
             >
               <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Me'"></agm-marker>
-              <agm-marker [latitude]="28.5355" [longitude]="77.3910" [label]="'Me'"></agm-marker>
+              <agm-marker [latitude]="31.3260" [longitude]="75.5762" [label]="'Me'"></agm-marker>
             </agm-map>
           </form>
         </div>
@@ -74,7 +74,26 @@
       <br />
       <div class="row1">
         <div class="col-12" align="center">
-          <button class="btn btn-primary">Book a Ride</button>
+          <form [formGroup]="customerRideForm" (ngSubmit)="onBookRide()">
+            <table class="table" border="2">
+              <tr ngclass="btn-primary">
+                <th class="tbl2">
+                  PickUp Location &nbsp;&nbsp;
+                  <input formControlName="PickUpLocation" placeholder="Enter PickUpLocation"  disabled/>
+                  <input formControlName="CustomerId" type="hidden" class="form-control"/>
+                </th>
+                <th class="tbl2">
+                  Drop Location &nbsp;&nbsp;
+                  <input formControlName="DropLocation" placeholder="Enter DropLocation" disabled/>
+                </th>
+                <th class="tbl2">
+                  <button class="btn btn-primary">Book a Ride</button>
+                </th>
+              </tr>
+            </table>
+            
+          </form>
+          
         </div>
       </div>
     </main>
