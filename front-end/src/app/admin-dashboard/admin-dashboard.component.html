@@ -48,7 +48,8 @@
         <li><button id="btn1" (click)="onUsers()">Users</button></li>
         <li><button id="btn1" (click)="onDrivers()">Drivers</button></li>
         <li><button id="btn1" (click)="onCustomers()">Customers</button></li>
-        <li><button id="btn1">Driver Location</button></li>
+        <li><button id="btn1" (click)="customerRide()">Customer Ride</button></li>
+        <li><button id="btn1" (click)="driverLocation()">Driver Location</button></li>
         <li><button id="btn1">Driver Attendance</button></li>
       </ul>
     </div>
@@ -65,6 +66,13 @@
       <div id="comp-render" *ngIf="driver">
         <app-drivers></app-drivers>
       </div>
+      <div id="comp-render" *ngIf="driverLoc">
+        <app-driver-location></app-driver-location>
+      </div>
+      <div id="comp-render" *ngIf="custRide">
+        <app-customer-ride></app-customer-ride>
+      </div>
+
     </div>
   </div>
 

@@ -54,12 +54,28 @@
       </div>
     </header>
 
-    <main class="row" id="mainc">
-      <div class="col-4"></div>
-      <div class="col-4" align="center">
-        <button class="btn btn-primary">Book a Ride</button>
+    <main id="mainc">
+      <div class="row1">
+        <div class="col-12">
+          <form>
+            <agm-map
+              style="height: 300px"
+              [latitude]="lat"
+              [longitude]="lng"
+              [zoom]="zoom"
+              (mapClick)="mapClicked($event)"
+            >
+              <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Me'"></agm-marker>
+            </agm-map>
+          </form>
+        </div>
       </div>
-      <div class="col-4"></div>
+      <br />
+      <div class="row1">
+        <div class="col-12" align="center">
+          <button class="btn btn-primary">Book a Ride</button>
+        </div>
+      </div>
     </main>
 
     <!-- FOOTER SECTION -->

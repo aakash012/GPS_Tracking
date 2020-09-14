@@ -16,15 +16,17 @@ export class AdminDashboardComponent implements OnInit {
   user=false;
   customer=false;
   driver=false;
-
+  driverLoc=false;
+  custRide=false;
   onTaxis(){
-    
     this.taxi=true;
     if(this.taxi)
     {
       this.user=false;
       this.customer=false;
       this.driver=false;
+      this.driverLoc=false;
+      this.custRide=false;
     }
   }
   onUsers(){
@@ -34,6 +36,8 @@ export class AdminDashboardComponent implements OnInit {
         this.customer=false;
         this.driver=false;
         this.taxi=false;
+        this.driverLoc=false;
+        this.custRide=false;
       }
   }
   onCustomers(){
@@ -43,6 +47,8 @@ export class AdminDashboardComponent implements OnInit {
       this.user=false;
       this.driver=false;
       this.taxi=false;
+      this.driverLoc=false;
+      this.custRide=false;
     }
   }
   onDrivers(){
@@ -52,6 +58,30 @@ export class AdminDashboardComponent implements OnInit {
       this.user=false;
       this.customer=false;
       this.taxi=false;
+      this.driverLoc=false;
+      this.custRide=false;
+    }
+  }
+  driverLocation(){
+    this.driverLoc=true;
+    if(this.driverLoc)
+    {
+      this.user=false;
+      this.customer=false;
+      this.taxi=false;
+      this.driver=false;
+      this.custRide=false;
+    }
+  }
+  customerRide(){
+    this.custRide=true;
+    if(this.custRide=true)
+    {
+      this.user=false;
+      this.customer=false;
+      this.taxi=false;
+      this.driver=false;
+      this.driverLoc=false;
     }
   }
   onSignOut(){

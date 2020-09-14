@@ -10,6 +10,8 @@ import { TaxiComponent } from './taxi/taxi.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { DriverLocationComponent } from './driver-location/driver-location.component';
+import { CustomerRideComponent } from './customer-ride/customer-ride.component';
 
 const routes: Routes = [
   {
@@ -51,6 +53,14 @@ const routes: Routes = [
   {
     path: 'driverDashboard',
     component: DriverDashboardComponent
+  },
+  {
+    path: 'driverLocation',
+    component: DriverLocationComponent
+  },
+  {
+    path: 'customerRide',
+    component: CustomerRideComponent
   }
 ];
 

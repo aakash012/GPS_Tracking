@@ -15,6 +15,9 @@ import { TaxiComponent } from './taxi/taxi.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { DriverLocationComponent } from './driver-location/driver-location.component';
+import { AgmCoreModule } from '@agm/core';
+import { CustomerRideComponent } from './customer-ride/customer-ride.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +31,18 @@ import { HomePageComponent } from './home-page/home-page.component';
     UserDashboardComponent,
     DriverDashboardComponent,
     HomePageComponent,
+    DriverLocationComponent,
+    CustomerRideComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCuRLlCgXtHrv4IjCRQwx6qCCV3O6Ww_0w'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
