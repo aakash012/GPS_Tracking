@@ -52,6 +52,7 @@
     <EntitySetMapping Name="Customer">
       <EntityTypeMapping TypeName="TaxiMasterModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="DateOfRegistration" ColumnName="DateOfRegistration" />
           <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
           <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />

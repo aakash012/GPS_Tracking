@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Api.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     [RoutePrefix("api/Driver")]
     public class DriverController : ApiController
     {
@@ -18,16 +20,27 @@ namespace Api.Controllers
 
         public IHttpActionResult Get()
         {
-            List<Driver> driverList = new List<Driver>();
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                driverList = obj.Driver.ToList();
+                var driverList = (from d in obj.Driver
+                                  join g in obj.Gender
+                        on d.Gender equals g.GenderId
+                                  select new
+                                  {
+                                      DriverId = d.DriverId,
+                                      DriverName = d.DriverName,
+                                      GenderType = g.GenderType,
+                                      ContactNo = d.ContactNo,
+                                      DrivingLicence = d.DrivingLicence,
+                                      Rating = d.Rating
+                                  }).ToList();
+
+                return Ok(driverList);
             }
 
-            return Ok(driverList);
         }
 
-        [HttpGet]
+        [HttpGet]   
         [Route("GetDriverById/{Id}")]
 
         public IHttpActionResult GetDriverById(int Id)
@@ -47,30 +60,39 @@ namespace Api.Controllers
         [HttpPost]
         [Route("Save")]
 
-        public IHttpActionResult SaveDriverData(List<DriverInputModel> driverInputList)
+        public IHttpActionResult SaveDriverData(Driver driverInputList)
         {
             int RowAffected = 0;
+            int flag = 0;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                foreach (var item in driverInputList)
+
+                Users user = new Users();
+                user.UserName = driverInputList.ContactNo;
+                user.UserPassword = driverInputList.UserPassword;
+                obj.Users.Add(user);
+                flag = obj.SaveChanges();
+
+                if (flag == 1)
                 {
+                    int userId = user.UserId;
                     Driver driver = new Driver();
-                    driver.DriverName = item.DriverName;
-                    driver.Gender = item.Gender;
-                    driver.ContactNo = item.ContactNo;
-                    driver.DrivingLicence = item.DrivingLicence;
+                    driver.DriverName = driverInputList.DriverName;
+                    driver.Gender = driverInputList.Gender;
+                    driver.ContactNo = driverInputList.ContactNo;
+                    driver.DrivingLicence = driverInputList.DrivingLicence;
+                    driver.UserId = userId;
 
                     obj.Driver.Add(driver);
-                }
 
-                RowAffected = obj.SaveChanges();
+                    RowAffected = obj.SaveChanges();
+                }
 
             }
             return Ok(RowAffected);
         }
         #endregion
-
-        
+      
         #region Delete Operation
         [HttpDelete]
         [Route("DeleteById/{Id}")]
@@ -99,27 +121,26 @@ namespace Api.Controllers
         [HttpPut]
         [Route("Update")]
 
-        public IHttpActionResult Update(List<DriverInputModel> driverInputList)
+        public IHttpActionResult Update(Driver driverInputList)
         {
             int RowAffected = 0;
 
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
 
-                foreach (var item in driverInputList)
-                {
+               
                     Driver driver = new Driver();
-                    driver = obj.Driver.ToList().Where(it => it.DriverId == item.DriverId).SingleOrDefault();
+                    driver = obj.Driver.ToList().Where(it => it.DriverId == driverInputList.DriverId).SingleOrDefault();
 
                     if (driver != null)
                     {
-                        driver.DriverName = item.DriverName;
-                        driver.Gender = item.Gender;
-                        driver.ContactNo = item.ContactNo;
-                        driver.DrivingLicence = item.DrivingLicence;
+                        driver.DriverName = driverInputList.DriverName;
+                        driver.Gender = driverInputList.Gender;
+                        driver.ContactNo = driverInputList.ContactNo;
+                        driver.DrivingLicence = driverInputList.DrivingLicence;
                         RowAffected = obj.SaveChanges();
                     }
-                }
+                
             }
 
             return Ok(RowAffected);

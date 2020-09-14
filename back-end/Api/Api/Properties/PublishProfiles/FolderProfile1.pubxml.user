@@ -8,10 +8,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Api.dll">
-      <publishTime>09/13/2020 20:34:56</publishTime>
+      <publishTime>09/14/2020 20:22:24</publishTime>
     </File>
     <File Include="bin/Api.pdb">
-      <publishTime>09/13/2020 20:34:56</publishTime>
+      <publishTime>09/14/2020 20:22:24</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>09/12/2020 18:13:37</publishTime>
@@ -191,7 +191,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/12/2020 18:13:37</publishTime>
     </File>
     <File Include="DBContextLayer/TaxiEntityModel.edmx.diagram">
-      <publishTime>09/13/2020 17:40:00</publishTime>
+      <publishTime>09/14/2020 18:47:26</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>09/12/2020 18:13:37</publishTime>

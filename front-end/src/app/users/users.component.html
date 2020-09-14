@@ -16,7 +16,6 @@
         <th class="tbl2">
           <select Tooltip="UserType" formControlName="UserType">
             <option value="1">Admin</option>
-            <option value="2">Driver</option>
           </select>
         </th>
         <th class="tbl2">
@@ -51,7 +50,7 @@
       <tr *ngFor="let User of userList">
         <td class="tbl2">{{ User.UserName }}</td>
         <td class="tbl2">{{ User.UserPassword }}</td>
-        <td class="tbl2">{{ User.UserType == 1 ? "Admin" : "Driver" }}</td>
+        <td class="tbl2">{{ User.UserType == 1 ? "Admin" : User.UserType == 2 ? "Driver" :"Customer" }}</td>
 
         <td class="tbl2">
           <button

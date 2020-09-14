@@ -18,6 +18,7 @@
     <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="CustomerPassword" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="DateOfRegistration" Type="datetime" />
+    <Property Name="UserId" Type="int" />
   </EntityType>
   <EntityType Name="Driver">
     <Key>
@@ -87,6 +88,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Customer__userid__5AEE82B9">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Driver__Gender__46E78A0C">
     <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
     <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
@@ -149,6 +162,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__Customer__Gender__47DBAE45" Association="Self.FK__Customer__Gender__47DBAE45">
       <End Role="Gender" EntitySet="Gender" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customer__userid__5AEE82B9" Association="Self.FK__Customer__userid__5AEE82B9">
+      <End Role="Users" EntitySet="Users" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
     <AssociationSet Name="FK__Driver__Gender__46E78A0C" Association="Self.FK__Driver__Gender__46E78A0C">
