@@ -1,24 +1,30 @@
 <div class="container">
   <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
-      <tr ngclass="btn-primary">
-        <th class="tbl2">
+      <tr class="tr1">
+        <td>UserName</td>
+        <td>Password</td>
+        <td>UserType</td>
+        <td></td>
+      </tr>
+    <tr ngclass="btn-primary">
+        <td class="tbl2">
           <input formControlName="UserName" placeholder="Enter UserName" />
           <input formControlName="UserId" type="hidden" class="form-control" id="UserId">
-        </th>
-        <th class="tbl2">
+        </td>
+        <td class="tbl2">
           <input
             formControlName="UserPassword"
             type="text"
             placeholder="Enter Password"
           />
-        </th>
-        <th class="tbl2">
+        </td>
+        <td class="tbl2">
           <select Tooltip="UserType" formControlName="UserType">
             <option value="1">Admin</option>
           </select>
-        </th>
-        <th class="tbl2">
+        </td>
+        <td class="tbl2">
           <button
             type="submit"
             class="btn btn-primary"
@@ -35,7 +41,7 @@
           >
             Reset
           </button>
-        </th>
+        </td>
       </tr>
     </table>
 

@@ -68,7 +68,7 @@
       <div class="container" id="mid_contr">
         <form [formGroup]="signUpForm" (ngSubmit)="onFormSubmit()">
           <div class="form-group">
-            <label>Customer Name</label>
+            <label>Name</label>
             <input
               type="text"
               formControlName="CustomerName"
@@ -90,7 +90,7 @@
           <div class="form-group">
             <label>Contact No.</label>
             <input
-              type="text"
+              type="number"
               formControlName="ContactNo"
               class="form-control"
               placeholder="Enter Phone Number"
@@ -109,6 +109,7 @@
             <label>Confirm Password</label>
             <input
               type="password"
+              formControlName="ConfirmPassword"
               class="form-control"
               placeholder="Enter Password again"
             />

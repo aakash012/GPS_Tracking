@@ -1,9 +1,17 @@
 <div class="container">
   <form [formGroup]="driverForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
+      <tr>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>License</td>
+        <td>Contact No</td>
+        <td>Password</td>
+        <td></td>
+      </tr>
       <tr ngclass="btn-primary">
         <th class="tbl2">
-          <input formControlName="DriverName" placeholder="Enter Name" />
+          <input formControlName="DriverName" placeholder="Enter Name" size="15"/>
           <input formControlName="driverId" type="hidden" class="form-control" id="driverId">
         </th>
         <th class="tbl2">
@@ -17,20 +25,23 @@
             formControlName="DrivingLicence"
             type="text"
             placeholder="Enter licence"
+            size="15"
           />
         </th>
         <th class="tbl2">
           <input
             formControlName="ContactNo"
             type="text"
-            placeholder="**********"
+            placeholder="Enter Phone no"
+            size="15"
           />
         </th>
         <th class="tbl2">
           <input
             formControlName="UserPassword"
-            type="text"
+            type="password"
             placeholder="Enter Password"
+            size="15"
           />
         </th>
         <th class="tbl2">
@@ -81,5 +92,5 @@
           </button>
         </td>
       </tr>
-    </table> 
+    </table>
 </div>
