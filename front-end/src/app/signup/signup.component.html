@@ -66,31 +66,24 @@
     <!-- MAIN SECTION -->
     <main>
       <div class="container" id="mid_contr">
-        <form name="sign_in_form">
+        <form [formGroup]="signUpForm" (ngSubmit)="onFormSubmit()">
           <div class="form-group">
-            <label>First Name</label>
+            <label>Customer Name</label>
             <input
               type="text"
+              formControlName="CustomerName"
               class="form-control"
-              placeholder="Enter First Name"
-            />
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Last Name"
+              placeholder="Enter Your Name"
             />
           </div>
           <div class="form-group">
             <label>Gender</label><br />
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gen" value="Male" />
+              <input class="form-check-input" formControlName="Gender" type="radio" name="gen" value="Male" />
               <label class="form-check-label">Male</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gen" value="Female" />
+              <input class="form-check-input" type="radio" formControlName="Gender" name="gen" value="Female" />
               <label class="form-check-label">Female</label>
             </div>
           </div>
@@ -98,6 +91,7 @@
             <label>Phone No.</label>
             <input
               type="text"
+              formControlName="ContactNo"
               class="form-control"
               placeholder="Enter Phone Number"
             />
@@ -106,6 +100,7 @@
             <label>Password</label>
             <input
               type="password"
+              formControlName="Password"
               class="form-control"
               placeholder="Enter Password"
             />

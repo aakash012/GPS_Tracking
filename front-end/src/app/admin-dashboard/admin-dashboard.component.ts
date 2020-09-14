@@ -13,7 +13,7 @@ export class AdminDashboardComponent implements OnInit {
   driver=false;
 
   onTaxis(){
-    this.taxi=!this.taxi;
+    this.taxi=true;
     if(this.taxi)
     {
       this.user=false;
@@ -22,7 +22,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
   onUsers(){
-    this.user=!this.user;
+    this.user=true;
     if(this.user)
       {
         this.customer=false;
@@ -31,7 +31,7 @@ export class AdminDashboardComponent implements OnInit {
       }
   }
   onCustomers(){
-    this.customer=!this.customer;
+    this.customer=true;
     if(this.customer)
     {
       this.user=false;
@@ -40,7 +40,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
   onDrivers(){
-    this.driver=!this.driver;
+    this.driver=true;
     if(this.driver)
     {
       this.user=false;
