@@ -8,27 +8,30 @@ import { User } from './user';
 })
 export class UserService {
 
-  url= ''
-  constructor(private http: HttpClient) { }
-  getAllUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + '/AllUserDetails');
+  url='http://localhost:5050/api/User';
+  constructor(private http:HttpClient) { }
+
+  getAllUser() 
+  {
+    return this.http.get(this.url + '/GetAllUser');
   }
 
-  getUserById(userId: string): Observable<User> {
-    return this.http.get<User>(this.url + '/GetUserDetailsById/' + userId);
-  }
-  createUser(User: User): Observable<User> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<User>(this.url + '/InsertUserDetails/', User, httpOptions);
+  getUserById(UserId:number) : Observable<User>
+  {
+    return this.http.get<User>(this.url + '/GetUserById/'+UserId);
   }
 
-  updateUser(User: User): Observable<User> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.put<User>(this.url + '/UpdateUserDetails/', User, httpOptions);
+  saveUser(user:User) : Observable<User>
+  {
+    return this.http.post<User>(this.url+'/Save',user);
   }
 
-  deleteUserById(userId: string): Observable<number> {
-    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.delete<number>(this.url + '/DeleteUserDetails?id=' + userId, httpOptions);
+  updateUser(user:User): Observable<User>
+  {
+    return this.http.put<User>(this.url+'/Update',user);
+  }
+
+  deleteUserById(UserId:number):Observable<number>{
+    return this.http.delete<number>(this.url+'/DeleteById/'+UserId);
   }
 }
