@@ -14,6 +14,7 @@ import { DriversComponent } from './drivers/drivers.component';
 import { TaxiComponent } from './taxi/taxi.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
+import { HomePageComponent } from './home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.co
     TaxiComponent,
     UserDashboardComponent,
     DriverDashboardComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
