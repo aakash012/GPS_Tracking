@@ -57,18 +57,20 @@
     <main id="mainc">
       <div class="row1">
         <div class="col-12">
-          <agm-map [latitude]="latitude" [longitude]="longitude">
-            <agm-marker
-              id="agm1"
-              [latitude]="latitude"
-              [longitude]="longitude"
-              [label]="'D'"
-              *ngIf="locationChosen"
-            ></agm-marker>
-          </agm-map>
+          <form>
+            <agm-map
+              style="height: 300px"
+              [latitude]="lat"
+              [longitude]="lng"
+              [zoom]="zoom"
+              (mapClick)="mapClicked($event)"
+            >
+              <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Me'"></agm-marker>
+            </agm-map>
+          </form>
         </div>
       </div>
-      <br>
+      <br />
       <div class="row1">
         <div class="col-12" align="center">
           <button class="btn btn-primary">Book a Ride</button>
