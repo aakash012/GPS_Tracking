@@ -17,6 +17,7 @@ import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.co
 import { HomePageComponent } from './home-page/home-page.component';
 import { DriverLocationComponent } from './driver-location/driver-location.component';
 import { AgmCoreModule } from '@agm/core';
+import { CustomerRideComponent } from './customer-ride/customer-ride.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { AgmCoreModule } from '@agm/core';
     DriverDashboardComponent,
     HomePageComponent,
     DriverLocationComponent,
+    CustomerRideComponent,
   ],
   imports: [
     BrowserModule,

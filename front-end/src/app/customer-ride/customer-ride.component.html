@@ -1,0 +1,56 @@
+<div class="container">
+  <form [formGroup]="rideForm" (ngSubmit)="onFormSubmit()">
+    <table class="table" border="2">
+      <tr ngclass="btn-primary">
+        <th class="tbl2">
+          <input formControlName="PickUp" disabled/>
+          <input formControlName="rideId" type="hidden" class="form-control" id="rideId">
+        </th>
+        <th class="tbl2">
+          <input formControlName="Drop" disabled/>
+        </th>
+        <th class="tbl2">
+          <select Tooltip="Choose Driver" formControlName="Driver">
+            <option value=1>Ramesh</option>
+            <option value=2>Suresh</option>
+          </select>
+        </th>
+        <th class="tbl2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            Tooltip="Click Submit Button"
+            [disabled]="!rideForm.valid"
+          >
+            Submit</button
+          >
+        </th>
+      </tr>
+    </table>
+  </form>
+    <table class="table" border="2">
+      <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
+        <th class="tbl2">Customer Name</th>
+        <th class="tbl2">PickUp Location</th>
+        <th class="tbl2">Drop Location</th>
+        <th class="tbl2">Status</th>
+        <th class="tbl2">Approve</th>
+      </tr>
+      <tr *ngFor="let Ride of rideList">
+        <td class="tbl2">{{ Ride.CustomerName }}</td>
+        <td class="tbl2">{{ Ride.PickUpLocation}}</td>
+        <td class="tbl2">{{ Ride.DropLocation }}</td>
+        <td class="tbl2">{{ Ride.Status }}</td>
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-info"
+            matTooltip="Click Edit Button"
+            (click)="FillRideFormToEdit(Ride.RideId)"
+          >
+            Approve
+          </button>
+        </td>
+      </tr>
+    </table>
+</div>

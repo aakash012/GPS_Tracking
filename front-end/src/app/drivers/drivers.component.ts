@@ -50,7 +50,7 @@ export class DriversComponent implements OnInit {
       this.driverForm.controls['Gender'].setValue(Driver.Gender, { onlySelf: true });
       this.driverForm.controls['ContactNo'].setValue(Driver.ContactNo);
       this.driverForm.controls['DrivingLicence'].setValue(Driver.DrivingLicence);
-      
+
     });
 
   }
@@ -80,9 +80,9 @@ export class DriversComponent implements OnInit {
     }
 
   }
-  
+
 ResetForm() {
   this.driverForm.reset();
-  
+
 }
 }
