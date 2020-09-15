@@ -4,13 +4,14 @@
       <tr class="tr1">
         <td>UserName</td>
         <td>Password</td>
-        <td>UserType</td>
         <td></td>
+        <!-- <td></td> -->
       </tr>
     <tr ngclass="btn-primary">
         <td class="tbl2">
           <input formControlName="UserName" placeholder="Enter UserName" />
           <input formControlName="UserId" type="hidden" class="form-control" id="UserId">
+          <input formControlName="UserType" type="hidden" class="form-control" id="UserType">
         </td>
         <td class="tbl2">
           <input
@@ -19,11 +20,11 @@
             placeholder="Enter Password"
           />
         </td>
-        <td class="tbl2">
+        <!-- <td class="tbl2">
           <select Tooltip="UserType" formControlName="UserType">
             <option value="1">Admin</option>
           </select>
-        </td>
+        </td> -->
         <td class="tbl2">
           <button
             type="submit"

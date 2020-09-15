@@ -102,6 +102,7 @@ namespace Api.Controllers
                         attendance.DriverId = driverId;
                         attendance.FinancialYear = "2020";
                         attendance.AttendanceMonth = "September";
+                        attendance.NumberOfDays = 0;
                         obj.Attendance.Add(attendance);
                         flag1 = obj.SaveChanges();
                     }
@@ -121,6 +122,9 @@ namespace Api.Controllers
         {
             int RowAffected = 0;
             Driver driver = new Driver();
+            Users users = new Users();
+            Attendance attendance = new Attendance();
+            TaxiDriver taxiDriver = new TaxiDriver();
 
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
@@ -128,6 +132,25 @@ namespace Api.Controllers
 
                 if (driver != null)
                 {
+                    Nullable<int> userID = driver.UserId;
+                    users = obj.Users.ToList().Where(it => it.UserId == userID).SingleOrDefault();
+                    if(users!=null)
+                    {
+                        obj.Users.Remove(users);
+                    }
+                    
+                    attendance = obj.Attendance.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
+                    if(attendance!=null)
+                    {
+                        obj.Attendance.Remove(attendance);
+                    }
+
+                    taxiDriver = obj.TaxiDriver.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
+                    if (taxiDriver != null)
+                    {
+                        obj.TaxiDriver.Remove(taxiDriver);
+                    }
+
                     obj.Driver.Remove(driver);
                     RowAffected = obj.SaveChanges();
                 }

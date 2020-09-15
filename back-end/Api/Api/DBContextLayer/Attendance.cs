@@ -16,9 +16,9 @@ namespace Api.DBContextLayer
     {
         public int AttendanceId { get; set; }
         public Nullable<int> DriverId { get; set; }
-        public Nullable<int> NumberOfDays { get; set; }
         public string FinancialYear { get; set; }
         public string AttendanceMonth { get; set; }
+        public Nullable<int> NumberOfDays { get; set; }
     
         public virtual Driver Driver { get; set; }
     }

@@ -41,7 +41,7 @@
         <div class="col-md-6" id="trk_head" align="right">
           <div class="row">
             <div class="col-md-12">
-              <button type="button" class="btn btn-primary">Sign Out</button>
+              <button type="button" class="btn btn-primary" (click)="onSignOut()">Sign Out</button>
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
               (mapClick)="mapClicked($event)"
             >
               <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Me'"></agm-marker>
-              <agm-marker [latitude]="31.3260" [longitude]="75.5762" [label]="'Me'"></agm-marker>
+              <agm-marker [latitude]="31.3260" [longitude]="75.5762" [label]="''"></agm-marker>
             </agm-map>
           </form>
         </div>

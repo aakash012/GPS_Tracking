@@ -17,8 +17,8 @@ namespace Api.DBContextLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Driver()
         {
-            this.TaxiDriver = new HashSet<TaxiDriver>();
             this.Attendance = new HashSet<Attendance>();
+            this.TaxiDriver = new HashSet<TaxiDriver>();
         }
     
         public int DriverId { get; set; }
@@ -31,10 +31,10 @@ namespace Api.DBContextLayer
         public Nullable<int> Rating { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
+        public virtual ICollection<Attendance> Attendance { get; set; }
         public virtual Gender Gender1 { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attendance> Attendance { get; set; }
+        public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
     }
 }

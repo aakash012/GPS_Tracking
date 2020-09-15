@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit {
       this.userForm.controls['UserId'].setValue(User.UserId);
       this.userForm.controls['UserName'].setValue(User.UserName);
       this.userForm.controls['UserPassword'].setValue(User.UserPassword);
-      this.userForm.controls['UserType'].setValue(User.UserType, { onlySelf: true });
+      this.userForm.controls['UserType'].setValue(User.UserType);
       
     });
 

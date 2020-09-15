@@ -1,3 +1,5 @@
+D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csprojAssemblyReference.cache
+D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CoreCompileInputs.cache
 D:\GPS_Tracking\back-end\Api\Api\bin\Api.dll.config
 D:\GPS_Tracking\back-end\Api\Api\bin\Api.dll
 D:\GPS_Tracking\back-end\Api\Api\bin\Api.pdb
@@ -67,8 +69,6 @@ D:\GPS_Tracking\back-end\Api\Api\bin\System.Net.Http.Formatting.xml
 D:\GPS_Tracking\back-end\Api\Api\bin\System.Web.Http.xml
 D:\GPS_Tracking\back-end\Api\Api\bin\System.Web.Http.WebHost.xml
 D:\GPS_Tracking\back-end\Api\Api\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csprojAssemblyReference.cache
-D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CoreCompileInputs.cache
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CopyComplete
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.dll
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.pdb

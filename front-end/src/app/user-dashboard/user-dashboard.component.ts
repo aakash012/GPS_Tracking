@@ -3,6 +3,7 @@ import {AgmMap, MapsAPILoader  } from '@agm/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { CustomerRideService } from '../customer-ride.service';
+import { Router } from '@angular/router';
 import {} from 'googlemaps';
 
 @Component({
@@ -20,7 +21,7 @@ export class UserDashboardComponent implements OnInit {
   longitude: any;
   customerRideForm:any;
 
-  constructor(private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService ) {}
+  constructor(private router: Router,private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService ) {}
   get() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: Position) => {
@@ -67,9 +68,9 @@ ngOnInit()
      this.zoom = 16;
 
      this.customerRideForm = this.formbulider.group({
-        CustomerId: ['1'],
-        PickUpLocation: ['31.6340 , 74.8723', [Validators.required]],
-        DropLocation: ['31.3260 , 75.5762', [Validators.required]]
+        CustomerId: ['20'],
+        PickUpLocation: ['Jalandhar', [Validators.required]],
+        DropLocation: ['Ludhiana', [Validators.required]]
   
       });
     }
@@ -109,6 +110,10 @@ ngOnInit()
       });
     
    
+  }
+
+  onSignOut(){
+    this.router.navigate(['login']);
   }
 
 }

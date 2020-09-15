@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CustomerRide } from './customer-ride';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +23,11 @@ export class CustomerRideService {
 
   saveCustomerRide(customerRide:CustomerRide) : Observable<CustomerRide>
   {
+    return this.http.post<CustomerRide>(this.url+'/Save',customerRide);
+  }
+  approveCustomerRide(customerRide:CustomerRide) : Observable<CustomerRide>
+  {
     return this.http.put<CustomerRide>(this.url+'/Update',customerRide);
   }
-
 
 }

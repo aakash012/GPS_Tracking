@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
 
   onFormSubmit() {
     const login = this.loginForm.value;
+    if (this.loginForm.invalid) {
+      alert("Please fill all the credentials");
+      return;
+  }
     this.login(login);
   }
 
@@ -58,5 +62,9 @@ export class LoginComponent implements OnInit {
         this.errorMessage = error.message;
       });
   };
+
+  onSignUp(){
+    this.router.navigate(['signup']);
+  }
 
 }

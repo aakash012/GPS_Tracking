@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
+import { Driver } from '../drivers';
 import { CustomerRideService } from '../customer-ride.service';
+import { DriversService } from '../drivers.service';
 
 @Component({
   selector: 'app-customer-ride',
@@ -11,9 +13,10 @@ import { CustomerRideService } from '../customer-ride.service';
 export class CustomerRideComponent implements OnInit {
 
   rideList: CustomerRide[];
+  driverList:Driver[];
   rideForm: any;
   rideUpdate = null;
-  constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService) { }
+  constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService,private driverService: DriversService) { }
 
   ngOnInit(): void {
     this.rideForm = this.formbulider.group({
@@ -31,6 +34,14 @@ export class CustomerRideComponent implements OnInit {
       this.rideList = data;
     });
   }
+
+  getDriverDetails() {
+    this.driverService.getAllDriver().subscribe((data: Driver[]) => {
+      this.driverList = data;
+    });
+  }
+
+
   onFormSubmit() {
     const ride = this.rideForm.value;
    // alert(ride);
@@ -46,12 +57,12 @@ export class CustomerRideComponent implements OnInit {
     });
   }
   CreateRide(ride: CustomerRide) {
-    // if (this.rideUpdate == null) {
-      this.customerRideService.saveCustomerRide(ride).subscribe(() => {
-        this.rideUpdate = null;
+    
+      this.customerRideService.approveCustomerRide(ride).subscribe(() => {
+        this.getRideDetails();
         this.ResetForm();
       });
-    // /}
+    
 
   }
 ResetForm() {

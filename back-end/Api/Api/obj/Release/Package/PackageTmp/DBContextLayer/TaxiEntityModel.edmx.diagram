@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0ebaa038391144d1b9edc01fd3b981e1" Name="Diagram1">
-        <EntityTypeShape EntityType="TaxiMasterModel.Taxi" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TaxiMasterModel.Driver" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="TaxiMasterModel.TaxiDriver" Width="1.5" PointX="5.625" PointY="1" />
-        <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__Drive__4222D4EF" />
-        <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__TaxiI__4316F928" />
-        <EntityTypeShape EntityType="TaxiMasterModel.Gender" Width="1.5" PointX="1.125" PointY="3.375" />
-        <AssociationConnector Association="TaxiMasterModel.FK__Driver__Gender__46E78A0C" />
-        <EntityTypeShape EntityType="TaxiMasterModel.Customer" Width="1.5" PointX="3.375" PointY="8.125" />
-        <EntityTypeShape EntityType="TaxiMasterModel.Users" Width="1.5" PointX="3.375" PointY="4.875" />
-        <AssociationConnector Association="TaxiMasterModel.FK__Customer__Gender__47DBAE45" />
-        <AssociationConnector Association="TaxiMasterModel.FK__Driver__UserId__38996AB5" />
-        <AssociationConnector Association="TaxiMasterModel.FK__Customer__userid__5AEE82B9" />
-        <EntityTypeShape EntityType="TaxiMasterModel.CustomerRide" Width="1.5" PointX="7.875" PointY="4.75" />
-        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__Custo__5EBF139D" />
-        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__TaxiD__5FB337D6" />
-        <EntityTypeShape EntityType="TaxiMasterModel.Attendance" Width="1.5" PointX="5.625" PointY="4.25" />
-        <AssociationConnector Association="TaxiMasterModel.FK__Attendanc__Drive__3F466844" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Attendance" Width="1.5" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Customer" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="TaxiMasterModel.CustomerRide" Width="1.5" PointX="8.25" PointY="3.375" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Driver" Width="1.5" PointX="6" PointY="4.125" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Gender" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Taxi" Width="1.5" PointX="9" PointY="0.75" />
+        <EntityTypeShape EntityType="TaxiMasterModel.TaxiDriver" Width="1.5" PointX="11.25" PointY="4.625" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Users" Width="1.5" PointX="0.75" PointY="1.625" />
+        <AssociationConnector Association="TaxiMasterModel.FK__Attendanc__Drive__68487DD7" />
+        <AssociationConnector Association="TaxiMasterModel.FK__Customer__Gender__73BA3083" />
+        <AssociationConnector Association="TaxiMasterModel.FK__Customer__UserId__74AE54BC" />
+        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__Custo__787EE5A0" />
+        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" />
+        <AssociationConnector Association="TaxiMasterModel.FK__Driver__Gender__656C112C" />
+        <AssociationConnector Association="TaxiMasterModel.FK__Driver__UserId__6477ECF3" />
+        <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" />
+        <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
