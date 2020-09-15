@@ -63,19 +63,17 @@ body
 }
 #lpanel, #rpanel{
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   box-shadow:3px 3px 5px gray;
   background: white;
 }
 #lpanel{
   background: linear-gradient(rgba(30, 161, 248, 0.6),rgba(6, 33, 44, 0.6));
-
-
+  padding-top: 20px;
 }
 #rpanel{
   border-left: 1px solid black ;
   background-color: #f6f9fc;
-
 }
 #lmenu{
   text-align: left;
@@ -85,6 +83,10 @@ body
 #btn1{
   border: none;
   background-color: transparent;
+}
+.taxi-ico{
+  height: 10px;
+  width: 5px;
 }
 footer
 {
