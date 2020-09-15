@@ -72,6 +72,7 @@ namespace Api.Controllers
         {
             int RowAffected = 0;
             int flag = 0;
+            int flag1 = 0;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
 
@@ -92,16 +93,19 @@ namespace Api.Controllers
                     driver.UserId = userId;
 
                     obj.Driver.Add(driver);
-
                     RowAffected = obj.SaveChanges();
 
-                    int driverId = driver.DriverId;
-                    Attendance attendance = new Attendance();
-                    attendance.DriverId = driverId;
-                    attendance.FinancialYear = "2020";
-                    attendance.AttendanceMonth = "September";
-                    obj.Attendance.Add(attendance);
-                    RowAffected = obj.SaveChanges();
+                    if (RowAffected == 1)
+                    {
+                        int driverId = driver.DriverId;
+                        Attendance attendance = new Attendance();
+                        attendance.DriverId = driverId;
+                        attendance.FinancialYear = "2020";
+                        attendance.AttendanceMonth = "September";
+                        obj.Attendance.Add(attendance);
+                        flag1 = obj.SaveChanges();
+                    }
+
                 }
 
             }
