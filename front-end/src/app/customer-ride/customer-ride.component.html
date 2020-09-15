@@ -1,7 +1,7 @@
 <div class="container">
   <form [formGroup]="rideForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
-      <tr>
+      <tr id="tr1">
         <td>PickUp Location</td>
         <td>Drop Location</td>
         <td>Driver Name</td>
@@ -27,7 +27,7 @@
             type="submit"
             class="btn btn-primary"
             Tooltip="Click Submit Button"
-            
+
           >
             Submit</button
           >
@@ -36,7 +36,7 @@
     </table>
   </form>
     <table class="table" border="2">
-      <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
+      <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
         <th class="tbl2">Customer Name</th>
         <th class="tbl2">PickUp Location</th>
         <th class="tbl2">Drop Location</th>

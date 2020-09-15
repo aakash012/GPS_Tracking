@@ -6,16 +6,6 @@
   <title>Admin Dashboard</title>
   	<!-- WEBSITE LOGO -->
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
-
-	<!-- GOOGLE FONTS USED -->
-	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-
-	<!-- SOCIAL MEDIA BUTTONS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<!-- BOOTSTRAP -->
-	<link rel=stylesheet type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
   <header class=container-fluid id=cn_fl1>
@@ -44,16 +34,16 @@
   <div class="row" id="main">
     <div class="col-2" id="lpanel">
       <ul id="lmenu">
-        <li><button id="btn1" (click)="onTaxis()">Taxi</button></li>
-        <li><button id="btn1" (click)="onUsers()">Users</button></li>
-        <li><button id="btn1" (click)="onDrivers()">Drivers</button></li>
-        <li><button id="btn1" (click)="onCustomers()">Customers</button></li>
-        <li><button id="btn1" (click)="customerRide()">Customer Ride</button></li>
-        <li><button id="btn1" (click)="driverLocation()">Driver Location</button></li>
-        <li><button id="btn1" (click)="onAttendance()">Driver Attendance</button></li>
+        <li><button id="btn1" (click)="onTaxis()"><span class="taxi-ico" style="background-image: url('../../assets/taxi.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Taxi</button></li>
+        <li><button id="btn1" (click)="onUsers()"><span class="taxi-ico" style="background-image: url('../../assets/users.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Users</button></li>
+        <li><button id="btn1" (click)="onDrivers()"><span class="taxi-ico" style="background-image: url('../../assets/driver.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Drivers</button></li>
+        <li><button id="btn1" (click)="onCustomers()"><span class="taxi-ico" style="background-image: url('../../assets/customer.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Customers</button></li>
+        <li><button id="btn1" (click)="customerRide()"><span class="taxi-ico" style="background-image: url('../../assets/ride.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Customer Ride</button></li>
+        <li><button id="btn1" (click)="driverLocation()"><span class="taxi-ico" style="background-image: url('../../assets/location.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Driver Location</button></li>
+        <li><button id="btn1" (click)="onAttendance()"><span class="taxi-ico" style="background-image: url('../../assets/attendance.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Attendance</button></li>
       </ul>
     </div>
-    <div class="col-9" id="rpanel">
+    <div class="col-10" id="rpanel">
       <div id="comp-render" *ngIf="taxi">
         <app-taxi></app-taxi>
       </div>

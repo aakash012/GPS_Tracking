@@ -11,9 +11,17 @@
 	font-family:'Comfortaa', cursive;
 	opacity:.6;
 }
+#cont{
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('../../assets/adventure-beach-blue.jpg');
+  background-size: 100% 800px;
+  background-position: fixed;
+  height: 100vh;
+  align-items: left;
+  text-align: left;
+}
 #cn_fl1
 {
-	background:white;
+	background: linear-gradient(rgba(30, 161, 248, 0.6),rgba(6, 33, 44, 0.6));
 	box-shadow:0 5px 8px -8px black;
 }
 body
@@ -58,7 +66,8 @@ aside
 {
 	font-family: 'Mulish', sans-serif;
 	font-family: 'Ubuntu Condensed', sans-serif;
-	text-align:center;
+  text-align:center;
+  color: white;
 	padding:30px;
 	font-size:30px;
 	text-shadow:1px 1px 1px gray;
@@ -69,10 +78,9 @@ main
 }
 #mid_contr
 {
-
-	box-shadow:3px 3px 5px gray;
-	background:white;
-	padding:20px 50px;
+	background:transparent;
+  padding:20px 50px;
+  color: white;
 }
 #f_pass
 {
@@ -81,8 +89,7 @@ main
 }
 footer
 {
-  position: absolute;
-  margin-top: 40px;
+  position: relative;;
   	left: 0;
   	bottom: 0;
   	width: 100%;
