@@ -1,7 +1,7 @@
 <div class="container">
   <form>
     <table class="table" border="2">
-      <tr ngclass="btn-primary" style="background-color: rgba(175, 240, 218, 0.795);">
+      <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
         <th class="tbl2">Customer Name</th>
         <th class="tbl2">Gender</th>
         <th class="tbl2">Contact Number</th>
@@ -9,9 +9,9 @@
       </tr>
       <tr *ngFor="let Customer of customerList">
         <td class="tbl2">{{ Customer.CustomerName }}</td>
-        <td class="tbl2">{{ Customer.GenderType }}</td> 
-        <td class="tbl2">{{ Customer.ContactNo }}</td> 
-        <td class="tbl2">{{ Customer.DateOfRegistration }}</td> 
+        <td class="tbl2">{{ Customer.GenderType }}</td>
+        <td class="tbl2">{{ Customer.ContactNo }}</td>
+        <td class="tbl2">{{ Customer.DateOfRegistration }}</td>
       </tr>
     </table>
   </form>
