@@ -16,7 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   user=false;
   customer=false;
   driver=false;
-  driverLoc=false;
+  driverLoc=true;
   custRide=false;
   attend=false;
   onTaxis(){
@@ -107,6 +107,6 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
- 
+
 
 }
