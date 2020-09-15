@@ -14,7 +14,7 @@
 }
 #cn_fl1
 {
-	background:white;
+	background: linear-gradient(rgba(30, 161, 248, 0.6),rgba(6, 33, 44, 0.6));
 	box-shadow:0 5px 8px -8px black;
 }
 .fa
@@ -55,7 +55,7 @@
   margin: 50px;
 }
 agm-map {
-  height: 350px;
+  height: 400px;
 }
 footer
 {
