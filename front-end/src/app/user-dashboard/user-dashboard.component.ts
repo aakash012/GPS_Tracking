@@ -20,9 +20,18 @@ export class UserDashboardComponent implements OnInit {
   latitude: any;
   longitude: any;
   customerRideForm:any;
+  customerId:any;
+  customerName:any;
 
   constructor(private router: Router,private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService ) {}
   get() {
+    this.customerId=localStorage.getItem("CustomerId");
+    this.customerName=localStorage.getItem("CustomerName");
+    if(this.customerId == null)
+    {
+      this.router.navigate(['login']);
+    }
+   // alert( this.customerId);
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: Position) => {
             if (position) {
@@ -68,7 +77,7 @@ ngOnInit()
      this.zoom = 16;
 
      this.customerRideForm = this.formbulider.group({
-        CustomerId: ['20'],
+        CustomerId: [this.customerId],
         PickUpLocation: ['Jalandhar', [Validators.required]],
         DropLocation: ['Ludhiana', [Validators.required]]
   
@@ -106,13 +115,15 @@ ngOnInit()
   CreateCustomerRide(customerRide: CustomerRide) {
     
       this.customerRideService.saveCustomerRide(customerRide).subscribe(() => {
-       
+       alert("Your Booking Request has been sent!!!");
       });
     
    
   }
 
   onSignOut(){
+      localStorage.removeItem("CustomerId");
+      localStorage.removeItem("CustomerName");
     this.router.navigate(['login']);
   }
 

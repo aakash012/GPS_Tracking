@@ -46,7 +46,7 @@ export class CustomerRideComponent implements OnInit {
     const ride = this.rideForm.value;
    // alert(ride);
     this.CreateRide(ride);
-    this.getRideDetails();
+    
   }
   FillRideFormToEdit(CustomerRideId: number) {
     this.customerRideService.getCustomerRideById(CustomerRideId).subscribe(Rides => {
@@ -59,6 +59,7 @@ export class CustomerRideComponent implements OnInit {
   CreateRide(ride: CustomerRide) {
     
       this.customerRideService.approveCustomerRide(ride).subscribe(() => {
+        alert("Booking Request Approved");
         this.getRideDetails();
         this.ResetForm();
       });

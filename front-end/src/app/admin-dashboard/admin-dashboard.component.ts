@@ -8,10 +8,22 @@ import { Router } from '@angular/router';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  userType:any;
+  userId:any;
+  userName:any;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.userType=localStorage.getItem("UserType");
+    this.userId=localStorage.getItem("UserId");
+    this.userName=localStorage.getItem("UserName");
+    
+    if(this.userId == null)
+    {
+      this.router.navigate(['login']);
+    }
   }
+
   taxi=false;
   user=false;
   customer=false;
@@ -104,6 +116,8 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
   onSignOut(){
+    localStorage.removeItem("UserId");
+    localStorage.removeItem("userName");
     this.router.navigate(['login']);
   }
 

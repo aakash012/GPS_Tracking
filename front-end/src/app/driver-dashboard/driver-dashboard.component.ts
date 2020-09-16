@@ -8,13 +8,27 @@ import { Router } from '@angular/router';
 })
 export class DriverDashboardComponent implements OnInit {
 
+  userType:any;
+  driverId:any;
+  driverName:any;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    //this.userType=localStorage.getItem("UserType");
+    this.driverId=localStorage.getItem("DriverId");
+    this.driverName=localStorage.getItem("DriverName");
+    if(this.driverId == null)
+    {
+      this.router.navigate(['login']);
+    }
+    //alert(this.userId);
   }
 
   
   onSignOut(){
+    localStorage.removeItem("DriverId");
+    localStorage.removeItem("DriverName");
     this.router.navigate(['login']);
   }
 

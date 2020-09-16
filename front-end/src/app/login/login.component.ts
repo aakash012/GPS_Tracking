@@ -43,13 +43,33 @@ export class LoginComponent implements OnInit {
       data => {
         
         if (data != null) {
+          
+         // alert(data["Users"]["UserId"]);
+        
+          localStorage.setItem("User",data.toString());
+          // alert("hello");
+          // alert("uid "+data["Users"]["UserType"]);
+          // alert("cid "+data["CustomerId"]);
+          
           if (data.UserType == 1) {
+            //alert("userType:"+data.UserType);
             this.router.navigate(['admin']);
+            localStorage.setItem("UserType","admin");
+            localStorage.setItem("UserId",data.UserId.toString());
+            localStorage.setItem("UserName",data.Username.toString());
+            
           }
-          else if (data.UserType == 2) {
+          else if (data["Users"]["UserType"] == 2) {
+            localStorage.setItem("UserType","driver");
+            localStorage.setItem("DriverId",data["DriverId"]);
+            localStorage.setItem("DriverName",data["DriverName"]);
+            alert(data.UserId.toString());
             this.router.navigate(['driverDashboard']);
           }
-          else if (data.UserType == 3) {
+          else if (data["Users"]["UserType"] == 3) {
+            localStorage.setItem("UserType","customer");
+            localStorage.setItem("CustomerId",data["CustomerId"]);
+            localStorage.setItem("CustomerName",data["CustomerName"]);
             this.router.navigate(['userDashboard']);
           }
         }

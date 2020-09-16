@@ -21,13 +21,35 @@ namespace Api.Controllers
         {
 
             Users user = new Users();
+            Customer customer = new Customer();
+            Driver driver = new Driver();
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
 
                 user = obj.Users.ToList().Where(it => it.UserName == userInputList.UserName && it.UserPassword == userInputList.UserPassword).SingleOrDefault();
 
-            }
+                if(user !=null)
+                {
+                    int userType = user.UserType;
+                    int userId = user.UserId;
 
+                    if (userType == 3)
+                    {
+                        customer = obj.Customer.ToList().Where(it => it.UserId == userId).SingleOrDefault();
+                        return Ok(customer);
+                    }
+                    else if (userType == 2)
+                    {
+                        driver = obj.Driver.ToList().Where(it => it.UserId == userId).SingleOrDefault();
+                        return Ok(driver);
+                    }
+                    else
+                    {
+                        return Ok(user);
+                    }
+                }
+                
+            }
             return Ok(user);
 
         }
