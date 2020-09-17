@@ -79,6 +79,7 @@ namespace Api.Controllers
                 Users user = new Users();
                 user.UserName = driverInputList.ContactNo;
                 user.UserPassword = driverInputList.UserPassword;
+                user.UserType = 2;
                 obj.Users.Add(user);
                 flag = obj.SaveChanges();
 

@@ -12,6 +12,7 @@ import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.co
 import { HomePageComponent } from './home-page/home-page.component';
 import { DriverLocationComponent } from './driver-location/driver-location.component';
 import { CustomerRideComponent } from './customer-ride/customer-ride.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'customerRide',
     component: CustomerRideComponent
+  },
+  {
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent
   }
 ];
 

@@ -19,6 +19,7 @@ import { DriverLocationComponent } from './driver-location/driver-location.compo
 import { AgmCoreModule } from '@agm/core';
 import { CustomerRideComponent } from './customer-ride/customer-ride.component';
 import { AttendanceComponent } from './attendance/attendance.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
     DriverLocationComponent,
     CustomerRideComponent,
     AttendanceComponent,
+  ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

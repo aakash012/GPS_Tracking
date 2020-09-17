@@ -44,7 +44,6 @@ export class CustomerRideComponent implements OnInit {
 
   onFormSubmit() {
     const ride = this.rideForm.value;
-   // alert(ride);
     this.CreateRide(ride);
     
   }
@@ -53,7 +52,7 @@ export class CustomerRideComponent implements OnInit {
       this.rideForm.controls['CustomerRideId'].setValue(Rides.CustomerRideId);
       this.rideForm.controls['PickupLocation'].setValue(Rides.PickupLocation);
       this.rideForm.controls['DropLocation'].setValue(Rides.DropLocation);
-      // this.rideForm.controls['DriverList'].setValue(Rides.DriverList, { onlySelf: true });
+     
     });
   }
   CreateRide(ride: CustomerRide) {

@@ -37,7 +37,6 @@ export class TaxiComponent implements OnInit {
 
   onFormSubmit() {
     const taxi = this.taxiForm.value;
-    alert(taxi);
     this.CreateTaxi(taxi);
     this.getTaxiDetails();
   }

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: any;
   errorMessage: string;
-  constructor(private router: Router, private LoginService: LoginServiceService,private formbulider: FormBuilder) { }
+  constructor(private router: Router, private LoginService: LoginServiceService, private formbulider: FormBuilder) { }
 
   ngOnInit() {
     sessionStorage.removeItem('UserName');
@@ -31,51 +31,46 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       alert("Please fill all the credentials");
       return;
-  }
+    }
     this.login(login);
   }
 
-  login(login: Login) {
-    //  this.router.navigate(['admin']);
-    //debugger;
+  forgotPassword() {
+    this.router.navigate(['forgotPassword']);
+  }
 
+  login(login: Login) {
     this.LoginService.Login(login).subscribe(
       data => {
-        
+
         if (data != null) {
-          
-         // alert(data["Users"]["UserId"]);
-        
-          localStorage.setItem("User",data.toString());
-          // alert("hello");
-          // alert("uid "+data["Users"]["UserType"]);
-          // alert("cid "+data["CustomerId"]);
-          
+
+          localStorage.setItem("User", data.toString());
+
           if (data.UserType == 1) {
-            //alert("userType:"+data.UserType);
+
             this.router.navigate(['admin']);
-            localStorage.setItem("UserType","admin");
-            localStorage.setItem("UserId",data.UserId.toString());
-            localStorage.setItem("UserName",data.Username.toString());
-            
+            localStorage.setItem("UserType", "admin");
+            localStorage.setItem("UserId", data.UserId.toString());
+            localStorage.setItem("UserName", data.Username.toString());
+
           }
           else if (data["Users"]["UserType"] == 2) {
-            localStorage.setItem("UserType","driver");
-            localStorage.setItem("DriverId",data["DriverId"]);
-            localStorage.setItem("DriverName",data["DriverName"]);
-            alert(data.UserId.toString());
+            localStorage.setItem("UserType", "driver");
+            localStorage.setItem("DriverId", data["DriverId"]);
+            localStorage.setItem("DriverName", data["DriverName"]);
             this.router.navigate(['driverDashboard']);
           }
           else if (data["Users"]["UserType"] == 3) {
-            localStorage.setItem("UserType","customer");
-            localStorage.setItem("CustomerId",data["CustomerId"]);
-            localStorage.setItem("CustomerName",data["CustomerName"]);
+            localStorage.setItem("UserType", "customer");
+            localStorage.setItem("CustomerId", data["CustomerId"]);
+            localStorage.setItem("CustomerName", data["CustomerName"]);
             this.router.navigate(['userDashboard']);
           }
         }
         else {
           alert("Invalid Username or Password");
-          //  this.errorMessage = data.Message;
+          
         }
       },
       error => {
@@ -83,7 +78,7 @@ export class LoginComponent implements OnInit {
       });
   };
 
-  onSignUp(){
+  onSignUp() {
     this.router.navigate(['signup']);
   }
 

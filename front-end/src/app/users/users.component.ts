@@ -37,7 +37,6 @@ export class UsersComponent implements OnInit {
 
   onFormSubmit() {
     const user = this.userForm.value;
-    alert(user);
     this.CreateUser(user);
     this.getUserDetails();
   }

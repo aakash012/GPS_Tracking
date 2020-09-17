@@ -15,14 +15,13 @@ export class DriverDashboardComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    //this.userType=localStorage.getItem("UserType");
     this.driverId=localStorage.getItem("DriverId");
     this.driverName=localStorage.getItem("DriverName");
     if(this.driverId == null)
     {
       this.router.navigate(['login']);
     }
-    //alert(this.userId);
+    
   }
 
   

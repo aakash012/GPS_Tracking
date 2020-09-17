@@ -30,28 +30,24 @@ export class SignupComponent implements OnInit {
 
 
   password() {
-    
+
 
   }
   onFormSubmit() {
-    this.submitted = true;
-    const Customer = this.signUpForm.value;
-    if (this.signUpForm.invalid) {
-      alert("Please fill all the credentials");
-      return;
-    }
 
+    const Customer = this.signUpForm.value;
     const CustomerPassword = this.signUpForm.get('CustomerPassword').value;
     const ConfirmPassword = this.signUpForm.get('ConfirmPassword').value;
 
-    // alert("CustomerPassword:"+CustomerPassword);
-    // alert("ConfirmPassword:"+ConfirmPassword);
-    
-    if (CustomerPassword != ConfirmPassword) {
-      alert("Password Not Macthed");
+    if (this.signUpForm.invalid) {
+      alert("Please fill all the credentials");
+    }
+    else if (CustomerPassword != ConfirmPassword) {
+      alert("Password doesnot match!!");
       return;
     }
-      
+
+
     this.CreateCustomer(Customer);
   }
   CreateCustomer(register: Register) {

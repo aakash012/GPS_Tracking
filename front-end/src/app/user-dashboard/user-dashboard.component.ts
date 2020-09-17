@@ -31,7 +31,6 @@ export class UserDashboardComponent implements OnInit {
     {
       this.router.navigate(['login']);
     }
-   // alert( this.customerId);
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: Position) => {
             if (position) {
@@ -52,18 +51,11 @@ export class UserDashboardComponent implements OnInit {
                         console.log(results);
                         if (results[0]) {
                             this.currentLocation = results[0].formatted_address;
-                            alert(this.currentLocation);
                             console.log(this.assgin);
                         } else {
                             console.log('Not found');
                         }
 
-                        // this.customerRideForm = this.formbulider.group({
-                        //     CustomerId: ['1'],
-                        //     PickUpLocation: [this.lat, [Validators.required]],
-                        //     DropLocation: ['Jalandhar', [Validators.required]]
-                      
-                        //   });
                     });
                 });
             }
@@ -78,8 +70,8 @@ ngOnInit()
 
      this.customerRideForm = this.formbulider.group({
         CustomerId: [this.customerId],
-        PickUpLocation: ['Jalandhar', [Validators.required]],
-        DropLocation: ['Ludhiana', [Validators.required]]
+        PickUpLocation: ['Amritsar', [Validators.required]],
+        DropLocation: ['Jalandhar', [Validators.required]]
   
       });
     }
@@ -107,7 +99,6 @@ ngOnInit()
 
   onBookRide() {
     const customerRide = this.customerRideForm.value;
-    //alert(taxi);
     this.CreateCustomerRide(customerRide);
     
   }

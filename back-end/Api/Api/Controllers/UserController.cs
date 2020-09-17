@@ -56,6 +56,50 @@ namespace Api.Controllers
 
         #endregion
 
+        #region Forget Password
+
+        [HttpPost]
+        [Route("CheckUserName")]
+        public IHttpActionResult CheckUserName(Users userInputList)
+        {
+
+            Users user = new Users();
+            
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+
+                user = obj.Users.ToList().Where(it => it.UserName == userInputList.UserName).SingleOrDefault();
+
+            }
+            return Ok(user);
+
+        }
+
+        [HttpPut]
+        [Route("UpdatePassword")]
+        public IHttpActionResult UpdatePassword(Users userInputList)
+        {
+            int RowAffected = 0;
+            Users user = new Users();
+
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+
+                user = obj.Users.ToList().Where(it => it.UserId == userInputList.UserId).SingleOrDefault();
+
+                if (user != null)
+                {
+                    user.UserPassword = userInputList.UserPassword;   
+                    RowAffected = obj.SaveChanges();
+                }
+
+            }
+            return Ok(user);
+
+        }
+
+        #endregion
+
         #region Get Operation
 
         [HttpGet]
@@ -66,19 +110,7 @@ namespace Api.Controllers
             
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                //var userList = (from d in obj.Driver
-                //                join u in obj.Users
-                //                on d.UserId equals u.UserId
-                //                select new
-                //                {
-                //                    UserId = u.UserId,
-                //                    UserType = u.UserType,
-                //                    DriverName = d.DriverName,
-                //                    Username = u.UserName,
-                //                    UserPassword = u.UserPassword
-                //                }).ToList();
-
-
+               
                 return Ok(obj.Users.ToList());
             }
 
@@ -126,7 +158,6 @@ namespace Api.Controllers
 
         #endregion
 
-
         #region Delete Operation
 
         [HttpDelete]
@@ -173,7 +204,7 @@ namespace Api.Controllers
                     {
                         user.UserName = userInputList.UserName;
                         user.UserPassword = userInputList.UserPassword;
-                        user.UserType = userInputList.UserType;
+                    user.UserType = userInputList.UserType;
                         RowAffected = obj.SaveChanges();
                     }
                

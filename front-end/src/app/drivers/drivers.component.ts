@@ -38,7 +38,6 @@ export class DriversComponent implements OnInit {
 
   onFormSubmit() {
     const driver = this.driverForm.value;
-   // alert(driver);
     this.CreateDriver(driver);
     this.getDriverDetails();
   }
