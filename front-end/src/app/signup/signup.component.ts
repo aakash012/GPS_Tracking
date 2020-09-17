@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
     this.signUpForm = this.formbulider.group({
       CustomerName: ['', [Validators.required, Validators.minLength(6)]],
       Gender: ['', [Validators.required]],
-      ContactNo: ['', [Validators.required, Validators.minLength(10)]],
+      ContactNo: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
       CustomerPassword: ['', [Validators.required]],
       ConfirmPassword: ['', [Validators.required]],
     });
@@ -41,12 +41,12 @@ export class SignupComponent implements OnInit {
 
     if (this.signUpForm.invalid) {
       alert("Please fill all the credentials");
+      return;
     }
     else if (CustomerPassword != ConfirmPassword) {
       alert("Password doesnot match!!");
       return;
     }
-
 
     this.CreateCustomer(Customer);
   }

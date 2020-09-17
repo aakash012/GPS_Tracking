@@ -1,10 +1,6 @@
 ﻿using Api.DBContextLayer;
-using Api.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -36,14 +32,7 @@ namespace Api.Controllers
                                   }).ToList();
 
                 return Ok(driverList);
-                //Attendance attendance = new Attendance();
-                //attendance = obj.Attendance.ToList().Where(it => it.DriverId == 11).SingleOrDefault();
-                //if (attendance != null)
-                //{
-                //    attendance.NumberOfDays = 0;
-                //    return Ok(attendance);
-                //}
-                //return Ok(12);
+                
             }
 
         }

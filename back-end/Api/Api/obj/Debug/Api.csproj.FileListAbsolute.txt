@@ -1,4 +1,3 @@
-D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csprojAssemblyReference.cache
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CoreCompileInputs.cache
 D:\GPS_Tracking\back-end\Api\Api\bin\Api.dll.config
 D:\GPS_Tracking\back-end\Api\Api\bin\Api.dll
