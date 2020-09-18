@@ -18,10 +18,9 @@
         </th>
         <th class="tbl2">
           <select Tooltip="Choose Driver" formControlName="TaxiDriverId">
-            <!-- <option  *ngFor="let d of driverList" [value]="d.DriverId>{{d.DriverName}}</option> -->
-            <option value=4>Ramesh</option>
-            <option value=5>Sujit</option>
-            <option value=6>Pawan</option>
+            <option  *ngFor="let td of taxiDriverList" [value]="td.TaxiDriverId">
+              {{td.DriverName}}
+            </option>
           </select>
         </th>
         <th class="tbl2"> 

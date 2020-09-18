@@ -137,7 +137,7 @@ namespace Api.Controllers
                         attendance = obj.Attendance.ToList().Where(it => it.DriverId == driverIdData[0].DriverId).SingleOrDefault();
                         if (attendance != null)
                         {
-                            attendance.NumberOfDays = 1;
+                            attendance.NumberOfDays = attendance.NumberOfDays + 1;
                             flag = obj.SaveChanges();
 
                         }

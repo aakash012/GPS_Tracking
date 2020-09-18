@@ -20,13 +20,14 @@ namespace Api.Controllers
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
 
-                var data= (from td in obj.TaxiDriver
-                           join t in obj.Taxi
-                 on td.TaxiId equals t.TaxiId
-                 select new
-                 {
-                     TaxiNo=t.TaxiNo
-                 }).ToList();
+                var data = (from td in obj.TaxiDriver
+                            join d in obj.Driver
+                  on td.DriverId equals d.DriverId
+                            select new
+                            {
+                                TaxiDriverId = td.TaxiDriverId,
+                                DriverName = d.DriverName
+                            }).ToList();
 
                 return Ok(data);
             }

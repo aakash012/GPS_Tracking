@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { Driver } from '../drivers';
 import { CustomerRideService } from '../customer-ride.service';
-import { DriversService } from '../drivers.service';
+import { TaxiDriverService } from '../taxi-driver.service';
 
 @Component({
   selector: 'app-customer-ride',
@@ -13,10 +13,10 @@ import { DriversService } from '../drivers.service';
 export class CustomerRideComponent implements OnInit {
 
   rideList: CustomerRide[];
-  driverList:Driver[];
+  taxiDriverList:Driver[];
   rideForm: any;
   rideUpdate = null;
-  constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService,private driverService: DriversService) { }
+  constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService,private taxiDriverService: TaxiDriverService) { }
 
   ngOnInit(): void {
     this.rideForm = this.formbulider.group({
@@ -28,6 +28,7 @@ export class CustomerRideComponent implements OnInit {
     });
 
     this.getRideDetails();
+    this.getTaxiDriverDetails();
   }
   getRideDetails() {
     this.customerRideService.getAllCustomerRide().subscribe((data: CustomerRide[]) => {
@@ -35,9 +36,9 @@ export class CustomerRideComponent implements OnInit {
     });
   }
 
-  getDriverDetails() {
-    this.driverService.getAllDriver().subscribe((data: Driver[]) => {
-      this.driverList = data;
+  getTaxiDriverDetails() {
+    this.taxiDriverService.getAllTaxiDriver().subscribe((data: Driver[]) => {
+      this.taxiDriverList = data;
     });
   }
 
