@@ -13,6 +13,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { DriverLocationComponent } from './driver-location/driver-location.component';
 import { CustomerRideComponent } from './customer-ride/customer-ride.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { TaxiDriverComponent } from './taxi-driver/taxi-driver.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'forgotPassword',
     component: ForgotPasswordComponent
+  },
+  {
+    path: 'taxiDriver',
+    component: TaxiDriverComponent
   }
 ];
 

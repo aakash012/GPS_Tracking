@@ -32,6 +32,7 @@
         <li><button id="btn1" (click)="onTaxis()"><span class="taxi-ico" style="background-image: url('../../assets/taxi.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Taxi</button></li>
         <li><button id="btn1" (click)="onUsers()"><span class="taxi-ico" style="background-image: url('../../assets/users.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Users</button></li>
         <li><button id="btn1" (click)="onDrivers()"><span class="taxi-ico" style="background-image: url('../../assets/driver.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Drivers</button></li>
+        <li><button id="btn1" (click)="onTaxiDrivers()"><span class="taxi-ico" style="background-image: url('../../assets/driver.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Taxi Drivers</button></li>
         <li><button id="btn1" (click)="onAttendance()"><span class="taxi-ico" style="background-image: url('../../assets/attendance.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Attendance</button></li>
         <li><button id="btn1" (click)="onCustomers()"><span class="taxi-ico" style="background-image: url('../../assets/customer.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Customers</button></li>
         <li><button id="btn1" (click)="customerRide()"><span class="taxi-ico" style="background-image: url('../../assets/ride.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Customer Ride</button></li>
@@ -60,7 +61,9 @@
       <div id="comp-render" *ngIf="attend">
         <app-attendance></app-attendance>
       </div>
-
+      <div id="comp-render" *ngIf="taxiDriver">
+        <app-taxi-driver></app-taxi-driver>
+      </div>
     </div>
   </div>
   <pre>

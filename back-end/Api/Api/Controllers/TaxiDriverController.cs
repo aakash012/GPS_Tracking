@@ -23,10 +23,15 @@ namespace Api.Controllers
                 var data = (from td in obj.TaxiDriver
                             join d in obj.Driver
                   on td.DriverId equals d.DriverId
+                            join t in obj.Taxi 
+                            on td.TaxiId equals t.TaxiId
                             select new
                             {
                                 TaxiDriverId = td.TaxiDriverId,
-                                DriverName = d.DriverName
+                                TaxiId=t.TaxiId,
+                                DriverId=d.DriverId,
+                                DriverName = d.DriverName,
+                                TaxiNo=t.TaxiNo
                             }).ToList();
 
                 return Ok(data);

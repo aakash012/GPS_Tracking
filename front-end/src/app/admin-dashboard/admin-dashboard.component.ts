@@ -31,6 +31,7 @@ export class AdminDashboardComponent implements OnInit {
   driverLoc=true;
   custRide=false;
   attend=false;
+  taxiDriver=false;
   onTaxis(){
     this.taxi=true;
     if(this.taxi)
@@ -41,6 +42,7 @@ export class AdminDashboardComponent implements OnInit {
       this.driverLoc=false;
       this.custRide=false;
       this.attend=false;
+      this.taxiDriver=false;
     }
   }
   onUsers(){
@@ -53,6 +55,7 @@ export class AdminDashboardComponent implements OnInit {
         this.driverLoc=false;
         this.custRide=false;
         this.attend=false;
+        this.taxiDriver=false;
       }
   }
   onCustomers(){
@@ -65,6 +68,7 @@ export class AdminDashboardComponent implements OnInit {
       this.driverLoc=false;
       this.custRide=false;
       this.attend=false;
+      this.taxiDriver=false;
     }
   }
   onDrivers(){
@@ -77,6 +81,20 @@ export class AdminDashboardComponent implements OnInit {
       this.driverLoc=false;
       this.custRide=false;
       this.attend=false;
+      this.taxiDriver=false;
+    }
+  }
+  onTaxiDrivers(){
+    this.taxiDriver=true;
+    if(this.taxiDriver)
+    {
+      this.user=false;
+      this.customer=false;
+      this.taxi=false;
+      this.driverLoc=false;
+      this.custRide=false;
+      this.attend=false;
+      this.driver=false;
     }
   }
   driverLocation(){
@@ -89,6 +107,7 @@ export class AdminDashboardComponent implements OnInit {
       this.driver=false;
       this.custRide=false;
       this.attend=false;
+      this.taxiDriver=false;
     }
   }
   customerRide(){
@@ -101,6 +120,7 @@ export class AdminDashboardComponent implements OnInit {
       this.driver=false;
       this.driverLoc=false;
       this.attend=false;
+      this.taxiDriver=false;
     }
   }
   onAttendance(){
@@ -113,8 +133,11 @@ export class AdminDashboardComponent implements OnInit {
       this.driver=false;
       this.driverLoc=false;
       this.custRide=false;
+      this.taxiDriver=false;
     }
   }
+
+
   onSignOut(){
     localStorage.removeItem("UserId");
     localStorage.removeItem("userName");

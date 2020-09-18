@@ -17,4 +17,9 @@ export class TaxiDriverService {
   {
     return this.http.get(this.url + '/GetAllTaxiDriver');
   }
+
+  saveTaxiDriver(taxiDriver:TaxiDriver) : Observable<TaxiDriver>
+  {
+    return this.http.post<TaxiDriver>(this.url+'/Save',taxiDriver);
+  }
 }

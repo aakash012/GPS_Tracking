@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { Driver } from '../drivers';
+import { TaxiDriver } from '../taxi-driver';
 import { CustomerRideService } from '../customer-ride.service';
 import { TaxiDriverService } from '../taxi-driver.service';
 
@@ -13,7 +14,7 @@ import { TaxiDriverService } from '../taxi-driver.service';
 export class CustomerRideComponent implements OnInit {
 
   rideList: CustomerRide[];
-  taxiDriverList:Driver[];
+  taxiDriverList:TaxiDriver[];
   rideForm: any;
   rideUpdate = null;
   constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService,private taxiDriverService: TaxiDriverService) { }
@@ -37,7 +38,7 @@ export class CustomerRideComponent implements OnInit {
   }
 
   getTaxiDriverDetails() {
-    this.taxiDriverService.getAllTaxiDriver().subscribe((data: Driver[]) => {
+    this.taxiDriverService.getAllTaxiDriver().subscribe((data: TaxiDriver[]) => {
       this.taxiDriverList = data;
     });
   }
