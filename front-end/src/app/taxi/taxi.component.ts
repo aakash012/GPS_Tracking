@@ -71,7 +71,13 @@ export class TaxiComponent implements OnInit {
   DeleteTaxi(TaxiId: number) {
     if (confirm("Are you sure you want to delete this ?")) {
 
-      this.taxiService.deleteTaxiById(TaxiId).subscribe(() => {
+      this.taxiService.deleteTaxiById(TaxiId).subscribe(Data => {
+        
+        if(Data == 0)
+        {
+          alert("Cannot Delete Taxi as Taxi is assigned to a Driver");
+        }
+        
         this.taxiUpdate = null;
         this.getTaxiDetails();
       });

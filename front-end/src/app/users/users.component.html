@@ -29,15 +29,16 @@
             [disabled]="!userForm.valid"
           >
             Submit</button
-          >&nbsp;&nbsp;&nbsp;&nbsp;
-          <button
+          >
+          <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+          <!-- <button
             type="reset"
             class="btn btn-danger"
             Tooltip="Click Reset Button"
             (click)="ResetForm()"
           >
             Reset
-          </button>
+          </button> -->
         </td>
       </tr>
     </table>
@@ -48,7 +49,7 @@
         <th class="tbl2">Password</th>
         <th class="tbl2">User Type</th>
         <th class="tbl2">Edit</th>
-        <th class="tbl2">Delete</th>
+        <!-- <th class="tbl2">Delete</th> -->
       </tr>
       <tr *ngFor="let User of userList">
         <td class="tbl2">{{ User.UserName }}</td>
@@ -65,7 +66,7 @@
             Edit
           </button>
         </td>
-        <td class="tbl2">
+        <!-- <td class="tbl2">
           <button
             type="button"
             class="btn btn-danger"
@@ -74,7 +75,7 @@
           >
             Delete
           </button>
-        </td>
+        </td> -->
       </tr>
     </table>
   </form>

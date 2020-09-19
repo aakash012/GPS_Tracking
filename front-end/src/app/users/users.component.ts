@@ -67,13 +67,22 @@ export class UsersComponent implements OnInit {
       });
     }
 
-
   }
 
   DeleteUser(UserId: number) {
     if (confirm("Are you sure you want to delete this ?")) {
 
-      this.userService.deleteUserById(UserId).subscribe(() => {
+      this.userService.deleteUserById(UserId).subscribe(data => {
+
+        if(data == 2)
+        {
+          alert("Please delete driver from Driver Master");
+        }
+        else if(data == 3)
+        {
+
+        }
+
         this.userUpdate = null;
         this.getUserDetails();
       });

@@ -37,6 +37,20 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetAllDriversForDropDown")]
+
+        public IHttpActionResult GetAllDriversForDropDown()
+        {
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+         
+                return Ok(obj.Driver.ToList().Where(it => it.AssignedStatus == 0));
+
+            }
+
+        }
+
         [HttpGet]   
         [Route("GetDriverById/{Id}")]
 
@@ -80,6 +94,7 @@ namespace Api.Controllers
                     driver.Gender = driverInputList.Gender;
                     driver.ContactNo = driverInputList.ContactNo;
                     driver.DrivingLicence = driverInputList.DrivingLicence;
+                    driver.AssignedStatus = 0;
                     driver.UserId = userId;
 
                     obj.Driver.Add(driver);
@@ -114,37 +129,41 @@ namespace Api.Controllers
             Driver driver = new Driver();
             Users users = new Users();
             Attendance attendance = new Attendance();
-            TaxiDriver taxiDriver = new TaxiDriver();
 
-            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            try
             {
-                driver = obj.Driver.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
-
-                if (driver != null)
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
                 {
-                    Nullable<int> userID = driver.UserId;
-                    users = obj.Users.ToList().Where(it => it.UserId == userID).SingleOrDefault();
-                    if(users!=null)
-                    {
-                        obj.Users.Remove(users);
-                    }
-                    
-                    attendance = obj.Attendance.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
-                    if(attendance!=null)
-                    {
-                        obj.Attendance.Remove(attendance);
-                    }
+                    driver = obj.Driver.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
 
-                    taxiDriver = obj.TaxiDriver.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
-                    if (taxiDriver != null)
+                    if (driver != null)
                     {
-                        obj.TaxiDriver.Remove(taxiDriver);
-                    }
+                        
 
-                    obj.Driver.Remove(driver);
-                    RowAffected = obj.SaveChanges();
+                        attendance = obj.Attendance.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
+                        if (attendance != null)
+                        {
+                            obj.Attendance.Remove(attendance);
+                        }
+
+                        obj.Driver.Remove(driver);
+
+                        Nullable<int> userID = driver.UserId;
+                        users = obj.Users.ToList().Where(it => it.UserId == userID).SingleOrDefault();
+                        if (users != null)
+                        {
+                            obj.Users.Remove(users);
+                        }
+
+                        RowAffected = obj.SaveChanges();
+                    }
                 }
             }
+            catch(Exception e)
+            {
+                return Ok(RowAffected);
+            }
+                
 
             return Ok(RowAffected);
         }

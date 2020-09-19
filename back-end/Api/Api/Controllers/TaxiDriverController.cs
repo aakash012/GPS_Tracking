@@ -22,7 +22,7 @@ namespace Api.Controllers
 
                 var data = (from td in obj.TaxiDriver
                             join d in obj.Driver
-                  on td.DriverId equals d.DriverId
+                            on td.DriverId equals d.DriverId
                             join t in obj.Taxi 
                             on td.TaxiId equals t.TaxiId
                             select new
@@ -31,7 +31,8 @@ namespace Api.Controllers
                                 TaxiId=t.TaxiId,
                                 DriverId=d.DriverId,
                                 DriverName = d.DriverName,
-                                TaxiNo=t.TaxiNo
+                                TaxiNo=t.TaxiNo,
+                                DriverAssignedStatus=td.DriverAssignedStatus
                             }).ToList();
 
                 return Ok(data);
@@ -54,10 +55,27 @@ namespace Api.Controllers
                 TaxiDriver taxiDriver = new TaxiDriver();
                 taxiDriver.DriverId = taxiDriverInputList.DriverId;
                 taxiDriver.TaxiId = taxiDriverInputList.TaxiId;
+                taxiDriver.DriverAssignedStatus = 0;
 
                 obj.TaxiDriver.Add(taxiDriver);
-                
                 RowAffected = obj.SaveChanges();
+
+                Driver driver = new Driver();
+                driver = obj.Driver.ToList().Where(it => it.DriverId == taxiDriverInputList.DriverId).SingleOrDefault();
+                if(driver != null)
+                {
+                    driver.AssignedStatus = 1;
+                    obj.SaveChanges();
+                }
+
+                Taxi taxi = new Taxi();
+                taxi = obj.Taxi.ToList().Where(it => it.TaxiId == taxiDriverInputList.TaxiId).SingleOrDefault();
+                if (taxi != null)
+                {
+                    taxi.AssignedStatus = 1;
+                    obj.SaveChanges();
+                }
+
 
             }
             return Ok(RowAffected);

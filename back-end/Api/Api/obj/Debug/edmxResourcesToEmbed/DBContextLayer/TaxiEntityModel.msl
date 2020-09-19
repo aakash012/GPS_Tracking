@@ -28,6 +28,7 @@
     <EntitySetMapping Name="CustomerRide">
       <EntityTypeMapping TypeName="TaxiMasterModel.CustomerRide">
         <MappingFragment StoreEntitySet="CustomerRide">
+          <ScalarProperty Name="DateOfRide" ColumnName="DateOfRide" />
           <ScalarProperty Name="RideStatus" ColumnName="RideStatus" />
           <ScalarProperty Name="DropLocation" ColumnName="DropLocation" />
           <ScalarProperty Name="PickupLocation" ColumnName="PickupLocation" />
@@ -40,6 +41,7 @@
     <EntitySetMapping Name="Driver">
       <EntityTypeMapping TypeName="TaxiMasterModel.Driver">
         <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="AssignedStatus" ColumnName="AssignedStatus" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="DrivingLicence" ColumnName="DrivingLicence" />
           <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
@@ -61,6 +63,7 @@
     <EntitySetMapping Name="Taxi">
       <EntityTypeMapping TypeName="TaxiMasterModel.Taxi">
         <MappingFragment StoreEntitySet="Taxi">
+          <ScalarProperty Name="AssignedStatus" ColumnName="AssignedStatus" />
           <ScalarProperty Name="Company" ColumnName="Company" />
           <ScalarProperty Name="TaxiNo" ColumnName="TaxiNo" />
           <ScalarProperty Name="TaxiId" ColumnName="TaxiId" />
@@ -70,6 +73,7 @@
     <EntitySetMapping Name="TaxiDriver">
       <EntityTypeMapping TypeName="TaxiMasterModel.TaxiDriver">
         <MappingFragment StoreEntitySet="TaxiDriver">
+          <ScalarProperty Name="DriverAssignedStatus" ColumnName="DriverAssignedStatus" />
           <ScalarProperty Name="TaxiId" ColumnName="TaxiId" />
           <ScalarProperty Name="DriverId" ColumnName="DriverId" />
           <ScalarProperty Name="TaxiDriverId" ColumnName="TaxiDriverId" />

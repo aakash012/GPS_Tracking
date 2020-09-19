@@ -1,4 +1,5 @@
 ﻿using Api.DBContextLayer;
+using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -162,18 +163,28 @@ namespace Api.Controllers
         public IHttpActionResult DeleteById(int Id)
         {
             int RowAffected = 0;
+            int UserType = 0;
             Users user = new Users();
 
-            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            try
             {
-                user = obj.Users.ToList().Where(it => it.UserId == Id).SingleOrDefault();
-
-                if (User != null)
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
                 {
-                    obj.Users.Remove(user);
-                    RowAffected = obj.SaveChanges();
+                    user = obj.Users.ToList().Where(it => it.UserId == Id).SingleOrDefault();
+
+                    if (User != null)
+                    {
+                        UserType = user.UserType;
+                        obj.Users.Remove(user);
+                        RowAffected = obj.SaveChanges();
+                    }
                 }
             }
+            catch(Exception e)
+            {
+                return Ok(UserType);
+            }
+              
 
             return Ok(RowAffected);
         }

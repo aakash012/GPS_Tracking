@@ -17,6 +17,11 @@ export class TaxiService {
     return this.http.get(this.url + '/GetAllTaxi');
   }
 
+  getAllTaxiForDropDown() 
+  {
+    return this.http.get(this.url + '/GetAllTaxiForDropDown');
+  }
+
   getTaxiById(TaxiId:number) : Observable<Taxi>
   {
     return this.http.get<Taxi>(this.url + '/GetTaxiById/'+TaxiId);

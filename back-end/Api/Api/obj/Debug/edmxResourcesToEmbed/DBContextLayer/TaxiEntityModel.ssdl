@@ -32,6 +32,7 @@
     <Property Name="PickupLocation" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DropLocation" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RideStatus" Type="int" Nullable="false" />
+    <Property Name="DateOfRide" Type="datetime" />
   </EntityType>
   <EntityType Name="Driver">
     <Key>
@@ -44,6 +45,7 @@
     <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="DrivingLicence" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Rating" Type="int" />
+    <Property Name="AssignedStatus" Type="int" />
   </EntityType>
   <EntityType Name="Gender">
     <Key>
@@ -59,6 +61,7 @@
     <Property Name="TaxiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TaxiNo" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Company" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="AssignedStatus" Type="int" />
   </EntityType>
   <EntityType Name="TaxiDriver">
     <Key>
@@ -67,6 +70,7 @@
     <Property Name="TaxiDriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DriverId" Type="int" />
     <Property Name="TaxiId" Type="int" />
+    <Property Name="DriverAssignedStatus" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

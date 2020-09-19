@@ -37,6 +37,7 @@
           <Property Name="PickupLocation" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DropLocation" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RideStatus" Type="int" Nullable="false" />
+          <Property Name="DateOfRide" Type="datetime" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
@@ -49,6 +50,7 @@
           <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DrivingLicence" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Rating" Type="int" />
+          <Property Name="AssignedStatus" Type="int" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -64,6 +66,7 @@
           <Property Name="TaxiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TaxiNo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Company" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AssignedStatus" Type="int" />
         </EntityType>
         <EntityType Name="TaxiDriver">
           <Key>
@@ -72,6 +75,7 @@
           <Property Name="TaxiDriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DriverId" Type="int" />
           <Property Name="TaxiId" Type="int" />
+          <Property Name="DriverAssignedStatus" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -324,6 +328,7 @@
           <Property Name="RideStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="TaxiMasterModel.FK__CustomerR__Custo__787EE5A0" FromRole="CustomerRide" ToRole="Customer" />
           <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" FromRole="CustomerRide" ToRole="TaxiDriver" />
+          <Property Name="DateOfRide" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Driver">
           <Key>
@@ -340,6 +345,7 @@
           <NavigationProperty Name="Gender1" Relationship="TaxiMasterModel.FK__Driver__Gender__656C112C" FromRole="Driver" ToRole="Gender" />
           <NavigationProperty Name="Users" Relationship="TaxiMasterModel.FK__Driver__UserId__6477ECF3" FromRole="Driver" ToRole="Users" />
           <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" FromRole="Driver" ToRole="TaxiDriver" />
+          <Property Name="AssignedStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -358,6 +364,7 @@
           <Property Name="TaxiNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Company" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D" FromRole="Taxi" ToRole="TaxiDriver" />
+          <Property Name="AssignedStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="TaxiDriver">
           <Key>
@@ -369,6 +376,7 @@
           <NavigationProperty Name="CustomerRide" Relationship="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" FromRole="TaxiDriver" ToRole="CustomerRide" />
           <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" FromRole="TaxiDriver" ToRole="Driver" />
           <NavigationProperty Name="Taxi" Relationship="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D" FromRole="TaxiDriver" ToRole="Taxi" />
+          <Property Name="DriverAssignedStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -522,6 +530,7 @@
           <EntitySetMapping Name="CustomerRide">
             <EntityTypeMapping TypeName="TaxiMasterModel.CustomerRide">
               <MappingFragment StoreEntitySet="CustomerRide">
+                <ScalarProperty Name="DateOfRide" ColumnName="DateOfRide" />
                 <ScalarProperty Name="RideStatus" ColumnName="RideStatus" />
                 <ScalarProperty Name="DropLocation" ColumnName="DropLocation" />
                 <ScalarProperty Name="PickupLocation" ColumnName="PickupLocation" />
@@ -534,6 +543,7 @@
           <EntitySetMapping Name="Driver">
             <EntityTypeMapping TypeName="TaxiMasterModel.Driver">
               <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="AssignedStatus" ColumnName="AssignedStatus" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="DrivingLicence" ColumnName="DrivingLicence" />
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
@@ -555,6 +565,7 @@
           <EntitySetMapping Name="Taxi">
             <EntityTypeMapping TypeName="TaxiMasterModel.Taxi">
               <MappingFragment StoreEntitySet="Taxi">
+                <ScalarProperty Name="AssignedStatus" ColumnName="AssignedStatus" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="TaxiNo" ColumnName="TaxiNo" />
                 <ScalarProperty Name="TaxiId" ColumnName="TaxiId" />
@@ -564,6 +575,7 @@
           <EntitySetMapping Name="TaxiDriver">
             <EntityTypeMapping TypeName="TaxiMasterModel.TaxiDriver">
               <MappingFragment StoreEntitySet="TaxiDriver">
+                <ScalarProperty Name="DriverAssignedStatus" ColumnName="DriverAssignedStatus" />
                 <ScalarProperty Name="TaxiId" ColumnName="TaxiId" />
                 <ScalarProperty Name="DriverId" ColumnName="DriverId" />
                 <ScalarProperty Name="TaxiDriverId" ColumnName="TaxiDriverId" />

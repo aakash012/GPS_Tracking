@@ -1,4 +1,5 @@
 ﻿using Api.DBContextLayer;
+using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -18,6 +19,18 @@ namespace Api.Controllers
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 return Ok(obj.Taxi.ToList());
+            }
+
+        }
+
+        [HttpGet]
+        [Route("GetAllTaxiForDropDown")]
+
+        public IHttpActionResult GetTaxiForDropDown()
+        {
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+                return Ok(obj.Taxi.ToList().Where(it=> it.AssignedStatus == 0));
             }
 
         }
@@ -50,6 +63,7 @@ namespace Api.Controllers
                     Taxi taxi = new Taxi();
                     taxi.TaxiNo = taxiInputList.TaxiNo;
                     taxi.Company = taxiInputList.Company;
+                    taxi.AssignedStatus = 0;
 
                     obj.Taxi.Add(taxi);
               
@@ -70,17 +84,24 @@ namespace Api.Controllers
             int RowAffected = 0;
             Taxi taxi = new Taxi();
 
-            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            try
             {
-                taxi = obj.Taxi.ToList().Where(it => it.TaxiId == Id).SingleOrDefault();
-
-                if(taxi != null)
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
                 {
-                    obj.Taxi.Remove(taxi);
-                    RowAffected = obj.SaveChanges();
+                    taxi = obj.Taxi.ToList().Where(it => it.TaxiId == Id).SingleOrDefault();
+
+                    if (taxi != null)
+                    {
+                        obj.Taxi.Remove(taxi);
+                        RowAffected = obj.SaveChanges();
+                    }
                 }
             }
-
+            catch(Exception e)
+            {
+                return Ok(RowAffected);
+            }
+           
             return Ok(RowAffected);
         }
         #endregion

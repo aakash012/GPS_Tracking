@@ -1,4 +1,5 @@
 ﻿using Api.DBContextLayer;
+using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -16,19 +17,34 @@ namespace Api.Controllers
 
         public IHttpActionResult Get()
         {
-
+            DateTime date = DateTime.Now;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 var customerList = (from c in obj.Customer
                                     join cr in obj.CustomerRide
-                                    on c.CustomerId equals cr.CustomerId
+                                    on c.CustomerId equals cr.CustomerId into custRide
+                                    from cr in custRide.DefaultIfEmpty()
+                                    join td in obj.TaxiDriver
+                                    on cr.TaxiDriverId equals td.TaxiDriverId into taxiDri
+                                    from td in taxiDri.DefaultIfEmpty()
+                                    join d in obj.Driver
+                                    on td.DriverId equals d.DriverId into Driv
+                                    from d in Driv.DefaultIfEmpty()
+                                    join t in obj.Taxi
+                                    on td.TaxiId equals t.TaxiId into taxi
+                                    from t in taxi.DefaultIfEmpty()
+                                    where (cr.CustomerRideId != null)
                                     select new
                                     {
-                                        CustomerRideId = cr.CustomerRideId,
-                                        CustomerName = c.CustomerName,
-                                        PickupLocation = cr.PickupLocation,
-                                        DropLocation = cr.DropLocation,
-                                        RideStatus = cr.RideStatus
+                                        CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
+                                        CustomerName = cr == null ? "" : c.CustomerName,
+                                        PickupLocation = cr == null ? "" : cr.PickupLocation,
+                                        DropLocation = cr == null ? "" : cr.DropLocation,
+                                        RideStatus = cr == null ? 0 : cr.RideStatus,
+                                        TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
+                                        DriverName = d == null ? "" : d.DriverName,
+                                        TaxiNo = t == null ? "" : t.TaxiNo,
+                                        RideDate = cr == null ? date : cr.DateOfRide
 
                                     }).ToList();
 
@@ -42,13 +58,26 @@ namespace Api.Controllers
 
         public IHttpActionResult GetCustomerRideById(int Id)
         {
-            CustomerRide customerRide = new CustomerRide();
+            
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                customerRide = obj.CustomerRide.ToList().Where(it => it.CustomerRideId == Id).SingleOrDefault();
-            }
+                var customerRide = (from cr in obj.CustomerRide
+                                join c in obj.Customer
+                                on cr.CustomerId equals c.CustomerId
+                                where (cr.CustomerRideId == Id)
+                                select new
+                                {
+                                    CustomerRideId = cr.CustomerRideId,
+                                    CustomerId = cr.CustomerId,
+                                    CustomerName = c.CustomerName,
+                                    PickupLocation = cr.PickupLocation,
+                                    DropLocation = cr.DropLocation
 
-            return Ok(customerRide);
+                                }).ToList().SingleOrDefault();
+                return Ok(customerRide);
+            }
+                
+            
         }
 
 
@@ -84,6 +113,7 @@ namespace Api.Controllers
         [Route("Save")]
         public IHttpActionResult SaveCustomerRideData(CustomerRide customerRideList)
         {
+            DateTime date = DateTime.Now;
             int RowAffected = 0;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
@@ -92,6 +122,7 @@ namespace Api.Controllers
                 customerRide.CustomerId = customerRideList.CustomerId;
                 customerRide.PickupLocation = customerRideList.PickupLocation;
                 customerRide.DropLocation = customerRideList.DropLocation;
+                customerRide.DateOfRide = date;
 
                 obj.CustomerRide.Add(customerRide);
                 RowAffected = obj.SaveChanges();

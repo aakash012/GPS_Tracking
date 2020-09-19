@@ -84,6 +84,7 @@
     <Property Name="RideStatus" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="TaxiMasterModel.FK__CustomerR__Custo__787EE5A0" FromRole="CustomerRide" ToRole="Customer" />
     <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" FromRole="CustomerRide" ToRole="TaxiDriver" />
+    <Property Name="DateOfRide" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Driver">
     <Key>
@@ -100,6 +101,7 @@
     <NavigationProperty Name="Gender1" Relationship="TaxiMasterModel.FK__Driver__Gender__656C112C" FromRole="Driver" ToRole="Gender" />
     <NavigationProperty Name="Users" Relationship="TaxiMasterModel.FK__Driver__UserId__6477ECF3" FromRole="Driver" ToRole="Users" />
     <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" FromRole="Driver" ToRole="TaxiDriver" />
+    <Property Name="AssignedStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="Gender">
     <Key>
@@ -118,6 +120,7 @@
     <Property Name="TaxiNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Company" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D" FromRole="Taxi" ToRole="TaxiDriver" />
+    <Property Name="AssignedStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="TaxiDriver">
     <Key>
@@ -129,6 +132,7 @@
     <NavigationProperty Name="CustomerRide" Relationship="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" FromRole="TaxiDriver" ToRole="CustomerRide" />
     <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" FromRole="TaxiDriver" ToRole="Driver" />
     <NavigationProperty Name="Taxi" Relationship="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D" FromRole="TaxiDriver" ToRole="Taxi" />
+    <Property Name="DriverAssignedStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

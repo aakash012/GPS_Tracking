@@ -35,13 +35,13 @@ export class TaxiDriverComponent implements OnInit {
   }
 
   getTaxiDetails() {
-    this.taxiService.getAllTaxi().subscribe((data: Taxi[]) => {
+    this.taxiService.getAllTaxiForDropDown().subscribe((data: Taxi[]) => {
       this.taxiList = data;
     });
   }
 
   getDriverDetails() {
-    this.driverService.getAllDriver().subscribe((data: Driver[]) => {
+    this.driverService.getAllDriverForDropDown().subscribe((data: Driver[]) => {
       this.driverList = data;
     });
   }
@@ -58,17 +58,13 @@ export class TaxiDriverComponent implements OnInit {
   }
 
   CreateTaxiDriver(taxiDriver:TaxiDriver) {
-// if (this.taxiUpdate == null) {
-      this.taxiDriverService.saveTaxiDriver(taxiDriver).subscribe(() => {
-        this.getTaxiDriverDetails();
-      });
-    //}
-    // else{
-    //   this.taxiService.updateTaxi(taxi).subscribe(() => {
-    //     this.taxiUpdate = null;
-    //     this.ResetForm();
-    //   });
-    // }
 
+      this.taxiDriverService.saveTaxiDriver(taxiDriver).subscribe(() => {
+        
+         this.getTaxiDetails();
+         this.getDriverDetails();
+         this.getTaxiDriverDetails();
+      });
+   
   }
 }

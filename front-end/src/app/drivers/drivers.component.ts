@@ -73,7 +73,11 @@ export class DriversComponent implements OnInit {
   DeleteDriver(DriverId: number) {
     if (confirm("Are you sure you want to delete this ?")) {
 
-      this.driverService.deleteDriverById(DriverId).subscribe(() => {
+      this.driverService.deleteDriverById(DriverId).subscribe(data => {
+        if(data == 0)
+        {
+          alert("Cannot Delete Driver as Driver is assigned to a Taxi");
+        }
         this.driverUpdate = null;
         this.getDriverDetails();
       });

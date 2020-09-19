@@ -16,6 +16,11 @@ export class DriversService {
     return this.http.get(this.url + '/GetAllDrivers');
   }
 
+  getAllDriverForDropDown() 
+  {
+    return this.http.get(this.url + '/GetAllDriversForDropDown');
+  }
+
   getDriverById(DriverId:number) : Observable<Driver>
   {
     return this.http.get<Driver>(this.url + '/GetDriverById/'+DriverId);

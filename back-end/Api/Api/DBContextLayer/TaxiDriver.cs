@@ -23,6 +23,7 @@ namespace Api.DBContextLayer
         public int TaxiDriverId { get; set; }
         public Nullable<int> DriverId { get; set; }
         public Nullable<int> TaxiId { get; set; }
+        public Nullable<int> DriverAssignedStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerRide> CustomerRide { get; set; }

@@ -11,7 +11,6 @@ export class TaxiDriverService {
   
   url='http://localhost:5050/api/TaxiDriver';
   constructor(private http:HttpClient) { }
-
   
   getAllTaxiDriver() 
   {

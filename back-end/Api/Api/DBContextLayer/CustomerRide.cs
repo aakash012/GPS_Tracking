@@ -20,6 +20,7 @@ namespace Api.DBContextLayer
         public string PickupLocation { get; set; }
         public string DropLocation { get; set; }
         public int RideStatus { get; set; }
+        public Nullable<System.DateTime> DateOfRide { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual TaxiDriver TaxiDriver { get; set; }

@@ -4,4 +4,5 @@ export class TaxiDriver {
     TaxiId:Number;
     DriverName:String;
     TaxiNo:String;
+    DriverAssignedStatus:Number
 }

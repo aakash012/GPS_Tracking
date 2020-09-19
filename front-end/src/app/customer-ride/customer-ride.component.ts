@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
-import { Driver } from '../drivers';
 import { TaxiDriver } from '../taxi-driver';
 import { CustomerRideService } from '../customer-ride.service';
 import { TaxiDriverService } from '../taxi-driver.service';
@@ -52,6 +51,7 @@ export class CustomerRideComponent implements OnInit {
   FillRideFormToEdit(CustomerRideId: number) {
     this.customerRideService.getCustomerRideById(CustomerRideId).subscribe(Rides => {
       this.rideForm.controls['CustomerRideId'].setValue(Rides.CustomerRideId);
+      this.rideForm.controls['CustomerName'].setValue(Rides.CustomerName);
       this.rideForm.controls['PickupLocation'].setValue(Rides.PickupLocation);
       this.rideForm.controls['DropLocation'].setValue(Rides.DropLocation);
      

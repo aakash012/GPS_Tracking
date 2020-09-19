@@ -2,6 +2,7 @@
   <form [formGroup]="rideForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
       <tr id="tr1">
+        <td>Customer Name</td>
         <td>PickUp Location</td>
         <td>Drop Location</td>
         <td>Driver Name</td>
@@ -10,8 +11,12 @@
       <tr ngclass="btn-primary">
         <th class="tbl2">
           <!-- <label>PickUp Location</label> -->
-          <input formControlName="PickupLocation" disabled/>
+          <input formControlName="CustomerName" disabled/>
           <input formControlName="CustomerRideId" type="hidden" class="form-control" id="CustomerRideId">
+        </th>
+        <th class="tbl2">
+          <!-- <label>PickUp Location</label> -->
+          <input formControlName="PickupLocation" disabled/>
         </th>
         <th class="tbl2">
           <input formControlName="DropLocation" disabled/>
@@ -41,14 +46,22 @@
         <th class="tbl2">Customer Name</th>
         <th class="tbl2">PickUp Location</th>
         <th class="tbl2">Drop Location</th>
-        <th class="tbl2">Status</th>
+        <th class="tbl2">Taxi No.</th>
+        <th class="tbl2">Driver</th>
+        <th class="tbl2">Ride Date</th>
+        <th class="tbl2">Booking Status</th>
+        <th class="tbl2">Ride Status</th>
         <th class="tbl2">Approve</th>
       </tr>
       <tr *ngFor="let Ride of rideList">
         <td class="tbl2">{{ Ride.CustomerName }}</td>
         <td class="tbl2">{{ Ride.PickupLocation}}</td>
         <td class="tbl2">{{ Ride.DropLocation }}</td>
-        <td class="tbl2">{{ Ride.RideStatus == 1 ? "Ride Booked" : "Booking Request"}}</td>
+        <td class="tbl2">{{ Ride.TaxiNo }}</td>
+        <td class="tbl2">{{ Ride.DriverName }}</td>
+        <td class="tbl2">{{ Ride.RideDate}}</td>
+        <td class="tbl2">{{ Ride.RideStatus == 1 ? "Booked" : "Requested"}}</td>
+        <td class="tbl2">{{ Ride.RideStatus == 0 ? "Initiated" : "Started"}}</td>
         <td class="tbl2">
           <button
             type="button"
