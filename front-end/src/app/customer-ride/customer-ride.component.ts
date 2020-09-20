@@ -37,11 +37,10 @@ export class CustomerRideComponent implements OnInit {
   }
 
   getTaxiDriverDetails() {
-    this.taxiDriverService.getAllTaxiDriver().subscribe((data: TaxiDriver[]) => {
+    this.taxiDriverService.getAllTaxiDriverForDropDown().subscribe((data: TaxiDriver[]) => {
       this.taxiDriverList = data;
     });
   }
-
 
   onFormSubmit() {
     const ride = this.rideForm.value;
@@ -50,10 +49,11 @@ export class CustomerRideComponent implements OnInit {
   }
   FillRideFormToEdit(CustomerRideId: number) {
     this.customerRideService.getCustomerRideById(CustomerRideId).subscribe(Rides => {
-      this.rideForm.controls['CustomerRideId'].setValue(Rides.CustomerRideId);
-      this.rideForm.controls['CustomerName'].setValue(Rides.CustomerName);
-      this.rideForm.controls['PickupLocation'].setValue(Rides.PickupLocation);
-      this.rideForm.controls['DropLocation'].setValue(Rides.DropLocation);
+     
+      this.rideForm.controls['CustomerRideId'].setValue(Rides[0].CustomerRideId);
+      this.rideForm.controls['CustomerName'].setValue(Rides[0].CustomerName);
+      this.rideForm.controls['PickupLocation'].setValue(Rides[0].PickupLocation);
+      this.rideForm.controls['DropLocation'].setValue(Rides[0].DropLocation);
      
     });
   }

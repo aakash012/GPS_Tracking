@@ -1,85 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="TaxiMasterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="TrackarsAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Attendance">
     <Key>
       <PropertyRef Name="AttendanceId" />
     </Key>
-    <Property Name="AttendanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DriverId" Type="int" />
-    <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
-    <Property Name="AttendanceMonth" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="NumberOfDays" Type="int" />
+    <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DriverId" Type="Int32" />
+    <Property Name="FinancialYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AttendanceMonth" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NumberOfDays" Type="Int32" />
+    <NavigationProperty Name="Driver" Relationship="Self.FK__Attendanc__Drive__6EF57B66" FromRole="Attendance" ToRole="Driver" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="CustomerId" />
     </Key>
-    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" />
-    <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Gender" Type="int" Nullable="false" />
-    <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="CustomerPassword" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="DateOfRegistration" Type="datetime" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="Int32" Nullable="false" />
+    <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfRegistration" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Gender1" Relationship="Self.FK__Customer__Gender__6FE99F9F" FromRole="Customer" ToRole="Gender" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Customer__UserId__70DDC3D8" FromRole="Customer" ToRole="Users" />
+    <NavigationProperty Name="CustomerRide" Relationship="Self.FK__CustomerR__Custo__71D1E811" FromRole="Customer" ToRole="CustomerRide" />
   </EntityType>
   <EntityType Name="CustomerRide">
     <Key>
       <PropertyRef Name="CustomerRideId" />
     </Key>
-    <Property Name="CustomerRideId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CustomerId" Type="int" />
-    <Property Name="TaxiDriverId" Type="int" />
-    <Property Name="PickupLocation" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="DropLocation" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="RideStatus" Type="int" Nullable="false" />
-    <Property Name="DateOfRide" Type="datetime" />
+    <Property Name="CustomerRideId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="TaxiDriverId" Type="Int32" />
+    <Property Name="PickupLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DropLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RideStatus" Type="Int32" Nullable="false" />
+    <Property Name="DateOfRide" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__CustomerR__Custo__71D1E811" FromRole="CustomerRide" ToRole="Customer" />
+    <NavigationProperty Name="TaxiDriver" Relationship="Self.FK__CustomerR__TaxiD__72C60C4A" FromRole="CustomerRide" ToRole="TaxiDriver" />
   </EntityType>
   <EntityType Name="Driver">
     <Key>
       <PropertyRef Name="DriverId" />
     </Key>
-    <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" />
-    <Property Name="DriverName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Gender" Type="int" Nullable="false" />
-    <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="DrivingLicence" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Rating" Type="int" />
-    <Property Name="AssignedStatus" Type="int" />
+    <Property Name="DriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="DriverName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="Int32" Nullable="false" />
+    <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DrivingLicence" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="AssignedStatus" Type="Int32" />
+    <NavigationProperty Name="Attendance" Relationship="Self.FK__Attendanc__Drive__6EF57B66" FromRole="Driver" ToRole="Attendance" />
+    <NavigationProperty Name="Gender1" Relationship="Self.FK__Driver__Gender__73BA3083" FromRole="Driver" ToRole="Gender" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Driver__UserId__74AE54BC" FromRole="Driver" ToRole="Users" />
+    <NavigationProperty Name="TaxiDriver" Relationship="Self.FK__TaxiDrive__Drive__75A278F5" FromRole="Driver" ToRole="TaxiDriver" />
   </EntityType>
   <EntityType Name="Gender">
     <Key>
       <PropertyRef Name="GenderId" />
     </Key>
-    <Property Name="GenderId" Type="int" Nullable="false" />
-    <Property Name="GenderType" Type="varchar" MaxLength="10" />
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <Property Name="GenderType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Customer__Gender__6FE99F9F" FromRole="Gender" ToRole="Customer" />
+    <NavigationProperty Name="Driver" Relationship="Self.FK__Driver__Gender__73BA3083" FromRole="Gender" ToRole="Driver" />
   </EntityType>
   <EntityType Name="Taxi">
     <Key>
       <PropertyRef Name="TaxiId" />
     </Key>
-    <Property Name="TaxiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TaxiNo" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="Company" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="AssignedStatus" Type="int" />
+    <Property Name="TaxiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaxiNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AssignedStatus" Type="Int32" />
+    <NavigationProperty Name="TaxiDriver" Relationship="Self.FK__TaxiDrive__TaxiI__76969D2E" FromRole="Taxi" ToRole="TaxiDriver" />
   </EntityType>
   <EntityType Name="TaxiDriver">
     <Key>
       <PropertyRef Name="TaxiDriverId" />
     </Key>
-    <Property Name="TaxiDriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DriverId" Type="int" />
-    <Property Name="TaxiId" Type="int" />
-    <Property Name="DriverAssignedStatus" Type="int" />
+    <Property Name="TaxiDriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DriverId" Type="Int32" />
+    <Property Name="TaxiId" Type="Int32" />
+    <Property Name="DriverAssignedStatus" Type="Int32" />
+    <NavigationProperty Name="CustomerRide" Relationship="Self.FK__CustomerR__TaxiD__72C60C4A" FromRole="TaxiDriver" ToRole="CustomerRide" />
+    <NavigationProperty Name="Driver" Relationship="Self.FK__TaxiDrive__Drive__75A278F5" FromRole="TaxiDriver" ToRole="Driver" />
+    <NavigationProperty Name="Taxi" Relationship="Self.FK__TaxiDrive__TaxiI__76969D2E" FromRole="TaxiDriver" ToRole="Taxi" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="UserType" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Customer__UserId__70DDC3D8" FromRole="Users" ToRole="Customer" />
+    <NavigationProperty Name="Driver" Relationship="Self.FK__Driver__UserId__74AE54BC" FromRole="Users" ToRole="Driver" />
   </EntityType>
   <Association Name="FK__Attendanc__Drive__6EF57B66">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
@@ -189,15 +207,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TaxiMasterModelStoreContainer">
-    <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CustomerRide" EntityType="Self.CustomerRide" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Taxi" EntityType="Self.Taxi" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TaxiDriver" EntityType="Self.TaxiDriver" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  <EntityContainer Name="TrackarsAppEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Attendance" EntityType="Self.Attendance" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerRide" EntityType="Self.CustomerRide" />
+    <EntitySet Name="Driver" EntityType="Self.Driver" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" />
+    <EntitySet Name="Taxi" EntityType="Self.Taxi" />
+    <EntitySet Name="TaxiDriver" EntityType="Self.TaxiDriver" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
     <AssociationSet Name="FK__Attendanc__Drive__6EF57B66" Association="Self.FK__Attendanc__Drive__6EF57B66">
       <End Role="Driver" EntitySet="Driver" />
       <End Role="Attendance" EntitySet="Attendance" />

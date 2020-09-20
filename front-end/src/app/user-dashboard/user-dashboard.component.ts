@@ -22,6 +22,8 @@ export class UserDashboardComponent implements OnInit {
   customerRideForm:any;
   customerId:any;
   customerName:any;
+  rideClick : boolean = true;
+  rideList: CustomerRide[];
 
   constructor(private router: Router,private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService ) {}
   get() {
@@ -67,6 +69,8 @@ ngOnInit()
     this.get()
     this.agmMap.triggerResize(true);
      this.zoom = 16;
+     this.CheckRideCompletion(this.customerId);
+     this.getRideDetails(this.customerId);
 
      this.customerRideForm = this.formbulider.group({
         CustomerId: [this.customerId],
@@ -107,9 +111,42 @@ ngOnInit()
     
       this.customerRideService.saveCustomerRide(customerRide).subscribe(() => {
        alert("Your Booking Request has been sent!!!");
+       this.rideClick=true;
+       this.getRideDetails(this.customerId);
       });
     
    
+  }
+
+  onRideComplete(customerRide: CustomerRide){
+ 
+    this.customerRideService.completeCustomerRide(customerRide).subscribe(() => {
+        alert("Your Ride has been completed");
+        alert("Thanks for riding with us!!!");
+        this.getRideDetails(this.customerId);
+        this.rideClick=false;
+      });
+  }
+
+  getRideDetails(CustomerId: number) {
+    this.customerRideService.getAllCustomerRideForUserDashBoard(CustomerId).subscribe((data: CustomerRide[]) => {
+      this.rideList = data;
+      
+    });
+  }
+
+  CheckRideCompletion(CustomerId: number) {
+    this.customerRideService.CheckRideCompletionByCustomerId(CustomerId).subscribe(data => {
+      
+      if(data == -1 || data ==2)
+      {
+        this.rideClick=false;
+      }
+      else{
+        this.rideClick=true;
+      }
+      
+    });
   }
 
   onSignOut(){

@@ -58,28 +58,122 @@ namespace Api.Controllers
 
         public IHttpActionResult GetCustomerRideById(int Id)
         {
-            
+            DateTime date = DateTime.Now;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-                var customerRide = (from cr in obj.CustomerRide
-                                join c in obj.Customer
-                                on cr.CustomerId equals c.CustomerId
-                                where (cr.CustomerRideId == Id)
-                                select new
-                                {
-                                    CustomerRideId = cr.CustomerRideId,
-                                    CustomerId = cr.CustomerId,
-                                    CustomerName = c.CustomerName,
-                                    PickupLocation = cr.PickupLocation,
-                                    DropLocation = cr.DropLocation
+                var customerList = (from c in obj.Customer
+                                    join cr in obj.CustomerRide
+                                    on c.CustomerId equals cr.CustomerId into custRide
+                                    from cr in custRide.DefaultIfEmpty()
+                                    join td in obj.TaxiDriver
+                                    on cr.TaxiDriverId equals td.TaxiDriverId into taxiDri
+                                    from td in taxiDri.DefaultIfEmpty()
+                                    join d in obj.Driver
+                                    on td.DriverId equals d.DriverId into Driv
+                                    from d in Driv.DefaultIfEmpty()
+                                    join t in obj.Taxi
+                                    on td.TaxiId equals t.TaxiId into taxi
+                                    from t in taxi.DefaultIfEmpty()
+                                    where ( cr.CustomerRideId == Id)
+                                    select new
+                                    {
+                                        CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
+                                        CustomerName = cr == null ? "" : c.CustomerName,
+                                        PickupLocation = cr == null ? "" : cr.PickupLocation,
+                                        DropLocation = cr == null ? "" : cr.DropLocation,
+                                        RideStatus = cr == null ? 0 : cr.RideStatus,
+                                        TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
+                                        DriverName = d == null ? "" : d.DriverName,
+                                        TaxiNo = t == null ? "" : t.TaxiNo,
+                                        RideDate = cr == null ? date : cr.DateOfRide
 
-                                }).ToList().SingleOrDefault();
-                return Ok(customerRide);
+                                    }).ToList();
+
+                return Ok(customerList);
             }
                 
             
         }
 
+        [HttpGet]
+        [Route("GetCustomerRideByCustomerId/{Id}")]
+
+        public IHttpActionResult GetCustomerRideByCustomerId(int Id)
+        {
+            DateTime date = DateTime.Now;
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+                var customerList = (from c in obj.Customer
+                                    join cr in obj.CustomerRide
+                                    on c.CustomerId equals cr.CustomerId into custRide
+                                    from cr in custRide.DefaultIfEmpty()
+                                    join td in obj.TaxiDriver
+                                    on cr.TaxiDriverId equals td.TaxiDriverId into taxiDri
+                                    from td in taxiDri.DefaultIfEmpty()
+                                    join d in obj.Driver
+                                    on td.DriverId equals d.DriverId into Driv
+                                    from d in Driv.DefaultIfEmpty()
+                                    join t in obj.Taxi
+                                    on td.TaxiId equals t.TaxiId into taxi
+                                    from t in taxi.DefaultIfEmpty()
+                                    where (cr.CustomerRideId != null && c.CustomerId == Id)
+                                    select new
+                                    {
+                                        CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
+                                        CustomerName = cr == null ? "" : c.CustomerName,
+                                        PickupLocation = cr == null ? "" : cr.PickupLocation,
+                                        DropLocation = cr == null ? "" : cr.DropLocation,
+                                        RideStatus = cr == null ? 0 : cr.RideStatus,
+                                        TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
+                                        DriverName = d == null ? "" : d.DriverName,
+                                        TaxiNo = t == null ? "" : t.TaxiNo,
+                                        RideDate = cr == null ? date : cr.DateOfRide
+
+                                    }).ToList();
+
+                return Ok(customerList);
+            }
+
+
+        }
+
+        [HttpGet]
+        [Route("CheckRideCompletionByCustomerId/{Id}")]
+
+        public IHttpActionResult CheckRideCompletionByCustomerId(int Id)
+        {
+            try
+            {
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
+                {
+                    var customerList = (from c in obj.Customer
+                                        join cr in obj.CustomerRide
+                                        on c.CustomerId equals cr.CustomerId
+                                        orderby cr.CustomerRideId descending
+                                        where (cr.CustomerRideId != null && cr.CustomerId==Id)
+                                        select new
+                                        {
+                                            CustomerRideId = cr.CustomerRideId,
+                                            RideStatus = cr.RideStatus
+                                        }).ToList().SingleOrDefault();
+
+                    if(customerList == null)
+                    {
+                        return Ok(-1);
+                    }
+
+                    return Ok(customerList.RideStatus);
+                }
+
+            }
+            catch(Exception e)
+            {
+                return Ok(0);
+            }
+
+
+
+        }
 
         [HttpGet]
         [Route("GetAllAttendance")]
@@ -172,8 +266,52 @@ namespace Api.Controllers
                             flag = obj.SaveChanges();
 
                         }
+
+                        TaxiDriver taxiDriver = new TaxiDriver();
+                        taxiDriver = obj.TaxiDriver.ToList().Where(it => it.TaxiDriverId == customerRideList.TaxiDriverId).SingleOrDefault();
+                        if (taxiDriver != null)
+                        {
+                            taxiDriver.DriverAssignedStatus = 1;
+                            obj.SaveChanges();
+
+                        }
                     }
                     
+                }
+
+            }
+
+            return Ok(flag);
+        }
+
+        [HttpPut]
+        [Route("CompleteRide")]
+
+        public IHttpActionResult CompleteRide(CustomerRide customerRideList)
+        {
+            int RowAffected = 0;
+            int flag = 0;
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+
+                CustomerRide customerRide = new CustomerRide();
+                customerRide = obj.CustomerRide.ToList().Where(it => it.CustomerRideId == customerRideList.CustomerRideId).SingleOrDefault();
+
+                if (customerRide != null)
+                {
+                    int TaxiDriverId = (int)customerRide.TaxiDriverId;
+                    customerRide.RideStatus = 2;
+                    RowAffected = obj.SaveChanges();
+
+                    TaxiDriver taxiDriver = new TaxiDriver();
+                    taxiDriver = obj.TaxiDriver.ToList().Where(it => it.TaxiDriverId == TaxiDriverId).SingleOrDefault();
+                    if (taxiDriver != null)
+                    {
+                        taxiDriver.DriverAssignedStatus = 0;
+                        obj.SaveChanges();
+
+                    }
+
                 }
 
             }

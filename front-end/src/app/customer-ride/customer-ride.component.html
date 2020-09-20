@@ -60,8 +60,8 @@
         <td class="tbl2">{{ Ride.TaxiNo }}</td>
         <td class="tbl2">{{ Ride.DriverName }}</td>
         <td class="tbl2">{{ Ride.RideDate}}</td>
-        <td class="tbl2">{{ Ride.RideStatus == 1 ? "Booked" : "Requested"}}</td>
-        <td class="tbl2">{{ Ride.RideStatus == 0 ? "Initiated" : "Started"}}</td>
+        <td class="tbl2">{{ Ride.RideStatus == 0 ? "Requested" : Ride.RideStatus == 1 ? "Booked" :"Booked"}}</td>
+        <td class="tbl2">{{ Ride.RideStatus == 0 ? "Initiated" : Ride.RideStatus == 1 ? "Started" :"Completed"}}</td>
         <td class="tbl2">
           <button
             type="button"

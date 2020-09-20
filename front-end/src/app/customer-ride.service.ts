@@ -16,6 +16,17 @@ export class CustomerRideService {
     return this.http.get(this.url + '/GetAllCustomerRide');
   }
 
+  getAllCustomerRideForUserDashBoard(CustomerId:number) 
+  {
+    return this.http.get(this.url + '/GetCustomerRideByCustomerId/' + CustomerId);
+  }
+
+  CheckRideCompletionByCustomerId(CustomerId:number) 
+  {
+    return this.http.get(this.url + '/CheckRideCompletionByCustomerId/' + CustomerId);
+  }
+
+
   getCustomerRideById(CustomerRideId:number) : Observable<CustomerRide>
   {
     return this.http.get<CustomerRide>(this.url + '/GetCustomerRideById/'+CustomerRideId);
@@ -29,5 +40,8 @@ export class CustomerRideService {
   {
     return this.http.put<CustomerRide>(this.url+'/Update',customerRide);
   }
-
+  completeCustomerRide(customerRide:CustomerRide) 
+  {
+    return this.http.put(this.url+'/CompleteRide',customerRide );
+  }
 }

@@ -32,22 +32,22 @@ const routes: Routes = [
     path: 'admin',
     component: AdminDashboardComponent
   },
-  {
-    path: 'users',
-    component: UsersComponent
-  },
-  {
-    path: 'customers',
-    component: CustomersComponent
-  },
-  {
-    path: 'drivers',
-    component: DriversComponent
-  },
-  {
-    path: 'taxi',
-    component: TaxiComponent
-  },
+  // {
+  //   path: 'users',
+  //   component: UsersComponent
+  // },
+  // {
+  //   path: 'customers',
+  //   component: CustomersComponent
+  // },
+  // {
+  //   path: 'drivers',
+  //   component: DriversComponent
+  // },
+  // {
+  //   path: 'taxi',
+  //   component: TaxiComponent
+  // },
   {
     path: 'userDashboard',
     component: UserDashboardComponent
@@ -56,22 +56,22 @@ const routes: Routes = [
     path: 'driverDashboard',
     component: DriverDashboardComponent
   },
-  {
-    path: 'driverLocation',
-    component: DriverLocationComponent
-  },
-  {
-    path: 'customerRide',
-    component: CustomerRideComponent
-  },
+  // {
+  //   path: 'driverLocation',
+  //   component: DriverLocationComponent
+  // },
+  // {
+  //   path: 'customerRide',
+  //   component: CustomerRideComponent
+  // },
   {
     path: 'forgotPassword',
     component: ForgotPasswordComponent
   },
-  {
-    path: 'taxiDriver',
-    component: TaxiDriverComponent
-  }
+  // {
+  //   path: 'taxiDriver',
+  //   component: TaxiDriverComponent
+  // }
 ];
 
 @NgModule({

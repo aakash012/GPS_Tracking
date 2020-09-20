@@ -28,6 +28,7 @@ namespace Api.DBContextLayer
         public string ContactNo { get; set; }
         public string DrivingLicence { get; set; }
         public string UserPassword { get; set; }
+
         public Nullable<int> Rating { get; set; }
         public Nullable<int> AssignedStatus { get; set; }
     

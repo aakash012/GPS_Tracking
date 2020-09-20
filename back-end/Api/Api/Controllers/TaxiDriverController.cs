@@ -40,6 +40,34 @@ namespace Api.Controllers
 
 
         }
+
+        [HttpGet]
+        [Route("GetAllTaxiDriverForDropDown")]
+
+        public IHttpActionResult GetAllTaxiDriverForDropDown()
+        {
+
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+
+                var data = (from td in obj.TaxiDriver
+                            join d in obj.Driver
+                            on td.DriverId equals d.DriverId
+                            join t in obj.Taxi
+                            on td.TaxiId equals t.TaxiId
+                            where td.DriverAssignedStatus == 0
+                            select new
+                            {
+                                TaxiDriverId = td.TaxiDriverId,
+                                DriverName = d.DriverName
+                            
+                            }).ToList();
+
+                return Ok(data);
+            }
+
+
+        }
         #endregion
 
         #region Save Operation
