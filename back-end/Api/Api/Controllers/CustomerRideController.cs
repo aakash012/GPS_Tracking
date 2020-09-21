@@ -74,7 +74,7 @@ namespace Api.Controllers
                                     join t in obj.Taxi
                                     on td.TaxiId equals t.TaxiId into taxi
                                     from t in taxi.DefaultIfEmpty()
-                                    where ( cr.CustomerRideId == Id)
+                                    where (cr.CustomerRideId == Id)
                                     select new
                                     {
                                         CustomerRideId = cr == null ? 0 : cr.CustomerRideId,

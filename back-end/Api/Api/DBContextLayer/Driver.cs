@@ -18,6 +18,7 @@ namespace Api.DBContextLayer
         public Driver()
         {
             this.Attendance = new HashSet<Attendance>();
+            this.Salary = new HashSet<Salary>();
             this.TaxiDriver = new HashSet<TaxiDriver>();
         }
     
@@ -28,14 +29,17 @@ namespace Api.DBContextLayer
         public string ContactNo { get; set; }
         public string DrivingLicence { get; set; }
         public string UserPassword { get; set; }
-
         public Nullable<int> Rating { get; set; }
         public Nullable<int> AssignedStatus { get; set; }
+        public Nullable<double> BasicSalary { get; set; }
+        public Nullable<int> WagePerRide { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendance { get; set; }
         public virtual Gender Gender1 { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Salary> Salary { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
     }

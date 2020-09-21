@@ -71,4 +71,3 @@ D:\GPS_Tracking\back-end\Api\Api\bin\Microsoft.CodeDom.Providers.DotNetCompilerP
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csproj.CopyComplete
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.dll
 D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.pdb
-D:\GPS_Tracking\back-end\Api\Api\obj\Debug\Api.csprojAssemblyReference.cache

@@ -32,6 +32,7 @@ export class AdminDashboardComponent implements OnInit {
   custRide=false;
   attend=false;
   taxiDriver=false;
+  salary=false;
   onTaxis(){
     this.taxi=true;
     if(this.taxi)
@@ -43,6 +44,7 @@ export class AdminDashboardComponent implements OnInit {
       this.custRide=false;
       this.attend=false;
       this.taxiDriver=false;
+      this.salary=false;
     }
   }
   onUsers(){
@@ -56,6 +58,7 @@ export class AdminDashboardComponent implements OnInit {
         this.custRide=false;
         this.attend=false;
         this.taxiDriver=false;
+        this.salary=false;
       }
   }
   onCustomers(){
@@ -69,6 +72,7 @@ export class AdminDashboardComponent implements OnInit {
       this.custRide=false;
       this.attend=false;
       this.taxiDriver=false;
+      this.salary=false;
     }
   }
   onDrivers(){
@@ -82,6 +86,7 @@ export class AdminDashboardComponent implements OnInit {
       this.custRide=false;
       this.attend=false;
       this.taxiDriver=false;
+      this.salary=false;
     }
   }
   onTaxiDrivers(){
@@ -95,6 +100,7 @@ export class AdminDashboardComponent implements OnInit {
       this.custRide=false;
       this.attend=false;
       this.driver=false;
+      this.salary=false;
     }
   }
   driverLocation(){
@@ -108,6 +114,7 @@ export class AdminDashboardComponent implements OnInit {
       this.custRide=false;
       this.attend=false;
       this.taxiDriver=false;
+      this.salary=false;
     }
   }
   customerRide(){
@@ -121,6 +128,7 @@ export class AdminDashboardComponent implements OnInit {
       this.driverLoc=false;
       this.attend=false;
       this.taxiDriver=false;
+      this.salary=false;
     }
   }
   onAttendance(){
@@ -134,9 +142,23 @@ export class AdminDashboardComponent implements OnInit {
       this.driverLoc=false;
       this.custRide=false;
       this.taxiDriver=false;
+      this.salary=false;
     }
   }
-
+  onSalary(){
+    this.salary=true;
+    if(this.attend=true)
+    {
+      this.user=false;
+      this.customer=false;
+      this.taxi=false;
+      this.driver=false;
+      this.driverLoc=false;
+      this.custRide=false;
+      this.taxiDriver=false;
+      this.attend=false;
+    }
+  }
 
   onSignOut(){
     localStorage.removeItem("UserId");

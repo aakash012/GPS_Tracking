@@ -1,0 +1,50 @@
+<div class="container">
+    <form [formGroup]="salaryForm" (ngSubmit)="onFormSubmit()">
+      <table class="table" border="2">
+        <tr ngclass="btn-primary">
+          <th class="tbl2">
+            Salary Month &nbsp;&nbsp;
+            <select Tooltip="Choose Salary Month" formControlName="SalaryMonth">
+                <option value="September">September</option>
+            </select>
+          </th>
+          <th class="tbl2">
+            Financial Year &nbsp;&nbsp;
+            <select Tooltip="Choose FinancialYear" formControlName="FinancialYear">
+                <option value="2020">2020</option>
+            </select>
+          </th>
+          <th class="tbl2">
+            <button type="button" class="btn btn-primary" Tooltip="Click Show Button" [disabled]="!salaryForm.valid">
+              Show</button>
+          </th>
+          <th class="tbl2">
+            <button type="submit" class="btn btn-primary" Tooltip="Click Calculate Button" [disabled]="!salaryForm.valid">
+              Calculate</button>
+          </th>
+        </tr>
+      </table>
+    </form>
+      <table class="table" border="2">
+        <tr ngclass="btn-primary" style="background-color: rgba(88, 174, 231, 0.6);">
+          <th class="tbl2">Driver Name</th>
+          <th class="tbl2">Month</th>
+          <th class="tbl2">Financial Year</th>
+          <th class="tbl2">No. of Rides</th>
+          <th class="tbl2">Ride Bonus</th>
+          <th class="tbl2">Basic Salary</th>
+          <th class="tbl2">Total Salary</th>
+        </tr>
+        <tr *ngFor="let salary of salaryList ">
+          <td class="tbl2">{{ salary.DriverName }}</td>
+          <td class="tbl2">{{ salary.SalaryMonth }}</td>
+          <td class="tbl2">{{ salary.FinancialYear }}</td>
+          <td class="tbl2">{{ salary.NumberOfRides }}</td>
+          <td class="tbl2">{{ salary.RideBonus }}</td>
+          <td class="tbl2">{{ salary.BasicSalary }}</td>
+          <td class="tbl2">{{ salary.FinalSalary }}</td>
+        </tr>
+      </table>
+   
+  </div>
+  

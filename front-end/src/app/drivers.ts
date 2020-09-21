@@ -6,4 +6,6 @@ export class Driver
   ContactNo: string;
   DrivingLicence: string;
   AssignedStatus:Number;
+  BasicSalary:Number;
+  WagePerRide:Number;
 }

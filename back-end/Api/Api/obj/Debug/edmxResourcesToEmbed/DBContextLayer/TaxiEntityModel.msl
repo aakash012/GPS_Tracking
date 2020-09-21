@@ -41,6 +41,8 @@
     <EntitySetMapping Name="Driver">
       <EntityTypeMapping TypeName="TaxiMasterModel.Driver">
         <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="WagePerRide" ColumnName="WagePerRide" />
+          <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
           <ScalarProperty Name="AssignedStatus" ColumnName="AssignedStatus" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="DrivingLicence" ColumnName="DrivingLicence" />
@@ -57,6 +59,19 @@
         <MappingFragment StoreEntitySet="Gender">
           <ScalarProperty Name="GenderType" ColumnName="GenderType" />
           <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salary">
+      <EntityTypeMapping TypeName="TaxiMasterModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="FinalSalary" ColumnName="FinalSalary" />
+          <ScalarProperty Name="RideBonus" ColumnName="RideBonus" />
+          <ScalarProperty Name="NumberOfRides" ColumnName="NumberOfRides" />
+          <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+          <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -46,6 +46,8 @@
     <Property Name="DrivingLicence" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Rating" Type="int" />
     <Property Name="AssignedStatus" Type="int" />
+    <Property Name="BasicSalary" Type="float" />
+    <Property Name="WagePerRide" Type="int" />
   </EntityType>
   <EntityType Name="Gender">
     <Key>
@@ -53,6 +55,18 @@
     </Key>
     <Property Name="GenderId" Type="int" Nullable="false" />
     <Property Name="GenderType" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="SalaryId" />
+    </Key>
+    <Property Name="SalaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DriverId" Type="int" />
+    <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="SalaryMonth" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="NumberOfRides" Type="int" Nullable="false" />
+    <Property Name="RideBonus" Type="float" Nullable="false" />
+    <Property Name="FinalSalary" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="Taxi">
     <Key>
@@ -81,7 +95,7 @@
     <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserType" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Attendanc__Drive__6EF57B66">
+  <Association Name="FK__Attendanc__Drive__68487DD7">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
     <ReferentialConstraint>
@@ -93,7 +107,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Customer__Gender__6FE99F9F">
+  <Association Name="FK__Customer__Gender__73BA3083">
     <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
     <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -105,7 +119,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Customer__UserId__70DDC3D8">
+  <Association Name="FK__Customer__UserId__74AE54BC">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -117,7 +131,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CustomerR__Custo__71D1E811">
+  <Association Name="FK__CustomerR__Custo__787EE5A0">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
     <ReferentialConstraint>
@@ -129,7 +143,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CustomerR__TaxiD__72C60C4A">
+  <Association Name="FK__CustomerR__TaxiD__797309D9">
     <End Role="TaxiDriver" Type="Self.TaxiDriver" Multiplicity="0..1" />
     <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
     <ReferentialConstraint>
@@ -141,7 +155,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Driver__Gender__73BA3083">
+  <Association Name="FK__Driver__Gender__656C112C">
     <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
     <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
     <ReferentialConstraint>
@@ -153,7 +167,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Driver__UserId__74AE54BC">
+  <Association Name="FK__Driver__UserId__6477ECF3">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
     <ReferentialConstraint>
@@ -165,7 +179,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TaxiDrive__Drive__75A278F5">
+  <Association Name="FK__Salary__DriverId__00200768">
+    <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverId" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="DriverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TaxiDrive__Drive__6D0D32F4">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
     <End Role="TaxiDriver" Type="Self.TaxiDriver" Multiplicity="*" />
     <ReferentialConstraint>
@@ -177,7 +203,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TaxiDrive__TaxiI__76969D2E">
+  <Association Name="FK__TaxiDrive__TaxiI__6E01572D">
     <End Role="Taxi" Type="Self.Taxi" Multiplicity="0..1" />
     <End Role="TaxiDriver" Type="Self.TaxiDriver" Multiplicity="*" />
     <ReferentialConstraint>
@@ -195,42 +221,47 @@
     <EntitySet Name="CustomerRide" EntityType="Self.CustomerRide" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Taxi" EntityType="Self.Taxi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaxiDriver" EntityType="Self.TaxiDriver" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Attendanc__Drive__6EF57B66" Association="Self.FK__Attendanc__Drive__6EF57B66">
+    <AssociationSet Name="FK__Attendanc__Drive__68487DD7" Association="Self.FK__Attendanc__Drive__68487DD7">
       <End Role="Driver" EntitySet="Driver" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__Customer__Gender__6FE99F9F" Association="Self.FK__Customer__Gender__6FE99F9F">
+    <AssociationSet Name="FK__Customer__Gender__73BA3083" Association="Self.FK__Customer__Gender__73BA3083">
       <End Role="Gender" EntitySet="Gender" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Customer__UserId__70DDC3D8" Association="Self.FK__Customer__UserId__70DDC3D8">
+    <AssociationSet Name="FK__Customer__UserId__74AE54BC" Association="Self.FK__Customer__UserId__74AE54BC">
       <End Role="Users" EntitySet="Users" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
-    <AssociationSet Name="FK__CustomerR__Custo__71D1E811" Association="Self.FK__CustomerR__Custo__71D1E811">
+    <AssociationSet Name="FK__CustomerR__Custo__787EE5A0" Association="Self.FK__CustomerR__Custo__787EE5A0">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="CustomerRide" EntitySet="CustomerRide" />
     </AssociationSet>
-    <AssociationSet Name="FK__CustomerR__TaxiD__72C60C4A" Association="Self.FK__CustomerR__TaxiD__72C60C4A">
+    <AssociationSet Name="FK__CustomerR__TaxiD__797309D9" Association="Self.FK__CustomerR__TaxiD__797309D9">
       <End Role="TaxiDriver" EntitySet="TaxiDriver" />
       <End Role="CustomerRide" EntitySet="CustomerRide" />
     </AssociationSet>
-    <AssociationSet Name="FK__Driver__Gender__73BA3083" Association="Self.FK__Driver__Gender__73BA3083">
+    <AssociationSet Name="FK__Driver__Gender__656C112C" Association="Self.FK__Driver__Gender__656C112C">
       <End Role="Gender" EntitySet="Gender" />
       <End Role="Driver" EntitySet="Driver" />
     </AssociationSet>
-    <AssociationSet Name="FK__Driver__UserId__74AE54BC" Association="Self.FK__Driver__UserId__74AE54BC">
+    <AssociationSet Name="FK__Driver__UserId__6477ECF3" Association="Self.FK__Driver__UserId__6477ECF3">
       <End Role="Users" EntitySet="Users" />
       <End Role="Driver" EntitySet="Driver" />
     </AssociationSet>
-    <AssociationSet Name="FK__TaxiDrive__Drive__75A278F5" Association="Self.FK__TaxiDrive__Drive__75A278F5">
+    <AssociationSet Name="FK__Salary__DriverId__00200768" Association="Self.FK__Salary__DriverId__00200768">
+      <End Role="Driver" EntitySet="Driver" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TaxiDrive__Drive__6D0D32F4" Association="Self.FK__TaxiDrive__Drive__6D0D32F4">
       <End Role="Driver" EntitySet="Driver" />
       <End Role="TaxiDriver" EntitySet="TaxiDriver" />
     </AssociationSet>
-    <AssociationSet Name="FK__TaxiDrive__TaxiI__76969D2E" Association="Self.FK__TaxiDrive__TaxiI__76969D2E">
+    <AssociationSet Name="FK__TaxiDrive__TaxiI__6E01572D" Association="Self.FK__TaxiDrive__TaxiI__6E01572D">
       <End Role="Taxi" EntitySet="Taxi" />
       <End Role="TaxiDriver" EntitySet="TaxiDriver" />
     </AssociationSet>

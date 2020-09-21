@@ -22,6 +22,8 @@ export class DriversComponent implements OnInit {
       DriverName: ['', [Validators.required]],
       Gender: [1, [Validators.required]],
       ContactNo: ['', [Validators.required]],
+      BasicSalary: ['', [Validators.required]],
+      WagePerRide: ['', [Validators.required]],
       UserPassword: ['', [Validators.required]],
       DrivingLicence: ['', [Validators.required]]
 
@@ -50,7 +52,8 @@ export class DriversComponent implements OnInit {
       this.driverForm.controls['Gender'].setValue(Driver.Gender, { onlySelf: true });
       this.driverForm.controls['ContactNo'].setValue(Driver.ContactNo);
       this.driverForm.controls['DrivingLicence'].setValue(Driver.DrivingLicence);
-
+      this.driverForm.controls['BasicSalary'].setValue(Driver.BasicSalary);
+      this.driverForm.controls['WagePerRide'].setValue(Driver.WagePerRide);
     });
 
   }

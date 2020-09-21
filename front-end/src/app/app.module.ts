@@ -21,6 +21,7 @@ import { CustomerRideComponent } from './customer-ride/customer-ride.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { TaxiDriverComponent } from './taxi-driver/taxi-driver.component';
+import { SalaryComponent } from './salary/salary.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { TaxiDriverComponent } from './taxi-driver/taxi-driver.component';
     AttendanceComponent,
   ForgotPasswordComponent,
   TaxiDriverComponent,
+  SalaryComponent,
   ],
   imports: [
     BrowserModule,

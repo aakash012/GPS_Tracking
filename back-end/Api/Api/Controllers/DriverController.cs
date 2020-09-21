@@ -28,6 +28,8 @@ namespace Api.Controllers
                                       GenderType = g.GenderType,
                                       ContactNo = d.ContactNo,
                                       DrivingLicence = d.DrivingLicence,
+                                      BasicSalary = d.BasicSalary,
+                                      WagePerRide = d.WagePerRide,
                                       Rating = d.Rating
                                   }).ToList();
 
@@ -94,6 +96,8 @@ namespace Api.Controllers
                     driver.Gender = driverInputList.Gender;
                     driver.ContactNo = driverInputList.ContactNo;
                     driver.DrivingLicence = driverInputList.DrivingLicence;
+                    driver.BasicSalary = driverInputList.BasicSalary;
+                    driver.WagePerRide = driverInputList.WagePerRide;
                     driver.AssignedStatus = 0;
                     driver.UserId = userId;
 
@@ -110,6 +114,15 @@ namespace Api.Controllers
                         attendance.NumberOfDays = 0;
                         obj.Attendance.Add(attendance);
                         flag1 = obj.SaveChanges();
+
+                        Salary salary = new Salary();
+                        salary.DriverId = driverId;
+                        salary.FinancialYear = "2020";
+                        salary.SalaryMonth = "September";
+                        salary.NumberOfRides = 0;
+                        obj.Salary.Add(salary);
+                        flag1 = obj.SaveChanges();
+
                     }
 
                 }
@@ -138,8 +151,8 @@ namespace Api.Controllers
 
                     if (driver != null)
                     {
-                        
 
+                        Nullable<int> userID = driver.UserId;
                         attendance = obj.Attendance.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
                         if (attendance != null)
                         {
@@ -148,7 +161,7 @@ namespace Api.Controllers
 
                         obj.Driver.Remove(driver);
 
-                        Nullable<int> userID = driver.UserId;
+                        
                         users = obj.Users.ToList().Where(it => it.UserId == userID).SingleOrDefault();
                         if (users != null)
                         {
@@ -179,8 +192,6 @@ namespace Api.Controllers
 
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
-
-               
                     Driver driver = new Driver();
                     driver = obj.Driver.ToList().Where(it => it.DriverId == driverInputList.DriverId).SingleOrDefault();
 
@@ -190,6 +201,8 @@ namespace Api.Controllers
                         driver.Gender = driverInputList.Gender;
                         driver.ContactNo = driverInputList.ContactNo;
                         driver.DrivingLicence = driverInputList.DrivingLicence;
+                        driver.BasicSalary = driverInputList.BasicSalary;
+                        driver.WagePerRide = driverInputList.WagePerRide;
                         RowAffected = obj.SaveChanges();
                     }
                 

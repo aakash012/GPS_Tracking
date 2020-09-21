@@ -5,9 +5,7 @@
         <td>Name</td>
         <td>Gender</td>
         <td>License</td>
-        <td>Contact No</td>
-        <td>Password</td>
-        <td></td>
+        <td>Basic Salary</td>
       </tr>
       <tr ngclass="btn-primary">
         <th class="tbl2">
@@ -25,6 +23,31 @@
             formControlName="DrivingLicence"
             type="text"
             placeholder="Enter licence"
+            size="15"
+          />
+        </th>
+        <th class="tbl2">
+          <input
+            formControlName="BasicSalary"
+            type="Number"
+            placeholder="Enter Basic Salary"
+            size="15"
+          />
+        </th>
+        
+      </tr>
+      <tr>
+        <th>Wage Per Ride</th>
+        <th>Contact No</th>
+        <th>Password</th>
+        <th>Save</th>
+      </tr>
+      <tr>
+        <th class="tbl2">
+          <input
+            formControlName="WagePerRide"
+            type="Number"
+            placeholder="Enter Wage Per Ride"
             size="15"
           />
         </th>
@@ -63,6 +86,8 @@
         <th class="tbl2">Gender</th>
         <th class="tbl2">Contact No.</th>
         <th class="tbl2">Driving License</th>
+        <th class="tbl2">Basic Salary</th>
+        <th class="tbl2">Wage Per Ride</th>
         <th class="tbl2">Edit</th>
         <th class="tbl2">Delete</th>
       </tr>
@@ -71,6 +96,8 @@
         <td class="tbl2">{{ Driver.GenderType}}</td>
         <td class="tbl2">{{ Driver.ContactNo }}</td>
         <td class="tbl2">{{ Driver.DrivingLicence }}</td>
+        <td class="tbl2">{{ Driver.BasicSalary }}</td>
+        <td class="tbl2">{{ Driver.WagePerRide }}</td>
         <td class="tbl2">
           <button
             type="button"
