@@ -14,6 +14,7 @@
           <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="AttendanceMonth" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="NumberOfDays" Type="int" />
+          <Property Name="AttendanceDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -70,8 +71,8 @@
           <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="SalaryMonth" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="NumberOfRides" Type="int" Nullable="false" />
-          <Property Name="RideBonus" Type="float" Nullable="false" />
-          <Property Name="FinalSalary" Type="float" Nullable="false" />
+          <Property Name="RideBonus" Type="float" />
+          <Property Name="FinalSalary" Type="float" />
         </EntityType>
         <EntityType Name="Taxi">
           <Key>
@@ -281,7 +282,6 @@
           <EntitySet Name="CustomerRide" EntityType="TaxiMasterModel.CustomerRide" />
           <EntitySet Name="Driver" EntityType="TaxiMasterModel.Driver" />
           <EntitySet Name="Gender" EntityType="TaxiMasterModel.Gender" />
-          <EntitySet Name="Salary" EntityType="TaxiMasterModel.Salary" />
           <EntitySet Name="Taxi" EntityType="TaxiMasterModel.Taxi" />
           <EntitySet Name="TaxiDriver" EntityType="TaxiMasterModel.TaxiDriver" />
           <EntitySet Name="Users" EntityType="TaxiMasterModel.Users" />
@@ -313,10 +313,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Driver" EntitySet="Driver" />
           </AssociationSet>
-          <AssociationSet Name="FK__Salary__DriverId__00200768" Association="TaxiMasterModel.FK__Salary__DriverId__00200768">
-            <End Role="Driver" EntitySet="Driver" />
-            <End Role="Salary" EntitySet="Salary" />
-          </AssociationSet>
           <AssociationSet Name="FK__TaxiDrive__Drive__6D0D32F4" Association="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4">
             <End Role="Driver" EntitySet="Driver" />
             <End Role="TaxiDriver" EntitySet="TaxiDriver" />
@@ -324,6 +320,11 @@
           <AssociationSet Name="FK__TaxiDrive__TaxiI__6E01572D" Association="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D">
             <End Role="Taxi" EntitySet="Taxi" />
             <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+          </AssociationSet>
+          <EntitySet Name="Salary" EntityType="TaxiMasterModel.Salary" />
+          <AssociationSet Name="FK__Salary__DriverId__00200768" Association="TaxiMasterModel.FK__Salary__DriverId__00200768">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Salary" EntitySet="Salary" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Attendance">
@@ -336,6 +337,7 @@
           <Property Name="AttendanceMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NumberOfDays" Type="Int32" />
           <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Attendanc__Drive__68487DD7" FromRole="Attendance" ToRole="Driver" />
+          <Property Name="AttendanceDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -383,8 +385,8 @@
           <NavigationProperty Name="Attendance" Relationship="TaxiMasterModel.FK__Attendanc__Drive__68487DD7" FromRole="Driver" ToRole="Attendance" />
           <NavigationProperty Name="Gender1" Relationship="TaxiMasterModel.FK__Driver__Gender__656C112C" FromRole="Driver" ToRole="Gender" />
           <NavigationProperty Name="Users" Relationship="TaxiMasterModel.FK__Driver__UserId__6477ECF3" FromRole="Driver" ToRole="Users" />
-          <NavigationProperty Name="Salary" Relationship="TaxiMasterModel.FK__Salary__DriverId__00200768" FromRole="Driver" ToRole="Salary" />
           <NavigationProperty Name="TaxiDriver" Relationship="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" FromRole="Driver" ToRole="TaxiDriver" />
+          <NavigationProperty Name="Salary" Relationship="TaxiMasterModel.FK__Salary__DriverId__00200768" FromRole="Driver" ToRole="Salary" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -394,19 +396,6 @@
           <Property Name="GenderType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customer" Relationship="TaxiMasterModel.FK__Customer__Gender__73BA3083" FromRole="Gender" ToRole="Customer" />
           <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Driver__Gender__656C112C" FromRole="Gender" ToRole="Driver" />
-        </EntityType>
-        <EntityType Name="Salary">
-          <Key>
-            <PropertyRef Name="SalaryId" />
-          </Key>
-          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DriverId" Type="Int32" />
-          <Property Name="FinancialYear" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="SalaryMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="NumberOfRides" Type="Int32" Nullable="false" />
-          <Property Name="RideBonus" Type="Double" Nullable="false" />
-          <Property Name="FinalSalary" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Salary__DriverId__00200768" FromRole="Salary" ToRole="Driver" />
         </EntityType>
         <EntityType Name="Taxi">
           <Key>
@@ -525,18 +514,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Salary__DriverId__00200768">
-          <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
-          <End Type="TaxiMasterModel.Salary" Role="Salary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driver">
-              <PropertyRef Name="DriverId" />
-            </Principal>
-            <Dependent Role="Salary">
-              <PropertyRef Name="DriverId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__TaxiDrive__Drive__6D0D32F4">
           <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
           <End Type="TaxiMasterModel.TaxiDriver" Role="TaxiDriver" Multiplicity="*" />
@@ -561,6 +538,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="FinancialYear" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SalaryMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfRides" Type="Int32" Nullable="false" />
+          <Property Name="RideBonus" Type="Double" />
+          <Property Name="FinalSalary" Type="Double" />
+          <NavigationProperty Name="Driver" Relationship="TaxiMasterModel.FK__Salary__DriverId__00200768" FromRole="Salary" ToRole="Driver" />
+        </EntityType>
+        <Association Name="FK__Salary__DriverId__00200768">
+          <End Type="TaxiMasterModel.Driver" Role="Driver" Multiplicity="0..1" />
+          <End Type="TaxiMasterModel.Salary" Role="Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverId" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -570,6 +572,7 @@
           <EntitySetMapping Name="Attendance">
             <EntityTypeMapping TypeName="TaxiMasterModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
                 <ScalarProperty Name="NumberOfDays" ColumnName="NumberOfDays" />
                 <ScalarProperty Name="AttendanceMonth" ColumnName="AttendanceMonth" />
                 <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
@@ -628,19 +631,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Salary">
-            <EntityTypeMapping TypeName="TaxiMasterModel.Salary">
-              <MappingFragment StoreEntitySet="Salary">
-                <ScalarProperty Name="FinalSalary" ColumnName="FinalSalary" />
-                <ScalarProperty Name="RideBonus" ColumnName="RideBonus" />
-                <ScalarProperty Name="NumberOfRides" ColumnName="NumberOfRides" />
-                <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
-                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
-                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
-                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Taxi">
             <EntityTypeMapping TypeName="TaxiMasterModel.Taxi">
               <MappingFragment StoreEntitySet="Taxi">
@@ -668,6 +658,19 @@
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salary">
+            <EntityTypeMapping TypeName="TaxiMasterModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="FinalSalary" ColumnName="FinalSalary" />
+                <ScalarProperty Name="RideBonus" ColumnName="RideBonus" />
+                <ScalarProperty Name="NumberOfRides" ColumnName="NumberOfRides" />
+                <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

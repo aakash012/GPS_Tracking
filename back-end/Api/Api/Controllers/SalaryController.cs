@@ -15,15 +15,16 @@ namespace Api.Controllers
     {
         #region Get Operation
         [HttpGet]
-        [Route("GetAllDriversSalary")]
+        [Route("GetAllDriversSalary/{SalaryMonth}/{FinancialYear}")]
 
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(String SalaryMonth,String FinancialYear)
         {
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 var driverSalaryList = (from d in obj.Driver
                                         join s in obj.Salary
                                         on d.DriverId equals s.DriverId
+                                        where (s.SalaryMonth == SalaryMonth && s.FinancialYear == FinancialYear)
                                   select new
                                   {
                                       DriverId = d.DriverId,
@@ -56,15 +57,25 @@ namespace Api.Controllers
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
                 
-                var salaryList = obj.Salary.ToList().Where(it => it.SalaryMonth == salaryInputList.SalaryMonth && it.FinancialYear == salaryInputList.FinancialYear);
+                var SalaryList = obj.Salary.ToList().Where(it => it.SalaryMonth == salaryInputList.SalaryMonth && it.FinancialYear == salaryInputList.FinancialYear);
 
-                if (salaryList!=null)
+                if (SalaryList!=null)
                 {
-                    foreach(var salary in salaryList)
+                    foreach(var salaryList in SalaryList)
                     {
+                        Driver driver = new Driver();
+                        driver = obj.Driver.ToList().Where(it => it.DriverId == salaryList.DriverId).SingleOrDefault();
+                        float RideBonus = (float)(salaryList.NumberOfRides * driver.WagePerRide);
+                        float FinalSalary = (float)(driver.BasicSalary + RideBonus);
+
+                        Salary salary = new Salary();
+                        salary = obj.Salary.ToList().Where(it => it.DriverId == salaryList.DriverId).SingleOrDefault();
+                        salary.RideBonus = RideBonus;
+                        salary.FinalSalary = FinalSalary;
+                        RowAffected = obj.SaveChanges();
 
                     }
-                    RowAffected = obj.SaveChanges();
+                    
                 }
 
             }

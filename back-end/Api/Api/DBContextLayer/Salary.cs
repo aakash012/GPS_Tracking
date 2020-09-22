@@ -19,8 +19,8 @@ namespace Api.DBContextLayer
         public string FinancialYear { get; set; }
         public string SalaryMonth { get; set; }
         public int NumberOfRides { get; set; }
-        public double RideBonus { get; set; }
-        public double FinalSalary { get; set; }
+        public Nullable<double> RideBonus { get; set; }
+        public Nullable<double> FinalSalary { get; set; }
     
         public virtual Driver Driver { get; set; }
     }

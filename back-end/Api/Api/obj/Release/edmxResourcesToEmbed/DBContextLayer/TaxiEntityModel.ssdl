@@ -9,6 +9,7 @@
     <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="AttendanceMonth" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="NumberOfDays" Type="int" />
+    <Property Name="AttendanceDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -65,8 +66,8 @@
     <Property Name="FinancialYear" Type="varchar" MaxLength="4" Nullable="false" />
     <Property Name="SalaryMonth" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="NumberOfRides" Type="int" Nullable="false" />
-    <Property Name="RideBonus" Type="float" Nullable="false" />
-    <Property Name="FinalSalary" Type="float" Nullable="false" />
+    <Property Name="RideBonus" Type="float" />
+    <Property Name="FinalSalary" Type="float" />
   </EntityType>
   <EntityType Name="Taxi">
     <Key>

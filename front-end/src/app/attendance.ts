@@ -4,4 +4,5 @@ export class Attendance{
   AttendanceMonth: string;
   FinancialYear: string;
   NumberOfDays: string;
+  
 }

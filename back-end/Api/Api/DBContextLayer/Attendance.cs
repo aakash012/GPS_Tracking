@@ -19,6 +19,7 @@ namespace Api.DBContextLayer
         public string FinancialYear { get; set; }
         public string AttendanceMonth { get; set; }
         public Nullable<int> NumberOfDays { get; set; }
+        public Nullable<System.DateTime> AttendanceDate { get; set; }
     
         public virtual Driver Driver { get; set; }
     }

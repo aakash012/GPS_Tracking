@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Attendance">
       <EntityTypeMapping TypeName="TaxiMasterModel.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
           <ScalarProperty Name="NumberOfDays" ColumnName="NumberOfDays" />
           <ScalarProperty Name="AttendanceMonth" ColumnName="AttendanceMonth" />
           <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
@@ -62,19 +63,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Salary">
-      <EntityTypeMapping TypeName="TaxiMasterModel.Salary">
-        <MappingFragment StoreEntitySet="Salary">
-          <ScalarProperty Name="FinalSalary" ColumnName="FinalSalary" />
-          <ScalarProperty Name="RideBonus" ColumnName="RideBonus" />
-          <ScalarProperty Name="NumberOfRides" ColumnName="NumberOfRides" />
-          <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
-          <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
-          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
-          <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Taxi">
       <EntityTypeMapping TypeName="TaxiMasterModel.Taxi">
         <MappingFragment StoreEntitySet="Taxi">
@@ -102,6 +90,19 @@
           <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salary">
+      <EntityTypeMapping TypeName="TaxiMasterModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="FinalSalary" ColumnName="FinalSalary" />
+          <ScalarProperty Name="RideBonus" ColumnName="RideBonus" />
+          <ScalarProperty Name="NumberOfRides" ColumnName="NumberOfRides" />
+          <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+          <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

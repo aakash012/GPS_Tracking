@@ -142,6 +142,7 @@ namespace Api.Controllers
             Driver driver = new Driver();
             Users users = new Users();
             Attendance attendance = new Attendance();
+            Salary salary = new Salary();
 
             try
             {
@@ -159,9 +160,14 @@ namespace Api.Controllers
                             obj.Attendance.Remove(attendance);
                         }
 
+                        salary = obj.Salary.ToList().Where(it => it.DriverId == Id).SingleOrDefault();
+                        if (salary != null)
+                        {
+                            obj.Salary.Remove(salary);
+                        }
+
                         obj.Driver.Remove(driver);
 
-                        
                         users = obj.Users.ToList().Where(it => it.UserId == userID).SingleOrDefault();
                         if (users != null)
                         {

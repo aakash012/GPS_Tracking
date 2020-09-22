@@ -15,7 +15,7 @@
             </select>
           </th>
           <th class="tbl2">
-            <button type="button" class="btn btn-primary" Tooltip="Click Show Button" [disabled]="!salaryForm.valid">
+            <button type="button" class="btn btn-primary" Tooltip="Click Show Button" [disabled]="!salaryForm.valid" (click)="getAllDriverSalary()">
               Show</button>
           </th>
           <th class="tbl2">

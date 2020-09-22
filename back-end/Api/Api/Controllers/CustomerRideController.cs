@@ -1,5 +1,6 @@
 ﻿using Api.DBContextLayer;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -191,8 +192,8 @@ namespace Api.Controllers
                                         DriverName = d.DriverName,
                                         FinancialYear = a.FinancialYear,
                                         AttendanceMonth = a.AttendanceMonth,
-                                        NumberOfDays = a.NumberOfDays
-
+                                        NumberOfDays = a.NumberOfDays,
+                                        AttendanceDate =a.AttendanceDate
                                     }).ToList();
 
                 return Ok(attendanceList);
@@ -234,6 +235,7 @@ namespace Api.Controllers
         {
             int RowAffected = 0;
             int flag = 0;
+            DateTime date = DateTime.Now;
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
             {
 
@@ -250,7 +252,7 @@ namespace Api.Controllers
                     {
                         var driverIdData = (from td in obj.TaxiDriver
                                             join d in obj.Driver
-                                  on td.DriverId equals d.DriverId
+                                            on td.DriverId equals d.DriverId
                                             where td.TaxiDriverId == customerRideList.TaxiDriverId
                                             select new
                                             {
@@ -262,7 +264,28 @@ namespace Api.Controllers
                         attendance = obj.Attendance.ToList().Where(it => it.DriverId == driverIdData[0].DriverId).SingleOrDefault();
                         if (attendance != null)
                         {
-                            attendance.NumberOfDays = attendance.NumberOfDays + 1;
+                            DateTime adate = date;
+                            if (attendance.AttendanceDate != null)
+                            {
+                                adate = (DateTime)attendance.AttendanceDate;
+
+                            }
+                            
+                            if (attendance.AttendanceDate == null || adate.Date != date.Date)
+                            {
+                                attendance.AttendanceDate = date;
+                                attendance.NumberOfDays = attendance.NumberOfDays + 1;
+                            }
+
+                            flag = obj.SaveChanges();
+
+                        }
+
+                        Salary salary = new Salary();
+                        salary = obj.Salary.ToList().Where(it => it.DriverId == driverIdData[0].DriverId).SingleOrDefault();
+                        if (salary != null)
+                        {
+                            salary.NumberOfRides = salary.NumberOfRides + 1;
                             flag = obj.SaveChanges();
 
                         }

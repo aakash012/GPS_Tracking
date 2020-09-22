@@ -31,9 +31,9 @@ namespace Api.DBContextLayer
         public virtual DbSet<CustomerRide> CustomerRide { get; set; }
         public virtual DbSet<Driver> Driver { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
-        public virtual DbSet<Salary> Salary { get; set; }
         public virtual DbSet<Taxi> Taxi { get; set; }
         public virtual DbSet<TaxiDriver> TaxiDriver { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Salary> Salary { get; set; }
     }
 }
