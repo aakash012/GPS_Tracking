@@ -22,6 +22,8 @@ export class UserDashboardComponent implements OnInit {
   dropLng:number;
   pickUpLat:number;
   pickUpLng:number;
+  pickUpId:number;
+  dropId:number;
   getAddress: any;
   zoom: number;
   latitude: any;
@@ -84,7 +86,7 @@ ngOnInit()
 
      this.customerRideForm = this.formbulider.group({
         CustomerId: [this.customerId],
-        PickupLocationId: ['Amritsar', [Validators.required]],
+        PickupLocationId: [this.dropId, [Validators.required]],
         DropLocationId: ['Jalandhar', [Validators.required]]
   
       });
@@ -121,14 +123,14 @@ ngOnInit()
 
   onBookRide() {
     const customerRide = this.customerRideForm.value;
-    //this.CreateCustomerRide(customerRide);
+    this.CreateCustomerRide(customerRide);
 
     const PickupLocationId = this.customerRideForm.controls['PickupLocationId'].value;
-     alert(PickupLocationId);
+    // alert(PickupLocationId);
     this.getPickupLocationById(PickupLocationId);
     
     const DropLocationId = this.customerRideForm.controls['DropLocationId'].value;
-     alert(DropLocationId);
+    // alert(DropLocationId);
     this.getDropLocationById(DropLocationId);
   }
   
@@ -136,8 +138,10 @@ ngOnInit()
     
       this.customerRideService.saveCustomerRide(customerRide).subscribe(() => {
        alert("Your Booking Request has been sent!!!");
+       this.getDirection();
        this.rideClick=true;
        this.getRideDetails(this.customerId);
+       
       });
   }
 
@@ -147,8 +151,6 @@ ngOnInit()
       this.dropLat=data.Latitude;
       this.dropLng=data.Longitude;
 
-      this.getDirection();
-      
     });
   }
 
@@ -158,8 +160,6 @@ ngOnInit()
       this.pickUpLat=data.Latitude;
       this.pickUpLng=data.Longitude;
 
-      this.getDirection();
-      
     });
   }
 
@@ -168,6 +168,11 @@ ngOnInit()
     this.customerRideService.completeCustomerRide(customerRide).subscribe(() => {
         alert("Your Ride has been completed");
         alert("Thanks for riding with us!!!");
+        this.pickUpLat=this.dropLat;
+        this.pickUpLng=this.dropLng;
+        // this.pickUpId=null;
+        // this.dropId=null;
+        this.getDirection();
         this.getRideDetails(this.customerId);
         this.rideClick=false;
       });
@@ -196,8 +201,23 @@ ngOnInit()
       }
       else{
         this.rideClick=true;
+        this.GetRideLocationsForDirection();
       }
       
+    });
+  }
+
+  GetRideLocationsForDirection() {
+    this.locationsService.getRideLocationsForDirection(this.customerId).subscribe(data => {
+    
+    this.pickUpLat = data["PickupLatitude"];
+    this.pickUpLng = data["PickupLongitude"];
+    this.dropLat = data["DropLatitude"];
+    this.dropLng = data["DropLongitude"];
+    this.pickUpId = data["PickupLocationId"];
+    this.dropId = data["DropLocationId"];
+
+    this.getDirection();
     });
   }
 

@@ -16,9 +16,15 @@ export class LocationsService {
     return this.http.get(this.url + '/GetAllLocations');
   }
 
+  getRideLocationsForDirection(CustomerId:Number)
+  {
+    return this.http.get(this.url + '/GetRideLocationsForDirection/' + CustomerId);
+  }
+
   getLocationById(LocationId:number) : Observable<Locations>
   {
     return this.http.get<Locations>(this.url + '/GetLocationById/'+LocationId);
   }
+
 
 }

@@ -41,6 +41,48 @@ namespace Api.Controllers
             return Ok(locations);
 
         }
+
+        [HttpGet]
+        [Route("GetRideLocationsForDirection/{Id}")]
+
+        public IHttpActionResult getRideLocationsForDirection(int Id)
+        {
+            try
+            {
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
+                {
+                    var customerList = (from cr in obj.CustomerRide
+                                        join dl in obj.Locations
+                                        on cr.DropLocationId equals dl.LocationId
+                                        join pl in obj.Locations
+                                        on cr.PickupLocationId equals pl.LocationId
+                                        orderby cr.CustomerRideId descending
+                                        where (cr.CustomerRideId != null && cr.CustomerId == Id)
+                                        select new
+                                        {
+                                            PickupLocationId = pl.LocationId,
+                                            PickupLocation = pl.LocationName,
+                                            PickupLatitude = pl.Latitude,
+                                            PickupLongitude = pl.Longitude,
+                                            DropLocationId = dl.LocationId,
+                                            DropLocation = dl.LocationName,
+                                            DropLatitude = dl.Latitude,
+                                            DropLongitude = dl.Longitude
+
+                                        }).ToList().FirstOrDefault();
+
+
+                    return Ok(customerList);
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Ok(0);
+            }
+
+        }
+
         #endregion
     }
 }

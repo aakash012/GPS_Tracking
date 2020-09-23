@@ -3,4 +3,8 @@ export class Locations {
     LocationName:String;
     Latitude:number;
     Longitude:number;
+    PickupLatitude:number;
+    PickupLongitude:number;
+    DropLatitude:number;
+    DropLongitude:number
 }

@@ -59,14 +59,15 @@ agm-map {
 }
 footer
 {
-  position: absolute;
-  margin-top: 40px;
-  	left: 0;
-  	bottom: 0;
+  display: block;
+  clear:both;
+  position: fixed;
+  top:97%;
   	width: 100%;
   	background-color: white;
   	color: black;
 	font-size:12px;
   	text-align:left;
-	padding:0px 20px;
+	padding:5px 20px;
+	
 }

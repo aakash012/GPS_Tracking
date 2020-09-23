@@ -76,7 +76,8 @@
                 <th class="tbl2">
                   PickUp Location &nbsp;&nbsp;
                   <select Tooltip="Choose PickUpLocation" formControlName="PickupLocationId">
-                    <option  *ngFor="let loc of locationsList" [value]="loc.LocationId">
+                    
+                    <option  *ngFor="let loc of locationsList" [value]="loc.LocationId" [attr.selected]="loc.LocationId == pickUpId ? true: null">
                       {{loc.LocationName}}
                     </option>
                   </select>
@@ -86,14 +87,14 @@
                 <th class="tbl2">
                   Drop Location &nbsp;&nbsp;
                   <select Tooltip="Choose DropLocation" formControlName="DropLocationId">
-                    <option  *ngFor="let loc of locationsList" [value]="loc.LocationId">
+                    <option  *ngFor="let loc of locationsList" [value]="loc.LocationId" [attr.selected]="loc.LocationId == dropId ? true: null">
                       {{loc.LocationName}}
                     </option>
                   </select>
                   <!-- <input formControlName="DropLocation" placeholder="Enter DropLocation" disabled/> -->
                 </th>
                 <th class="tbl2">
-                  <button class="btn btn-primary" [disabled]="rideClick">Book a Ride</button>
+                  <button class="btn btn-primary" [disabled]="rideClick || customerRideForm.invalid">Book a Ride</button>
                 </th>
               </tr>
             </table>
