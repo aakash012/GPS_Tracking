@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {AgmMap, MapsAPILoader  } from '@agm/core';
+import { Directive, Input, OnChanges,  SimpleChanges,Component, OnInit, ViewChild } from '@angular/core';
+import {AgmMap, MapsAPILoader,GoogleMapsAPIWrapper} from '@agm/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { CustomerRideService } from '../customer-ride.service';
 import { Router } from '@angular/router';
+import { Locations } from '../locations';
+import { LocationsService } from '../locations.service';
 import {} from 'googlemaps';
 
 @Component({
@@ -11,10 +13,15 @@ import {} from 'googlemaps';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css'],
 })
+
 export class UserDashboardComponent implements OnInit {
   @ViewChild(AgmMap,{static: true}) public agmMap: AgmMap;
   lat: number;
   lng: number;
+  dropLat:number;
+  dropLng:number;
+  pickUpLat:number;
+  pickUpLng:number;
   getAddress: any;
   zoom: number;
   latitude: any;
@@ -24,8 +31,9 @@ export class UserDashboardComponent implements OnInit {
   customerName:any;
   rideClick : boolean = true;
   rideList: CustomerRide[];
+  locationsList : Locations[];
 
-  constructor(private router: Router,private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService ) {}
+  constructor(private router: Router,private formbulider: FormBuilder,private apiloader: MapsAPILoader,private customerRideService: CustomerRideService, private locationsService: LocationsService) {}
   get() {
     this.customerId=localStorage.getItem("CustomerId");
     this.customerName=localStorage.getItem("CustomerName");
@@ -64,6 +72,7 @@ export class UserDashboardComponent implements OnInit {
         })
     }
 }
+
 ngOnInit()
   {
     this.get()
@@ -71,11 +80,12 @@ ngOnInit()
      this.zoom = 16;
      this.CheckRideCompletion(this.customerId);
      this.getRideDetails(this.customerId);
+     this.getAllLocations();
 
      this.customerRideForm = this.formbulider.group({
         CustomerId: [this.customerId],
-        PickUpLocation: ['Amritsar', [Validators.required]],
-        DropLocation: ['Jalandhar', [Validators.required]]
+        PickupLocationId: ['Amritsar', [Validators.required]],
+        DropLocationId: ['Jalandhar', [Validators.required]]
   
       });
     }
@@ -101,10 +111,25 @@ ngOnInit()
       });
   }
 
+  dir = undefined;
+  public getDirection() {
+    this.dir = {
+      origin: { lat: this.pickUpLat, lng: this.pickUpLng },
+      destination: { lat: this.dropLat, lng: this.dropLng }
+    }
+  }
+
   onBookRide() {
     const customerRide = this.customerRideForm.value;
-    this.CreateCustomerRide(customerRide);
+    //this.CreateCustomerRide(customerRide);
+
+    const PickupLocationId = this.customerRideForm.controls['PickupLocationId'].value;
+     alert(PickupLocationId);
+    this.getPickupLocationById(PickupLocationId);
     
+    const DropLocationId = this.customerRideForm.controls['DropLocationId'].value;
+     alert(DropLocationId);
+    this.getDropLocationById(DropLocationId);
   }
   
   CreateCustomerRide(customerRide: CustomerRide) {
@@ -114,8 +139,28 @@ ngOnInit()
        this.rideClick=true;
        this.getRideDetails(this.customerId);
       });
-    
-   
+  }
+
+  getDropLocationById(LocationId: number) {
+    this.locationsService.getLocationById(LocationId).subscribe(data => {
+      
+      this.dropLat=data.Latitude;
+      this.dropLng=data.Longitude;
+
+      this.getDirection();
+      
+    });
+  }
+
+  getPickupLocationById(LocationId: number) {
+    this.locationsService.getLocationById(LocationId).subscribe(data => {
+      
+      this.pickUpLat=data.Latitude;
+      this.pickUpLng=data.Longitude;
+
+      this.getDirection();
+      
+    });
   }
 
   onRideComplete(customerRide: CustomerRide){
@@ -131,6 +176,13 @@ ngOnInit()
   getRideDetails(CustomerId: number) {
     this.customerRideService.getAllCustomerRideForUserDashBoard(CustomerId).subscribe((data: CustomerRide[]) => {
       this.rideList = data;
+      
+    });
+  }
+
+  getAllLocations() {
+    this.locationsService.getAllLocations().subscribe((data: Locations[]) => {
+      this.locationsList = data;
       
     });
   }

@@ -7,7 +7,6 @@
       <Diagram DiagramId="0ebaa038391144d1b9edc01fd3b981e1" Name="Diagram1">
         <EntityTypeShape EntityType="TaxiMasterModel.Attendance" Width="1.5" PointX="5.25" PointY="10" />
         <EntityTypeShape EntityType="TaxiMasterModel.Customer" Width="1.5" PointX="6" PointY="6.125" />
-        <EntityTypeShape EntityType="TaxiMasterModel.CustomerRide" Width="1.5" PointX="8.25" PointY="6.25" />
         <EntityTypeShape EntityType="TaxiMasterModel.Driver" Width="1.5" PointX="3" PointY="5.625" />
         <EntityTypeShape EntityType="TaxiMasterModel.Gender" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="TaxiMasterModel.Taxi" Width="1.5" PointX="3" PointY="2.625" />
@@ -16,14 +15,18 @@
         <AssociationConnector Association="TaxiMasterModel.FK__Attendanc__Drive__68487DD7" />
         <AssociationConnector Association="TaxiMasterModel.FK__Customer__Gender__73BA3083" />
         <AssociationConnector Association="TaxiMasterModel.FK__Customer__UserId__74AE54BC" />
-        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__Custo__787EE5A0" />
-        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" />
         <AssociationConnector Association="TaxiMasterModel.FK__Driver__Gender__656C112C" />
         <AssociationConnector Association="TaxiMasterModel.FK__Driver__UserId__6477ECF3" />
         <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__Drive__6D0D32F4" />
         <AssociationConnector Association="TaxiMasterModel.FK__TaxiDrive__TaxiI__6E01572D" />
         <EntityTypeShape EntityType="TaxiMasterModel.Salary" Width="1.5" PointX="5.25" PointY="20.25" />
         <AssociationConnector Association="TaxiMasterModel.FK__Salary__DriverId__00200768" />
+        <EntityTypeShape EntityType="TaxiMasterModel.Locations" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TaxiMasterModel.CustomerRide" Width="1.5" PointX="9.625" PointY="3.375" />
+        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__Custo__787EE5A0" />
+        <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" />
+        <AssociationConnector Association="TaxiMasterModel.fk_cr_Drop" />
+        <AssociationConnector Association="TaxiMasterModel.fk_cr_PickUp" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

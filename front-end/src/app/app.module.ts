@@ -22,6 +22,8 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { TaxiDriverComponent } from './taxi-driver/taxi-driver.component';
 import { SalaryComponent } from './salary/salary.component';
+import { AgmDirectionModule } from 'agm-direction'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,7 @@ import { SalaryComponent } from './salary/salary.component';
   ForgotPasswordComponent,
   TaxiDriverComponent,
   SalaryComponent,
-  ],
+  ],  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,8 +51,9 @@ import { SalaryComponent } from './salary/salary.component';
     HttpClientModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCuRLlCgXtHrv4IjCRQwx6qCCV3O6Ww_0w'
-    })
+      apiKey: 'AIzaSyDFLisLUnEOjI9aq3GDXDera2OraxbezbE'
+    }),
+    AgmDirectionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

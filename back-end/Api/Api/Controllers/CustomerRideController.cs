@@ -25,6 +25,12 @@ namespace Api.Controllers
                                     join cr in obj.CustomerRide
                                     on c.CustomerId equals cr.CustomerId into custRide
                                     from cr in custRide.DefaultIfEmpty()
+                                    join pl in obj.Locations
+                                    on cr.PickupLocationId equals pl.LocationId into pLocation
+                                    from pl in pLocation.DefaultIfEmpty()
+                                    join dl in obj.Locations
+                                    on cr.DropLocationId equals dl.LocationId into dLocation
+                                    from dl in dLocation.DefaultIfEmpty()
                                     join td in obj.TaxiDriver
                                     on cr.TaxiDriverId equals td.TaxiDriverId into taxiDri
                                     from td in taxiDri.DefaultIfEmpty()
@@ -39,8 +45,8 @@ namespace Api.Controllers
                                     {
                                         CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
                                         CustomerName = cr == null ? "" : c.CustomerName,
-                                        PickupLocation = cr == null ? "" : cr.PickupLocation,
-                                        DropLocation = cr == null ? "" : cr.DropLocation,
+                                        PickupLocation = pl == null ? "" : pl.LocationName,
+                                        DropLocation = dl == null ? "" : dl.LocationName,
                                         RideStatus = cr == null ? 0 : cr.RideStatus,
                                         TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
                                         DriverName = d == null ? "" : d.DriverName,
@@ -66,6 +72,12 @@ namespace Api.Controllers
                                     join cr in obj.CustomerRide
                                     on c.CustomerId equals cr.CustomerId into custRide
                                     from cr in custRide.DefaultIfEmpty()
+                                    join pl in obj.Locations
+                                    on cr.PickupLocationId equals pl.LocationId into pLocation
+                                    from pl in pLocation.DefaultIfEmpty()
+                                    join dl in obj.Locations
+                                    on cr.DropLocationId equals dl.LocationId into dLocation
+                                    from dl in dLocation.DefaultIfEmpty()
                                     join td in obj.TaxiDriver
                                     on cr.TaxiDriverId equals td.TaxiDriverId into taxiDri
                                     from td in taxiDri.DefaultIfEmpty()
@@ -80,8 +92,8 @@ namespace Api.Controllers
                                     {
                                         CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
                                         CustomerName = cr == null ? "" : c.CustomerName,
-                                        PickupLocation = cr == null ? "" : cr.PickupLocation,
-                                        DropLocation = cr == null ? "" : cr.DropLocation,
+                                        PickupLocation = pl == null ? "" : pl.LocationName,
+                                        DropLocation = dl == null ? "" : dl.LocationName,
                                         RideStatus = cr == null ? 0 : cr.RideStatus,
                                         TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
                                         DriverName = d == null ? "" : d.DriverName,
@@ -108,6 +120,12 @@ namespace Api.Controllers
                                     join cr in obj.CustomerRide
                                     on c.CustomerId equals cr.CustomerId into custRide
                                     from cr in custRide.DefaultIfEmpty()
+                                    join pl in obj.Locations
+                                    on cr.PickupLocationId equals pl.LocationId into pLocation
+                                    from pl in pLocation.DefaultIfEmpty()
+                                    join dl in obj.Locations
+                                    on cr.DropLocationId equals dl.LocationId into dLocation
+                                    from dl in dLocation.DefaultIfEmpty()
                                     join td in obj.TaxiDriver
                                     on cr.TaxiDriverId equals td.TaxiDriverId into taxiDri
                                     from td in taxiDri.DefaultIfEmpty()
@@ -122,8 +140,8 @@ namespace Api.Controllers
                                     {
                                         CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
                                         CustomerName = cr == null ? "" : c.CustomerName,
-                                        PickupLocation = cr == null ? "" : cr.PickupLocation,
-                                        DropLocation = cr == null ? "" : cr.DropLocation,
+                                        PickupLocation = pl == null ? "" : pl.LocationName,
+                                        DropLocation = dl == null ? "" : dl.LocationName,
                                         RideStatus = cr == null ? 0 : cr.RideStatus,
                                         TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
                                         DriverName = d == null ? "" : d.DriverName,
@@ -156,7 +174,7 @@ namespace Api.Controllers
                                         {
                                             CustomerRideId = cr.CustomerRideId,
                                             RideStatus = cr.RideStatus
-                                        }).ToList().SingleOrDefault();
+                                        }).ToList().FirstOrDefault();
 
                     if(customerList == null)
                     {
@@ -172,9 +190,7 @@ namespace Api.Controllers
                 return Ok(0);
             }
 
-
-
-        }
+         }
 
         [HttpGet]
         [Route("GetAllAttendance")]
@@ -215,8 +231,8 @@ namespace Api.Controllers
 
                 CustomerRide customerRide = new CustomerRide();
                 customerRide.CustomerId = customerRideList.CustomerId;
-                customerRide.PickupLocation = customerRideList.PickupLocation;
-                customerRide.DropLocation = customerRideList.DropLocation;
+                customerRide.PickupLocationId = customerRideList.PickupLocationId;
+                customerRide.DropLocationId = customerRideList.DropLocationId;
                 customerRide.DateOfRide = date;
 
                 obj.CustomerRide.Add(customerRide);

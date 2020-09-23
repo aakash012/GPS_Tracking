@@ -17,12 +17,14 @@ namespace Api.DBContextLayer
         public int CustomerRideId { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public Nullable<int> TaxiDriverId { get; set; }
-        public string PickupLocation { get; set; }
-        public string DropLocation { get; set; }
+        public Nullable<int> PickupLocationId { get; set; }
+        public Nullable<int> DropLocationId { get; set; }
         public int RideStatus { get; set; }
         public Nullable<System.DateTime> DateOfRide { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual TaxiDriver TaxiDriver { get; set; }
+        public virtual Locations Locations { get; set; }
+        public virtual Locations Locations1 { get; set; }
     }
 }

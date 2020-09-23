@@ -112,6 +112,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerRideController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\TaxiController.cs" />
     <Compile Include="Controllers\TaxiDriverController.cs" />
@@ -129,6 +130,9 @@
       <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\Gender.cs">
+      <DependentUpon>TaxiEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBContextLayer\Locations.cs">
       <DependentUpon>TaxiEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBContextLayer\Salary.cs">

@@ -12,22 +12,23 @@ namespace Api.DBContextLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class TaxiDriver
+    public partial class Locations
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TaxiDriver()
+        public Locations()
         {
             this.CustomerRide = new HashSet<CustomerRide>();
+            this.CustomerRide1 = new HashSet<CustomerRide>();
         }
     
-        public int TaxiDriverId { get; set; }
-        public Nullable<int> DriverId { get; set; }
-        public Nullable<int> TaxiId { get; set; }
-        public Nullable<int> DriverAssignedStatus { get; set; }
+        public int LocationId { get; set; }
+        public string LocationName { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
     
-        public virtual Driver Driver { get; set; }
-        public virtual Taxi Taxi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerRide> CustomerRide { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerRide> CustomerRide1 { get; set; }
     }
 }

@@ -26,19 +26,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CustomerRide">
-      <EntityTypeMapping TypeName="TaxiMasterModel.CustomerRide">
-        <MappingFragment StoreEntitySet="CustomerRide">
-          <ScalarProperty Name="DateOfRide" ColumnName="DateOfRide" />
-          <ScalarProperty Name="RideStatus" ColumnName="RideStatus" />
-          <ScalarProperty Name="DropLocation" ColumnName="DropLocation" />
-          <ScalarProperty Name="PickupLocation" ColumnName="PickupLocation" />
-          <ScalarProperty Name="TaxiDriverId" ColumnName="TaxiDriverId" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="CustomerRideId" ColumnName="CustomerRideId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Driver">
       <EntityTypeMapping TypeName="TaxiMasterModel.Driver">
         <MappingFragment StoreEntitySet="Driver">
@@ -103,6 +90,29 @@
           <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
           <ScalarProperty Name="DriverId" ColumnName="DriverId" />
           <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="TaxiMasterModel.Locations">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerRide">
+      <EntityTypeMapping TypeName="TaxiMasterModel.CustomerRide">
+        <MappingFragment StoreEntitySet="CustomerRide">
+          <ScalarProperty Name="DateOfRide" ColumnName="DateOfRide" />
+          <ScalarProperty Name="RideStatus" ColumnName="RideStatus" />
+          <ScalarProperty Name="DropLocationId" ColumnName="DropLocationId" />
+          <ScalarProperty Name="PickupLocationId" ColumnName="PickupLocationId" />
+          <ScalarProperty Name="TaxiDriverId" ColumnName="TaxiDriverId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerRideId" ColumnName="CustomerRideId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

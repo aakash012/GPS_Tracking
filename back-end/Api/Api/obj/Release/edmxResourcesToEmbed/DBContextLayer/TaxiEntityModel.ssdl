@@ -30,8 +30,8 @@
     <Property Name="CustomerRideId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CustomerId" Type="int" />
     <Property Name="TaxiDriverId" Type="int" />
-    <Property Name="PickupLocation" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="DropLocation" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PickupLocationId" Type="int" />
+    <Property Name="DropLocationId" Type="int" />
     <Property Name="RideStatus" Type="int" Nullable="false" />
     <Property Name="DateOfRide" Type="datetime" />
   </EntityType>
@@ -56,6 +56,15 @@
     </Key>
     <Property Name="GenderId" Type="int" Nullable="false" />
     <Property Name="GenderType" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Latitude" Type="numeric" Precision="6" Scale="4" />
+    <Property Name="Longitude" Type="numeric" Precision="6" Scale="4" />
   </EntityType>
   <EntityType Name="Salary">
     <Key>
@@ -216,12 +225,37 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_cr_Drop">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+    <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="CustomerRide">
+        <PropertyRef Name="DropLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cr_PickUp">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+    <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="CustomerRide">
+        <PropertyRef Name="PickupLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TaxiMasterModelStoreContainer">
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerRide" EntityType="Self.CustomerRide" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Taxi" EntityType="Self.Taxi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaxiDriver" EntityType="Self.TaxiDriver" Schema="dbo" store:Type="Tables" />
@@ -265,6 +299,14 @@
     <AssociationSet Name="FK__TaxiDrive__TaxiI__6E01572D" Association="Self.FK__TaxiDrive__TaxiI__6E01572D">
       <End Role="Taxi" EntitySet="Taxi" />
       <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cr_Drop" Association="Self.fk_cr_Drop">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="CustomerRide" EntitySet="CustomerRide" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cr_PickUp" Association="Self.fk_cr_PickUp">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="CustomerRide" EntitySet="CustomerRide" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
