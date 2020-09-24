@@ -27,6 +27,7 @@
         <AssociationConnector Association="TaxiMasterModel.FK__CustomerR__TaxiD__797309D9" />
         <AssociationConnector Association="TaxiMasterModel.fk_cr_Drop" />
         <AssociationConnector Association="TaxiMasterModel.fk_cr_PickUp" />
+        <AssociationConnector Association="TaxiMasterModel.fk_cr_Current" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

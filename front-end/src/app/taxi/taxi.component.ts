@@ -14,6 +14,7 @@ export class TaxiComponent implements OnInit {
   taxiList: Taxi[];
   taxiForm: any;
   taxiUpdate = null;
+  
 
   constructor(private formbulider: FormBuilder, private taxiService: TaxiService) { }
 
@@ -22,7 +23,8 @@ export class TaxiComponent implements OnInit {
     this.taxiForm = this.formbulider.group({
       taxiId: ['0'],
       TaxiNo: ['', [Validators.required]],
-      Company: ['', [Validators.required]]
+      Company: ['', [Validators.required]],
+      CurrentLocationId: ['0', [Validators.required]]
 
     });
 
@@ -38,7 +40,7 @@ export class TaxiComponent implements OnInit {
   onFormSubmit() {
     const taxi = this.taxiForm.value;
     this.CreateTaxi(taxi);
-    this.getTaxiDetails();
+    
   }
 
   FillTaxiFormToEdit(TaxiId: number) {
@@ -57,12 +59,14 @@ export class TaxiComponent implements OnInit {
       this.taxiService.saveTaxi(taxi).subscribe(() => {
         this.taxiUpdate = null;
         this.ResetForm();
+        this.getTaxiDetails();
       });
     }
     else{
       this.taxiService.updateTaxi(taxi).subscribe(() => {
         this.taxiUpdate = null;
         this.ResetForm();
+        this.getTaxiDetails();
       });
     }
 

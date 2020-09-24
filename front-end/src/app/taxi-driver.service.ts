@@ -16,9 +16,9 @@ export class TaxiDriverService {
   {
     return this.http.get(this.url + '/GetAllTaxiDriver');
   }
-  getAllTaxiDriverForDropDown() 
+  getAllTaxiDriverForDropDown(PickupLocationId: number) 
   {
-    return this.http.get(this.url + '/GetAllTaxiDriverForDropDown');
+    return this.http.get(this.url + '/GetAllTaxiDriverForDropDown/'+PickupLocationId);
   }
   saveTaxiDriver(taxiDriver:TaxiDriver) : Observable<TaxiDriver>
   {

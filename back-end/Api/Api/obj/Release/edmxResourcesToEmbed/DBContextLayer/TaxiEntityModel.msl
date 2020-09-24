@@ -63,6 +63,7 @@
     <EntitySetMapping Name="TaxiDriver">
       <EntityTypeMapping TypeName="TaxiMasterModel.TaxiDriver">
         <MappingFragment StoreEntitySet="TaxiDriver">
+          <ScalarProperty Name="CurrentLocationId" ColumnName="CurrentLocationId" />
           <ScalarProperty Name="DriverAssignedStatus" ColumnName="DriverAssignedStatus" />
           <ScalarProperty Name="TaxiId" ColumnName="TaxiId" />
           <ScalarProperty Name="DriverId" ColumnName="DriverId" />

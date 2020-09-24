@@ -25,6 +25,8 @@ namespace Api.Controllers
                             on td.DriverId equals d.DriverId
                             join t in obj.Taxi 
                             on td.TaxiId equals t.TaxiId
+                            join cl in obj.Locations
+                            on td.CurrentLocationId equals cl.LocationId
                             select new
                             {
                                 TaxiDriverId = td.TaxiDriverId,
@@ -32,7 +34,9 @@ namespace Api.Controllers
                                 DriverId=d.DriverId,
                                 DriverName = d.DriverName,
                                 TaxiNo=t.TaxiNo,
-                                DriverAssignedStatus=td.DriverAssignedStatus
+                                DriverAssignedStatus=td.DriverAssignedStatus,
+                                CurrentLocationName = cl.LocationName
+
                             }).ToList();
 
                 return Ok(data);
@@ -42,9 +46,9 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllTaxiDriverForDropDown")]
+        [Route("GetAllTaxiDriverForDropDown/{id}")]
 
-        public IHttpActionResult GetAllTaxiDriverForDropDown()
+        public IHttpActionResult GetAllTaxiDriverForDropDown(int Id)
         {
 
             using (TaxiMasterEntities obj = new TaxiMasterEntities())
@@ -55,7 +59,7 @@ namespace Api.Controllers
                             on td.DriverId equals d.DriverId
                             join t in obj.Taxi
                             on td.TaxiId equals t.TaxiId
-                            where td.DriverAssignedStatus == 0
+                            where (td.CurrentLocationId == Id && td.DriverAssignedStatus == 0)
                             select new
                             {
                                 TaxiDriverId = td.TaxiDriverId,
@@ -84,6 +88,7 @@ namespace Api.Controllers
                 taxiDriver.DriverId = taxiDriverInputList.DriverId;
                 taxiDriver.TaxiId = taxiDriverInputList.TaxiId;
                 taxiDriver.DriverAssignedStatus = 0;
+                taxiDriver.CurrentLocationId = taxiDriverInputList.CurrentLocationId;
 
                 obj.TaxiDriver.Add(taxiDriver);
                 RowAffected = obj.SaveChanges();

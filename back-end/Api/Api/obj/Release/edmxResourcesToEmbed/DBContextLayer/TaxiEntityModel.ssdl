@@ -95,6 +95,7 @@
     <Property Name="DriverId" Type="int" />
     <Property Name="TaxiId" Type="int" />
     <Property Name="DriverAssignedStatus" Type="int" />
+    <Property Name="CurrentLocationId" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -225,6 +226,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_cr_Current">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+    <End Role="TaxiDriver" Type="Self.TaxiDriver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="TaxiDriver">
+        <PropertyRef Name="CurrentLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_cr_Drop">
     <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
     <End Role="CustomerRide" Type="Self.CustomerRide" Multiplicity="*" />
@@ -298,6 +311,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__TaxiDrive__TaxiI__6E01572D" Association="Self.FK__TaxiDrive__TaxiI__6E01572D">
       <End Role="Taxi" EntitySet="Taxi" />
+      <End Role="TaxiDriver" EntitySet="TaxiDriver" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cr_Current" Association="Self.fk_cr_Current">
+      <End Role="Locations" EntitySet="Locations" />
       <End Role="TaxiDriver" EntitySet="TaxiDriver" />
     </AssociationSet>
     <AssociationSet Name="fk_cr_Drop" Association="Self.fk_cr_Drop">

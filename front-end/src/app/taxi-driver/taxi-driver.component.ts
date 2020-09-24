@@ -5,6 +5,8 @@ import { Driver } from '../drivers';
 import { DriversService } from '../drivers.service';
 import { TaxiDriver } from '../taxi-driver';
 import { TaxiDriverService } from '../taxi-driver.service';
+import { Locations } from '../locations';
+import { LocationsService } from '../locations.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -18,20 +20,23 @@ export class TaxiDriverComponent implements OnInit {
   driverList:Driver[];
   taxiDriverList:TaxiDriver[];
   taxiDriverForm:any;
-  constructor(private formbulider: FormBuilder, private taxiService: TaxiService,private driverService: DriversService,private taxiDriverService: TaxiDriverService) { }
+  locationsList : Locations[];
+
+  constructor(private formbulider: FormBuilder, private taxiService: TaxiService,private driverService: DriversService,private taxiDriverService: TaxiDriverService,private locationsService: LocationsService) { }
 
   ngOnInit(): void {
 
     this.taxiDriverForm = this.formbulider.group({
       TaxiId: ['0', [Validators.required]],
-      DriverId: ['0', [Validators.required]]
-      
+      DriverId: ['0', [Validators.required]],
+      CurrentLocationId: ['0', [Validators.required]]
 
     });
 
     this.getTaxiDetails();
     this.getDriverDetails();
     this.getTaxiDriverDetails();
+    this.getAllLocations();
   }
 
   getTaxiDetails() {
@@ -50,6 +55,14 @@ export class TaxiDriverComponent implements OnInit {
       this.taxiDriverList = data;
     });
   }
+
+  getAllLocations() {
+    this.locationsService.getAllLocations().subscribe((data: Locations[]) => {
+      this.locationsList = data;
+      
+    });
+  }
+
 
   onFormSubmit()
   {

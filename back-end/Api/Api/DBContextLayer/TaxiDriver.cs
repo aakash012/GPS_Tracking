@@ -24,10 +24,12 @@ namespace Api.DBContextLayer
         public Nullable<int> DriverId { get; set; }
         public Nullable<int> TaxiId { get; set; }
         public Nullable<int> DriverAssignedStatus { get; set; }
+        public Nullable<int> CurrentLocationId { get; set; }
     
         public virtual Driver Driver { get; set; }
         public virtual Taxi Taxi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerRide> CustomerRide { get; set; }
+        public virtual Locations Locations { get; set; }
     }
 }

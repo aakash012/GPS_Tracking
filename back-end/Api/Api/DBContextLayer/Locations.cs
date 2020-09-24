@@ -19,6 +19,7 @@ namespace Api.DBContextLayer
         {
             this.CustomerRide = new HashSet<CustomerRide>();
             this.CustomerRide1 = new HashSet<CustomerRide>();
+            this.TaxiDriver = new HashSet<TaxiDriver>();
         }
     
         public int LocationId { get; set; }
@@ -30,5 +31,7 @@ namespace Api.DBContextLayer
         public virtual ICollection<CustomerRide> CustomerRide { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerRide> CustomerRide1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaxiDriver> TaxiDriver { get; set; }
     }
 }

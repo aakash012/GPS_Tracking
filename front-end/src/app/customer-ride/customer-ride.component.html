@@ -67,7 +67,7 @@
             type="button"
             class="btn btn-info"
             matTooltip="Click Edit Button"
-            (click)="FillRideFormToEdit(Ride.CustomerRideId)"
+            (click)="FillRideFormToEdit(Ride.CustomerRideId,Ride.PickupLocationId)"
             *ngIf="Ride.RideStatus == 0"
           >
             Approve

@@ -19,7 +19,15 @@
             </select>
           </th>
           <th class="tbl2">
-            <button type="submit" class="btn btn-primary" Tooltip="Click Save Button" [disabled]="!taxiDriverForm.valid">
+            Current Location &nbsp;&nbsp;
+            <select Tooltip="Choose CurrentLocation" formControlName="CurrentLocationId"> 
+              <option  *ngFor="let loc of locationsList" [value]="loc.LocationId" >
+                {{loc.LocationName}}
+              </option>
+            </select>
+          </th>
+          <th class="tbl2">
+            <button type="submit" class="btn btn-primary" Tooltip="Click Save Button" [disabled]="taxiDriverForm.invalid">
               Save</button>
           </th>
         </tr>
@@ -29,25 +37,13 @@
         <tr ngclass="btn-primary" style="background-color: rgba(88, 174, 231, 0.6);">
           <th class="tbl2">Taxi Number</th>
           <th class="tbl2">Driver Name</th>
-          <!-- <th class="tbl2">Edit</th>
-          <th class="tbl2">Delete</th> -->
+          <th class="tbl2">Current Location</th>
+          
         </tr>
         <tr *ngFor="let TaxiDriver of taxiDriverList ">
           <td class="tbl2">{{ TaxiDriver.TaxiNo }}</td>
           <td class="tbl2">{{ TaxiDriver.DriverName }}</td>
-  
-          <!-- <td class="tbl2">
-            <button type="button" class="btn btn-info" matTooltip="Click Edit Button"
-              (click)="FillTaxiFormToEdit(Taxi.TaxiId)">
-              Edit
-            </button>
-          </td>
-          <td class="tbl2">
-            <button type="button" class="btn btn-danger" matTooltip="Click Delete Button"
-              (click)="DeleteTaxi(Taxi.TaxiId)">
-              Delete
-            </button>
-          </td> -->
+          <td class="tbl2">{{ TaxiDriver.CurrentLocationName }}</td>
         </tr>
       </table>
    

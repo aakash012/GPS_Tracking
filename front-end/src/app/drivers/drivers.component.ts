@@ -41,7 +41,7 @@ export class DriversComponent implements OnInit {
   onFormSubmit() {
     const driver = this.driverForm.value;
     this.CreateDriver(driver);
-    this.getDriverDetails();
+   
   }
 
   FillDriverFormToEdit(DriverId: number) {
@@ -63,12 +63,14 @@ export class DriversComponent implements OnInit {
       this.driverService.saveDriver(driver).subscribe(() => {
         this.driverUpdate = null;
         this.ResetForm();
+        this.getDriverDetails();
       });
     }
     else{
       this.driverService.updateDriver(driver).subscribe(() => {
         this.driverUpdate = null;
         this.ResetForm();
+        this.getDriverDetails();
       });
     }
   }

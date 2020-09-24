@@ -28,7 +28,7 @@ export class CustomerRideComponent implements OnInit {
     });
 
     this.getRideDetails();
-    this.getTaxiDriverDetails();
+    
   }
   getRideDetails() {
     this.customerRideService.getAllCustomerRide().subscribe((data: CustomerRide[]) => {
@@ -36,8 +36,8 @@ export class CustomerRideComponent implements OnInit {
     });
   }
 
-  getTaxiDriverDetails() {
-    this.taxiDriverService.getAllTaxiDriverForDropDown().subscribe((data: TaxiDriver[]) => {
+  getTaxiDriverDetails(PickupLocationId: number) {
+    this.taxiDriverService.getAllTaxiDriverForDropDown(PickupLocationId).subscribe((data: TaxiDriver[]) => {
       this.taxiDriverList = data;
     });
   }
@@ -47,7 +47,8 @@ export class CustomerRideComponent implements OnInit {
     this.CreateRide(ride);
     
   }
-  FillRideFormToEdit(CustomerRideId: number) {
+
+  FillRideFormToEdit(CustomerRideId: number,PickupLocationId: number) {
     this.customerRideService.getCustomerRideById(CustomerRideId).subscribe(Rides => {
      
       this.rideForm.controls['CustomerRideId'].setValue(Rides[0].CustomerRideId);
@@ -56,6 +57,7 @@ export class CustomerRideComponent implements OnInit {
       this.rideForm.controls['DropLocation'].setValue(Rides[0].DropLocation);
      
     });
+    this.getTaxiDriverDetails(PickupLocationId);
   }
   CreateRide(ride: CustomerRide) {
     
@@ -63,6 +65,7 @@ export class CustomerRideComponent implements OnInit {
         alert("Booking Request Approved");
         this.getRideDetails();
         this.ResetForm();
+        this.getTaxiDriverDetails(0);
       });
     
 

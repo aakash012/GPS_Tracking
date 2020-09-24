@@ -40,6 +40,7 @@ namespace Api.Controllers
                                     join t in obj.Taxi
                                     on td.TaxiId equals t.TaxiId into taxi
                                     from t in taxi.DefaultIfEmpty()
+                                    orderby cr.CustomerRideId descending
                                     where (cr.CustomerRideId != null)
                                     select new
                                     {
@@ -47,6 +48,8 @@ namespace Api.Controllers
                                         CustomerName = cr == null ? "" : c.CustomerName,
                                         PickupLocation = pl == null ? "" : pl.LocationName,
                                         DropLocation = dl == null ? "" : dl.LocationName,
+                                        PickupLocationId = pl == null ? 0 : pl.LocationId,
+                                        DropLocationId = dl == null ? 0 : dl.LocationId,
                                         RideStatus = cr == null ? 0 : cr.RideStatus,
                                         TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
                                         DriverName = d == null ? "" : d.DriverName,
@@ -92,6 +95,8 @@ namespace Api.Controllers
                                     {
                                         CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
                                         CustomerName = cr == null ? "" : c.CustomerName,
+                                        PickupLocationId = pl == null ? 0 : pl.LocationId,
+                                        DropLocationId = dl == null ? 0 : dl.LocationId,
                                         PickupLocation = pl == null ? "" : pl.LocationName,
                                         DropLocation = dl == null ? "" : dl.LocationName,
                                         RideStatus = cr == null ? 0 : cr.RideStatus,
@@ -135,6 +140,7 @@ namespace Api.Controllers
                                     join t in obj.Taxi
                                     on td.TaxiId equals t.TaxiId into taxi
                                     from t in taxi.DefaultIfEmpty()
+                                    orderby cr.CustomerRideId descending
                                     where (cr.CustomerRideId != null && c.CustomerId == Id)
                                     select new
                                     {
@@ -142,6 +148,8 @@ namespace Api.Controllers
                                         CustomerName = cr == null ? "" : c.CustomerName,
                                         PickupLocation = pl == null ? "" : pl.LocationName,
                                         DropLocation = dl == null ? "" : dl.LocationName,
+                                        PickupLocationId = pl == null ? 0 : pl.LocationId,
+                                        DropLocationId = dl == null ? 0 : dl.LocationId,
                                         RideStatus = cr == null ? 0 : cr.RideStatus,
                                         TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
                                         DriverName = d == null ? "" : d.DriverName,
@@ -348,6 +356,7 @@ namespace Api.Controllers
                     if (taxiDriver != null)
                     {
                         taxiDriver.DriverAssignedStatus = 0;
+                        taxiDriver.CurrentLocationId = customerRideList.DropLocationId;
                         obj.SaveChanges();
 
                     }
