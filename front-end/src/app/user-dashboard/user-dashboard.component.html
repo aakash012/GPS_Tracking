@@ -60,9 +60,16 @@
               [zoom]="zoom"
               (mapClick)="mapClicked($event)"
             >
-              <agm-marker [latitude]="lat" [longitude]="lng" [label]="'Me'"></agm-marker>
-              <!-- <agm-marker [latitude]="31.3260" [longitude]="75.5762" [label]="''"></agm-marker> -->
-              <agm-direction *ngIf="dir" [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
+              
+            <agm-marker [latitude]="taxiLat" [longitude]="taxiLng" *ngIf="taxiLocation" [iconUrl]="{
+              url: './assets/DriverTaxiMarker.png',
+              scaledSize: {
+                  width: 45,
+                  height: 30
+              }
+          }"></agm-marker>
+              <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="currentLocation" [label]="''"></agm-marker>
+              <agm-direction *ngIf="directionFlag" [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
             </agm-map>
           </form>
         </div>

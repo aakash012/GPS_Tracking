@@ -27,6 +27,7 @@ namespace Api.Controllers
                             on td.TaxiId equals t.TaxiId
                             join cl in obj.Locations
                             on td.CurrentLocationId equals cl.LocationId
+                            orderby cl.LocationName ascending
                             select new
                             {
                                 TaxiDriverId = td.TaxiDriverId,
@@ -35,7 +36,9 @@ namespace Api.Controllers
                                 DriverName = d.DriverName,
                                 TaxiNo=t.TaxiNo,
                                 DriverAssignedStatus=td.DriverAssignedStatus,
-                                CurrentLocationName = cl.LocationName
+                                CurrentLocationName = cl.LocationName,
+                                TaxiLocationLatitude = cl.Latitude,
+                                TaxiLocationLongitude = cl.Longitude
 
                             }).ToList();
 

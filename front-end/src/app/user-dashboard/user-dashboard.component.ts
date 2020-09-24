@@ -22,6 +22,8 @@ export class UserDashboardComponent implements OnInit {
   dropLng:number;
   pickUpLat:number;
   pickUpLng:number;
+  taxiLat:number;
+  taxiLng:number;
   pickUpId:number;
   dropId:number;
   getAddress: any;
@@ -32,6 +34,9 @@ export class UserDashboardComponent implements OnInit {
   customerId:any;
   customerName:any;
   rideClick : boolean = true;
+  taxiLocation: boolean =false;
+  directionFlag: boolean = false;
+  currentLocation: boolean=true;
   rideList: CustomerRide[];
   locationsList : Locations[];
 
@@ -140,6 +145,8 @@ ngOnInit()
        alert("Your Booking Request has been sent!!!");
        this.getDirection();
        this.rideClick=true;
+       this.directionFlag=true;
+       this.currentLocation=false;
        this.getRideDetails(this.customerId);
        
       });
@@ -168,8 +175,12 @@ ngOnInit()
     this.customerRideService.completeCustomerRide(customerRide).subscribe(() => {
         alert("Your Ride has been completed");
         alert("Thanks for riding with us!!!");
-        this.pickUpLat=this.dropLat;
-        this.pickUpLng=this.dropLng;
+        this.lat=this.dropLat;
+        this.lng=this.dropLng;
+        this.taxiLat=this.dropLat;
+        this.taxiLng=this.dropLng;
+        this.directionFlag=false;
+        this.currentLocation=true;
         // this.pickUpId=null;
         // this.dropId=null;
         this.getDirection();
@@ -198,9 +209,13 @@ ngOnInit()
       if(data == -1 || data ==2)
       {
         this.rideClick=false;
+        
       }
       else{
         this.rideClick=true;
+        this.currentLocation=false;
+        this.taxiLocation=true;
+        this.directionFlag=true;
         this.GetRideLocationsForDirection();
       }
       
@@ -216,6 +231,8 @@ ngOnInit()
     this.dropLng = data["DropLongitude"];
     this.pickUpId = data["PickupLocationId"];
     this.dropId = data["DropLocationId"];
+    this.taxiLat = data["PickupLatitude"];
+    this.taxiLng = data["PickupLongitude"];
 
     this.getDirection();
     });

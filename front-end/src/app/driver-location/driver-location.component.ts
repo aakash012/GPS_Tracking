@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {} from 'googlemaps';
+import { TaxiDriver } from '../taxi-driver';
+import { TaxiDriverService } from '../taxi-driver.service';
+
 
 @Component({
   selector: 'app-driver-location',
@@ -7,18 +10,18 @@ import {} from 'googlemaps';
   styleUrls: ['./driver-location.component.css'],
 })
 export class DriverLocationComponent {
+  latitude:number = 31.6340;
+  longitude:number = 74.8723;
+  taxiDriverList:TaxiDriver[];
+  constructor(private taxiDriverService: TaxiDriverService) { }
 
-  latitude = 28.5355;
-  longitude = 77.3910;
+  ngOnInit(): void {
+    this.getAllTaxiDriver();
+  }
 
-  latitude1 = 28.56;
-  longitude2 = 77.43;
-  locationChosen = true;
-
-  // onChoseLocation(event) {
-  //   this.latitude = event.coords.lat;
-  //   this.longitude = event.coords.lng;
-  //   this.locationChosen = false;
-  //}
-
+  getAllTaxiDriver() {
+    this.taxiDriverService.getAllTaxiDriver().subscribe((data: TaxiDriver[]) => {
+      this.taxiDriverList = data;
+    });
+  }
 }

@@ -28,8 +28,6 @@
       <table class="table" border="2">
         <tr ngclass="btn-primary" style="background-color: rgba(88, 174, 231, 0.6);">
           <th class="tbl2">Driver Name</th>
-          <th class="tbl2">Month</th>
-          <th class="tbl2">Financial Year</th>
           <th class="tbl2">No. of Rides</th>
           <th class="tbl2">Ride Bonus</th>
           <th class="tbl2">Basic Salary</th>
@@ -37,8 +35,6 @@
         </tr>
         <tr *ngFor="let salary of salaryList ">
           <td class="tbl2">{{ salary.DriverName }}</td>
-          <td class="tbl2">{{ salary.SalaryMonth }}</td>
-          <td class="tbl2">{{ salary.FinancialYear }}</td>
           <td class="tbl2">{{ salary.NumberOfRides }}</td>
           <td class="tbl2">{{ salary.RideBonus }}</td>
           <td class="tbl2">{{ salary.BasicSalary }}</td>
