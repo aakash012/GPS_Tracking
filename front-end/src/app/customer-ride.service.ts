@@ -16,6 +16,11 @@ export class CustomerRideService {
     return this.http.get(this.url + '/GetAllCustomerRide');
   }
 
+  getCustomerRideByDriverId(DriverId:number)
+  {
+    return this.http.get(this.url + '/GetCustomerRideByDriverId/'+DriverId);
+  }
+
   getAllCustomerRideForUserDashBoard(CustomerId:number) 
   {
     return this.http.get(this.url + '/GetCustomerRideByCustomerId/' + CustomerId);

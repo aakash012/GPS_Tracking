@@ -16,6 +16,11 @@ export class SalaryService {
     return this.http.get(this.url + '/GetAllDriversSalary/'+SalaryMonth+'/'+FinancialYear);
   }
 
+  GetSalaryForDriver(SalaryMonth:String,FinancialYear:String,DriverId:number) 
+  {
+    return this.http.get(this.url + '/GetSalaryForDriver/'+SalaryMonth+'/'+FinancialYear+'/'+DriverId);
+  }
+
   calculateSalary(salary:Salary) : Observable<Salary>
   {
     return this.http.put<Salary>(this.url+'/CalculateSalary',salary);

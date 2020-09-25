@@ -22,7 +22,11 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { TaxiDriverComponent } from './taxi-driver/taxi-driver.component';
 import { SalaryComponent } from './salary/salary.component';
-import { AgmDirectionModule } from 'agm-direction'; 
+import { AgmDirectionModule } from 'agm-direction';
+import { DriverDashboardLocationComponent } from './driver-dashboard-location/driver-dashboard-location.component';
+import { DriverDashboardRidesComponent } from './driver-dashboard-rides/driver-dashboard-rides.component';
+import { DriverDashboardSalaryComponent } from './driver-dashboard-salary/driver-dashboard-salary.component';
+import { DriverDashboardAttendanceComponent } from './driver-dashboard-attendance/driver-dashboard-attendance.component'; 
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { AgmDirectionModule } from 'agm-direction';
   ForgotPasswordComponent,
   TaxiDriverComponent,
   SalaryComponent,
+  DriverDashboardLocationComponent,
+  DriverDashboardRidesComponent,
+  DriverDashboardSalaryComponent,
+  DriverDashboardAttendanceComponent,
   ],  
   imports: [
     BrowserModule,

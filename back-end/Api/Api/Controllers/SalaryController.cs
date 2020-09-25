@@ -44,6 +44,37 @@ namespace Api.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("GetSalaryForDriver/{SalaryMonth}/{FinancialYear}/{id}")]
+
+        public IHttpActionResult GetSalaryForDriver(String SalaryMonth, String FinancialYear, int Id)
+        {
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+                var driverSalaryList = (from d in obj.Driver
+                                        join s in obj.Salary
+                                        on d.DriverId equals s.DriverId
+                                        where (s.SalaryMonth == SalaryMonth && s.FinancialYear == FinancialYear && s.DriverId == Id)
+                                        select new
+                                        {
+                                            DriverId = d.DriverId,
+                                            DriverName = d.DriverName,
+                                            SalaryMonth = s.SalaryMonth,
+                                            FinancialYear = s.FinancialYear,
+                                            NumberOfRides = s.NumberOfRides,
+                                            BasicSalary = d.BasicSalary,
+                                            WagePerRide = d.WagePerRide,
+                                            FinalSalary = s.FinalSalary,
+                                            RideBonus = s.RideBonus
+
+                                        }).ToList();
+
+                return Ok(driverSalaryList);
+
+            }
+
+        }
         #endregion
 
         #region Calculate Salary

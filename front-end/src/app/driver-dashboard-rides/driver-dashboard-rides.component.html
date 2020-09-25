@@ -1,0 +1,21 @@
+<table class="table" border="2">
+    <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
+      <th class="tbl2">Customer Name</th>
+      <th class="tbl2">PickUp Location</th>
+      <th class="tbl2">Drop Location</th>
+      <th class="tbl2">Taxi No.</th>
+      <th class="tbl2">Ride Date</th>
+      <th class="tbl2">Booking Status</th>
+      <th class="tbl2">Ride Status</th>
+    </tr>
+    <tr *ngFor="let Ride of rideList">
+      <td class="tbl2">{{ Ride.CustomerName }}</td>
+      <td class="tbl2">{{ Ride.PickupLocation}}</td>
+      <td class="tbl2">{{ Ride.DropLocation }}</td>
+      <td class="tbl2">{{ Ride.TaxiNo }}</td>
+      <td class="tbl2">{{ Ride.RideDate}}</td>
+      <td class="tbl2">{{ Ride.RideStatus == 0 ? "Requested" : Ride.RideStatus == 1 ? "Booked" :"Booked"}}</td>
+      <td class="tbl2">{{ Ride.RideStatus == 0 ? "Initiated" : Ride.RideStatus == 1 ? "Started" :"Completed"}}</td>
+      
+    </tr>
+  </table>

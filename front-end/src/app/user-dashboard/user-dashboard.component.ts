@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {AgmMap, MapsAPILoader} from '@agm/core';
+import { AgmMap, MapsAPILoader } from '@agm/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { CustomerRideService } from '../customer-ride.service';

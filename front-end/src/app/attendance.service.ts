@@ -15,4 +15,9 @@ export class AttendanceService {
   {
     return this.http.get(this.url + '/GetAllAttendance');
   }
+
+  getAttendanceByDriverId(DriverId:number)
+  {
+    return this.http.get(this.url + '/GetAllAttendanceByDriverId/'+DriverId);
+  }
 }

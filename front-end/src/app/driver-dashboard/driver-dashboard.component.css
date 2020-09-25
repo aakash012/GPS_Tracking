@@ -62,36 +62,26 @@ body
 
 }
 #lpanel, #rpanel{
-  text-align: center;
-  margin: 10px;
-  padding: 20px;
-  box-shadow:3px 3px 5px gray;
-  background: white;
-}
-#lpanel{
-  background: linear-gradient(rgba(30, 161, 248, 0.6),rgba(6, 33, 44, 0.6));
+	text-align: center;
+	padding-left: 10px;
+	box-shadow:3px 3px 5px gray;
+	background: white;
+  }
+  #lpanel{
+	background: linear-gradient(rgba(30, 161, 248, 0.6),rgba(6, 33, 44, 0.6));
+	padding-top: 20px;
+  }
+  #rpanel{
+	border-left: 1px solid black ;
+	background-color: #f6f9fc;
+  }
+  #lmenu{
+	text-align: left;
+	list-style: none;
+	line-height: 42px;
+  }
 
-}
-#rpanel{
-  background-color: #f6f9fc;
-}
-#lmenu{
-  text-align: center;
-  list-style: none;
-  line-height: 42px;
-  padding-top: 100% ;
-}
-#btn1{
-  border: 2px solid black;
-  border-radius: 3px;
-  background-color: transparent;
-  font-size: large;
-  font-weight: 500;
-  transition: ease all 0.5s;
-}
-#btn1:hover{
-  box-shadow: 1px 1px 1px 1px black;
-}
+
 footer
 {
   position: absolute;
@@ -105,3 +95,8 @@ footer
   	text-align:left;
 	padding:0px 20px;
 }
+
+#btn1{
+	border: none;
+	background-color: transparent;
+  }

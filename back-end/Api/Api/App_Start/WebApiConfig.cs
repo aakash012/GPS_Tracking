@@ -12,7 +12,6 @@ namespace Api
         {
             // Web API configuration and services
             
-
             config.EnableCors();
             
             // Web API routes

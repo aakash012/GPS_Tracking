@@ -1,0 +1,21 @@
+<div class="container">
+    <form>
+      <table class="table" border="2">
+        <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
+          <th class="tbl2">Driver Name</th>
+          <th class="tbl2">Month</th>
+          <th class="tbl2">Financial Year</th>
+          <th class="tbl2">Days Present</th>
+          <th class="tbl2">Date of Attendance</th>
+        </tr>
+        <tr *ngFor="let Attendance of attendanceList">
+          <td class="tbl2">{{ Attendance.DriverName }}</td>
+          <td class="tbl2">{{ Attendance.AttendanceMonth }}</td>
+          <td class="tbl2">{{ Attendance.FinancialYear }}</td>
+          <td class="tbl2">{{ Attendance.NumberOfDays}}</td>
+          <td class="tbl2">{{ Attendance.AttendanceDate}}</td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  

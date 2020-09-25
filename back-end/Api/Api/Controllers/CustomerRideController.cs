@@ -165,6 +165,51 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [Route("GetCustomerRideByDriverId/{Id}")]
+
+        public IHttpActionResult GetCustomerRideByDriverId(int Id)
+        {
+            DateTime date = DateTime.Now;
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+                var customerList = (from c in obj.Customer
+                                    join cr in obj.CustomerRide
+                                    on c.CustomerId equals cr.CustomerId 
+                                    join pl in obj.Locations
+                                    on cr.PickupLocationId equals pl.LocationId
+                                    join dl in obj.Locations
+                                    on cr.DropLocationId equals dl.LocationId
+                                    join td in obj.TaxiDriver
+                                    on cr.TaxiDriverId equals td.TaxiDriverId
+                                    join d in obj.Driver
+                                    on td.DriverId equals d.DriverId
+                                    join t in obj.Taxi
+                                    on td.TaxiId equals t.TaxiId
+                                    orderby cr.CustomerRideId descending
+                                    where (td.DriverId != null && td.DriverId == Id)
+                                    select new
+                                    {
+                                        CustomerRideId = cr == null ? 0 : cr.CustomerRideId,
+                                        CustomerName = cr == null ? "" : c.CustomerName,
+                                        PickupLocation = pl == null ? "" : pl.LocationName,
+                                        DropLocation = dl == null ? "" : dl.LocationName,
+                                        PickupLocationId = pl == null ? 0 : pl.LocationId,
+                                        DropLocationId = dl == null ? 0 : dl.LocationId,
+                                        RideStatus = cr == null ? 0 : cr.RideStatus,
+                                        TaxiDriverId = cr == null ? 0 : cr.TaxiDriverId,
+                                        DriverName = d == null ? "" : d.DriverName,
+                                        TaxiNo = t == null ? "" : t.TaxiNo,
+                                        RideDate = cr == null ? date : cr.DateOfRide
+
+                                    }).ToList();
+
+                return Ok(customerList);
+            }
+
+
+        }
+
+        [HttpGet]
         [Route("CheckRideCompletionByCustomerId/{Id}")]
 
         public IHttpActionResult CheckRideCompletionByCustomerId(int Id)
@@ -222,6 +267,32 @@ namespace Api.Controllers
                                         NumberOfDays = a.NumberOfDays,
                                         AttendanceDate =a.AttendanceDate
                                     }).ToList();
+
+                return Ok(attendanceList);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("GetAllAttendanceByDriverId/{id}")]
+
+        public IHttpActionResult GetAllAttendanceByDriverId(int Id)
+        {
+
+            using (TaxiMasterEntities obj = new TaxiMasterEntities())
+            {
+                var attendanceList = (from a in obj.Attendance
+                                      join d in obj.Driver
+                                      on a.DriverId equals d.DriverId
+                                      where (a.DriverId == Id)
+                                      select new
+                                      {
+                                          DriverName = d.DriverName,
+                                          FinancialYear = a.FinancialYear,
+                                          AttendanceMonth = a.AttendanceMonth,
+                                          NumberOfDays = a.NumberOfDays,
+                                          AttendanceDate = a.AttendanceDate
+                                      }).ToList();
 
                 return Ok(attendanceList);
             }

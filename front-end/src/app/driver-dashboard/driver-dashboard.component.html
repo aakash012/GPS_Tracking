@@ -39,54 +39,25 @@
   <div class="row" id="main">
     <div class="col-2" id="lpanel">
       <ul id="lmenu">
-        <li><button id="btn1">Driver Location</button></li>
+        <li><button id="btn1" (click)="onMyLocation()"><span class="taxi-ico" style="background-image: url('../../assets/location.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>My Location</button></li>
+        <li><button id="btn1" (click)="onMyRides()"><span class="taxi-ico" style="background-image: url('../../assets/ride.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>My Rides</button></li>
+        <li><button id="btn1" (click)="onSalary()"><span class="taxi-ico" style="background-image: url('../../assets/attendance.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>My Salary</button></li>
+        <li><button id="btn1" (click)="onAttendance()"><span class="taxi-ico" style="background-image: url('../../assets/attendance.png');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>My Attendance</button></li>
       </ul>
     </div>
-    <div class="col-9" id="rpanel">
-      <div class="row1">
-        <div class="col-12">
-          <form>
-            <agm-map
-              style="height: 300px"
-              [latitude]="lat"
-              [longitude]="lng"
-              [zoom]="zoom"
-              (mapClick)="mapClicked($event)"
-            >
-            <agm-marker [latitude]="taxiLat" [longitude]="taxiLng" *ngIf="taxiLocation" [iconUrl]="{
-              url: './assets/DriverTaxiMarker.png',
-              scaledSize: {
-                  width: 45,
-                  height: 30
-              }
-          }"></agm-marker>
-              <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="customerLocation" [label]="''"></agm-marker>
-              <agm-direction *ngIf="directionFlag" [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
-            </agm-map>
-          </form>
-        </div>
+    <div class="col-10" id="rpanel">
+      <div id="comp-render" *ngIf="myLocation">
+        <app-driver-dashboard-location></app-driver-dashboard-location>
       </div>
-      <br/>
-      <div class="row1">
-        <div class="col-12" align="center">
-          <table class="table" border="2">
-            <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
-              <th class="tbl2">Customer Name</th>
-              <th class="tbl2">PickUp Location</th>
-              <th class="tbl2">Drop Location</th>
-              <th class="tbl2">Ride Date</th>
-              <th class="tbl2">Ride Status</th>
-            </tr>
-            <tr *ngIf="currentRideList">
-              <td class="tbl2">{{ currentRideList.CustomerName}}</td>
-              <td class="tbl2">{{ currentRideList.PickupLocation}}</td>
-              <td class="tbl2">{{ currentRideList.DropLocation }}</td>
-              <td class="tbl2">{{ currentRideList.RideDate}}</td>
-              <td class="tbl2">{{ currentRideList.RideStatus == 0 ? "Initiated" : currentRideList.RideStatus == 1 ? "Started" :"Completed"}}</td>
-            </tr>
-          </table>
-          </div>
-      </div>
+      <div id="comp-render" *ngIf="myRides">
+        <app-driver-dashboard-rides></app-driver-dashboard-rides>
+      </div>   
+      <div id="comp-render" *ngIf="salary">
+        <app-driver-dashboard-salary></app-driver-dashboard-salary>
+      </div>   
+      <div id="comp-render" *ngIf="attendance">
+        <app-driver-dashboard-attendance></app-driver-dashboard-attendance>
+      </div>          
     </div>
   </div>
  
