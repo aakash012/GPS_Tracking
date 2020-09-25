@@ -1,5 +1,5 @@
-import { Directive, Input, OnChanges,  SimpleChanges,Component, OnInit, ViewChild } from '@angular/core';
-import {AgmMap, MapsAPILoader,GoogleMapsAPIWrapper} from '@agm/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {AgmMap, MapsAPILoader} from '@agm/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { CustomerRideService } from '../customer-ride.service';
@@ -181,8 +181,6 @@ ngOnInit()
         this.taxiLng=this.dropLng;
         this.directionFlag=false;
         this.currentLocation=true;
-        // this.pickUpId=null;
-        // this.dropId=null;
         this.getDirection();
         this.getRideDetails(this.customerId);
         this.rideClick=false;

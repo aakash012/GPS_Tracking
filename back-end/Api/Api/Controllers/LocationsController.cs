@@ -83,6 +83,90 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetCustomerRideByDriverId/{Id}")]
+
+        public IHttpActionResult getCustomerRideByDriverId(int Id)
+        {
+            try
+            {
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
+                {
+                    var driverCustomerRideList = (from td in obj.TaxiDriver
+                                        join d in obj.Driver
+                                        on td.DriverId equals d.DriverId
+                                        join cr in obj.CustomerRide
+                                        on td.TaxiDriverId equals cr.TaxiDriverId
+                                        join c in obj.Customer
+                                        on cr.CustomerId equals c.CustomerId
+                                        join pl in obj.Locations
+                                        on cr.PickupLocationId equals pl.LocationId
+                                        join dl in obj.Locations
+                                        on cr.DropLocationId equals dl.LocationId
+                                        orderby cr.CustomerRideId descending
+                                        where (cr.CustomerRideId != null && td.DriverId == Id)
+                                        select new
+                                        {
+                                            CustomerRideId = cr.CustomerRideId,
+                                            CustomerName = c.CustomerName,
+                                            PickupLocation = pl.LocationName,
+                                            PickupLatitude = pl.Latitude,
+                                            PickupLongitude = pl.Longitude,
+                                            DropLocation = dl.LocationName,
+                                            DropLatitude = dl.Latitude,
+                                            DropLongitude = dl.Longitude,
+                                            RideDate = cr.DateOfRide,
+                                            RideStatus = cr.RideStatus
+                                        }).ToList().FirstOrDefault();
+
+
+
+                    return Ok(driverCustomerRideList);
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Ok(0);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("GetDriverLocation/{Id}")]
+
+        public IHttpActionResult getDriverLocation(int Id)
+        {
+            try
+            {
+                using (TaxiMasterEntities obj = new TaxiMasterEntities())
+                {
+                    var driverLocationList = (from td in obj.TaxiDriver
+                                        join cl in obj.Locations
+                                        on td.CurrentLocationId equals cl.LocationId
+                                        where (td.TaxiDriverId != null && td.DriverId == Id)
+                                        select new
+                                        {
+                                            CurrentLocationId = cl.LocationId,
+                                            CurrentLocation = cl.LocationName,
+                                            CurrentLatitude = cl.Latitude,
+                                            CurrentLongitude = cl.Longitude,
+
+
+                                        }).ToList().FirstOrDefault();
+
+
+                    return Ok(driverLocationList);
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Ok(0);
+            }
+
+        }
+
         #endregion
     }
 }

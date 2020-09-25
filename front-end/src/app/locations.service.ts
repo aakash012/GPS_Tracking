@@ -21,6 +21,16 @@ export class LocationsService {
     return this.http.get(this.url + '/GetRideLocationsForDirection/' + CustomerId);
   }
 
+  getCustomerRideByDriverId(DriverId:Number)
+  {
+    return this.http.get(this.url + '/GetCustomerRideByDriverId/' + DriverId);
+  }
+
+  getDriverLocation(DriverId:number): Observable<Locations>
+  {
+    return this.http.get<Locations>(this.url + '/GetDriverLocation/' + DriverId);
+  }
+
   getLocationById(LocationId:number) : Observable<Locations>
   {
     return this.http.get<Locations>(this.url + '/GetLocationById/'+LocationId);

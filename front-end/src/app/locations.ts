@@ -7,4 +7,7 @@ export class Locations {
     PickupLongitude:number;
     DropLatitude:number;
     DropLongitude:number
+    CurrentLocationName:String;
+    CurrentLatitude:number;
+    CurrentLongitude:number;
 }

@@ -22,8 +22,8 @@
     <div class=row>
       <div class=col-md-6 id=trk_head>
         <div class="page-header">
-          <span id=app_name>TRACKARS  </span>
-          <span>Welcome {{driverName}}</span>
+          <span id=app_name>TRACKARS</span>
+          <span>  Welcome {{driverName}}</span>
         </div>
       </div>
       <div class=col-md-6  id=trk_head align=right>
@@ -43,7 +43,50 @@
       </ul>
     </div>
     <div class="col-9" id="rpanel">
-      <app-driver-location></app-driver-location>
+      <div class="row1">
+        <div class="col-12">
+          <form>
+            <agm-map
+              style="height: 300px"
+              [latitude]="lat"
+              [longitude]="lng"
+              [zoom]="zoom"
+              (mapClick)="mapClicked($event)"
+            >
+            <agm-marker [latitude]="taxiLat" [longitude]="taxiLng" *ngIf="taxiLocation" [iconUrl]="{
+              url: './assets/DriverTaxiMarker.png',
+              scaledSize: {
+                  width: 45,
+                  height: 30
+              }
+          }"></agm-marker>
+              <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="customerLocation" [label]="''"></agm-marker>
+              <agm-direction *ngIf="directionFlag" [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
+            </agm-map>
+          </form>
+        </div>
+      </div>
+      <br/>
+      <div class="row1">
+        <div class="col-12" align="center">
+          <table class="table" border="2">
+            <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
+              <th class="tbl2">Customer Name</th>
+              <th class="tbl2">PickUp Location</th>
+              <th class="tbl2">Drop Location</th>
+              <th class="tbl2">Ride Date</th>
+              <th class="tbl2">Ride Status</th>
+            </tr>
+            <tr *ngIf="currentRideList">
+              <td class="tbl2">{{ currentRideList.CustomerName}}</td>
+              <td class="tbl2">{{ currentRideList.PickupLocation}}</td>
+              <td class="tbl2">{{ currentRideList.DropLocation }}</td>
+              <td class="tbl2">{{ currentRideList.RideDate}}</td>
+              <td class="tbl2">{{ currentRideList.RideStatus == 0 ? "Initiated" : currentRideList.RideStatus == 1 ? "Started" :"Completed"}}</td>
+            </tr>
+          </table>
+          </div>
+      </div>
     </div>
   </div>
  
