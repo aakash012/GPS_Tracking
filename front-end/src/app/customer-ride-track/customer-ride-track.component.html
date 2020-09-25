@@ -1,0 +1,68 @@
+<div class="container">
+<div class="row1">
+    <div class="col-12">
+      <form>
+        <agm-map
+          style="height: 300px"
+          [latitude]="lat"
+          [longitude]="lng"
+          [zoom]="zoom"
+          (mapClick)="mapClicked($event)"
+        >
+          
+        <agm-marker [latitude]="taxiLat" [longitude]="taxiLng" *ngIf="taxiLocation" [iconUrl]="{
+          url: './assets/DriverTaxiMarker.png',
+          scaledSize: {
+              width: 45,
+              height: 30
+          }
+      }"></agm-marker>
+          <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="currentLocation" [label]="''"></agm-marker>
+          <agm-direction *ngIf="directionFlag" [origin]="dir.origin" [destination]="dir.destination"></agm-direction>
+        </agm-map>
+      </form>
+    </div>
+  </div>
+<br/>
+  <div class="row1">
+    <div class="col-12" align="center">
+      <table class="table" border="2">
+        <tr ngclass="btn-primary" style="background-color:  rgba(88, 174, 231, 0.6);">
+          
+          <th class="tbl2">PickUp Location</th>
+          <th class="tbl2">Drop Location</th>
+          <th class="tbl2">Taxi No.</th>
+          <th class="tbl2">Driver</th>
+          <th class="tbl2">Ride Date</th>
+          <th class="tbl2">Booking Status</th>
+          <th class="tbl2">Ride Status</th>
+        </tr>
+        <tr *ngFor="let Ride of rideList">
+          
+          <td class="tbl2">{{ Ride.PickupLocation}}</td>
+          <td class="tbl2">{{ Ride.DropLocation }}</td>
+          <td class="tbl2">{{ Ride.TaxiNo }}</td>
+          <td class="tbl2">{{ Ride.DriverName }}</td>
+          <td class="tbl2">{{ Ride.RideDate}}</td>
+          <td class="tbl2">{{ Ride.RideStatus == 0 ? "Requested" : Ride.RideStatus == 1 ? "Booked" :"Booked"}}</td>
+          <td class="tbl2">{{ Ride.RideStatus == 0 ? "Initiated" : Ride.RideStatus == 1 ? "Started" :"Completed"}}</td>
+        </tr>
+      </table>
+      </div>
+  </div>
+  <!-- <div class="row1">
+    <div class="col-12" align="right">
+      <button
+      type="button"
+      class="btn btn-info"
+      (click)="onBack()"
+    >
+      Back
+    </button>
+    </div>
+    
+  </div> -->
+</div>
+<div class="container" *ngIf="CustomerRide">
+  <app-customer-ride></app-customer-ride>
+</div>

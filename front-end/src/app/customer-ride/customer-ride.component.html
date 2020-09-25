@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="CustomerRide">
   <form [formGroup]="rideForm" (ngSubmit)="onFormSubmit()">
     <table class="table" border="2">
       <tr id="tr1">
@@ -52,6 +52,7 @@
         <th class="tbl2">Booking Status</th>
         <th class="tbl2">Ride Status</th>
         <th class="tbl2">Approve</th>
+        <th class="tbl2">Track Ride</th>
       </tr>
       <tr *ngFor="let Ride of rideList">
         <td class="tbl2">{{ Ride.CustomerName }}</td>
@@ -73,6 +74,20 @@
             Approve
           </button>
         </td>
+        <td class="tbl2">
+          <button
+            type="button"
+            class="btn btn-danger"
+            matTooltip="Click Edit Button"
+            (click)="onTrack(Ride.CustomerRideId)"
+            *ngIf="Ride.RideStatus == 1 "
+          >
+            Track
+          </button>
+        </td>
       </tr>
     </table>
+</div>
+<div class="container" *ngIf="TrackRide">
+  <app-customer-ride-track CustomerRideId="{{CustomerRideId}}"></app-customer-ride-track>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomerRide } from '../customer-ride';
 import { TaxiDriver } from '../taxi-driver';
@@ -16,7 +16,13 @@ export class CustomerRideComponent implements OnInit {
   taxiDriverList:TaxiDriver[];
   rideForm: any;
   rideUpdate = null;
+  CustomerRideId:number;
+  CustomerRide:boolean=true;
+  TrackRide:boolean=false;
+  
   constructor(private formbulider: FormBuilder, private customerRideService: CustomerRideService,private taxiDriverService: TaxiDriverService) { }
+
+
 
   ngOnInit(): void {
     this.rideForm = this.formbulider.group({
@@ -26,6 +32,7 @@ export class CustomerRideComponent implements OnInit {
       DropLocation: ['', [Validators.required]],
       TaxiDriverId: ['0']
     });
+
 
     this.getRideDetails();
     
@@ -46,6 +53,13 @@ export class CustomerRideComponent implements OnInit {
     const ride = this.rideForm.value;
     this.CreateRide(ride);
     
+  }
+
+  onTrack(CustomerRideId:number)
+  {
+    this.CustomerRideId=CustomerRideId;
+    this.CustomerRide=false;
+    this.TrackRide=true;
   }
 
   FillRideFormToEdit(CustomerRideId: number,PickupLocationId: number) {

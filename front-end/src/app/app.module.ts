@@ -26,7 +26,8 @@ import { AgmDirectionModule } from 'agm-direction';
 import { DriverDashboardLocationComponent } from './driver-dashboard-location/driver-dashboard-location.component';
 import { DriverDashboardRidesComponent } from './driver-dashboard-rides/driver-dashboard-rides.component';
 import { DriverDashboardSalaryComponent } from './driver-dashboard-salary/driver-dashboard-salary.component';
-import { DriverDashboardAttendanceComponent } from './driver-dashboard-attendance/driver-dashboard-attendance.component'; 
+import { DriverDashboardAttendanceComponent } from './driver-dashboard-attendance/driver-dashboard-attendance.component';
+import { CustomerRideTrackComponent } from './customer-ride-track/customer-ride-track.component'; 
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DriverDashboardAttendanceComponent } from './driver-dashboard-attendanc
   DriverDashboardRidesComponent,
   DriverDashboardSalaryComponent,
   DriverDashboardAttendanceComponent,
+  CustomerRideTrackComponent,
   ],  
   imports: [
     BrowserModule,
